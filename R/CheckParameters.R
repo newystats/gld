@@ -44,109 +44,118 @@ else { # single parameter arguments - check they are there, then collect them to
 as.double(lambda1)
 }
 
-gl.check.lambda <-  function(lambdas,lambda2=NULL,lambda3=NULL,lambda4=NULL,
-param="fkml",lambda5=NULL,vect=FALSE)
 {
-# Checks to see that the lambda values given are allowed.
-# There is a function called .gl.parameter.tidy that does the tidying 
-# around of parameters.  It return a single vector, which contains the
-# parameters.
-# If you call this after .gl.parameter.tidy, let it know with the vect=T
-# argument
-# If vect=TRUE, we don't need to tidy
-if (vect) {
-	if (!is.null(lambda3)) {
-	warning("lambda3 should be null because you claim the parameters are in a vector")
-		}
-	}
-else	{
-	lambdas <- .gl.parameter.tidy(lambdas,lambda2,lambda3,lambda4,param,lambda5)
-	}
-if(param=="fm5"){lambda5 = lambdas[5]}
-lambda4 = lambdas[4]                        
-lambda3 = lambdas[3]
-lambda2 = lambdas[2]
-lambda1 = lambdas[1]
-# I did have a check for finite lambdas, but that caused a problem with data frames, 
-# so I removed it - still need to include the limit results
-param <- switch(param,  
-# Different tests apply for each parameterisation
-	freimer=,  # allows for alternate expressions
-	frm=,  # allows for alternate expressions
-	FMKL=,
-	FKML=,
-	fmkl=,
-	fkml={
-	if (lambda2<=0) {return(FALSE)}
-	else {return(TRUE)}
-	},
-	ramberg=, # Ramberg & Schmeiser
-	ram=,
-	RS=,
-	rs={
-	if (lambda3*lambda4>0) { # regions 3 and 4 
-				 # all values of lambda 3 and lambda 4 OK
-				 # check lambda 2
-		if ((lambda3>0)&(lambda4>0)) { # region 3 - l2 >0
-			if (lambda2<=0) {ret <- FALSE}
-			else {ret <- TRUE}
-			}
-		if ((lambda3<0)&(lambda4<0)) { # region 4 - l2 <0
-			if (lambda2>=0) {ret <- FALSE}
-			else {ret <- TRUE}
-			}
+    if (vect) { 
+        if (!is.null(lambda3)) {
+            warning("lambda3 should be null because you claim the parameters are in a vector")
+        }
+    }
+    else {
+        lambdas <- .gl.parameter.tidy(lambdas, lambda2, lambda3, 
+            lambda4, param, lambda5)
+	# parameter labels in .gl.parameter.tidy are not correct for GPD parameterisation, but the rest should work
+    }
+    if (param == "fm5") {
+        lambda5 = lambdas[5]
+    }
+    lambda4 = lambdas[4]
+    lambda3 = lambdas[3]
+    lambda2 = lambdas[2]
+    lambda1 = lambdas[1]
+    param <- switch(param, freimer = , frm = , FMKL = , FKML = , 
+        fmkl = , fkml = {
+            if (lambda2 <= 0) {
+                return(FALSE)
+            } else {
+                return(TRUE)
+            }
+        }, ramberg = , ram = , RS = , rs = {
+            if (lambda3 * lambda4 > 0) {
+                if ((lambda3 > 0) & (lambda4 > 0)) {
+                  if (lambda2 <= 0) {
+                    ret <- FALSE
+                  } else {
+                    ret <- TRUE
+                  }
+                }
+                if ((lambda3 < 0) & (lambda4 < 0)) {
+                  if (lambda2 >= 0) {
+                    ret <- FALSE
+                  } else {
+                    ret <- TRUE
+                  }
+                }
+            } else {
+                if (lambda2 >= 0) {
+                  return(FALSE)
+                }
+                if ((lambda3 > 0) & (lambda3 < 1) & (lambda4 < 
+                  0)) {
+                  return(FALSE)
+                }
+                if ((lambda4 > 0) & (lambda4 < 1) & (lambda3 < 
+                  0)) {
+                  return(FALSE)
+                }
+                lc <- lambda3
+                ld <- lambda4
+                if ((lambda3 > -1) & (lambda3 < 0) & (lambda4 > 
+                  1)) {
+                  if (((1 - lc)^(1 - lc) * (ld - 1)^(ld - 1))/((ld - 
+                    lc)^(ld - lc)) > -lc/ld) {
+                    return(FALSE)
+                  } else {
+                    return(TRUE)
+                  }
+                }
+                if ((lambda4 > -1) & (lambda4 < 0) & (lambda3 > 
+                  1)) {
+                  if (((1 - ld)^(1 - ld) * (lc - 1)^(lc - 1))/((lc - 
+                    ld)^(lc - ld)) > -ld/lc) {
+                    return(FALSE)
+                  } else {
+                    return(TRUE)
+                  }
+                }
+                if (lambda3 == 0) {
+                  warning("lambda 3 = 0 with RS parameterisation - possible problem")
+                  if (lambda4 == 0) {
+                    return(FALSE)
+                  } else {
+                    return(TRUE)
+                  }
+                }
+                if (lambda4 == 0) {
+                  warning("lambda 5 = 0 with RS parameterisation - possible problem")
+                  if (lambda4 == 0) {
+                    return(FALSE)
+                  } else {
+                    return(TRUE)
+                  }
+                }
+                ret <- TRUE
+            }
+        }, fm5 = {
+            lambda5 <- lambdas[5]
+            if (lambda2 <= 0) {
+                ret <- FALSE
+            } else {
+                if ((lambda5 >= -1) | (lambda5 <= 1)) {
+                  ret <- TRUE
+                } else {
+                  ret <- FALSE
+                }
+            }
+        }, vsk=, VSK =, gpd=, GPD= {
+		if (lambda2 <= 0) {
+			ret <- FALSE
+			warning("Negative or zero beta")
+		} else {
+			if ((lambda4 < 0)|(lambda4 > 1)) { ret <- FALSE 
+			} else 	{
+				ret <- TRUE 
+			} 
 		}	
-	else { 	# other quadrants - lambda 2 must be negative, and lambda3 
-		# lambda 4 values need checking.
-		if (lambda2>=0) {return(FALSE)}
-		# Rectangular regions where RS is not defined 
-		if ((lambda3>0)&(lambda3<1)&(lambda4<0)) {return(FALSE)}
-		if ((lambda4>0)&(lambda4<1)&(lambda3<0)) {return(FALSE)}
-		# Different here because there are a 
-		# number of ways in which the parameters can fail.
-		# 
-		# Curved regions where RS is not defined
-		# change to shorter var names
-		lc <- lambda3
-		ld <- lambda4
-		if ((lambda3>-1)&(lambda3<0)&(lambda4>1)) {  # region 5 or not?
-			if ( ((1-lc)^(1-lc)*(ld-1)^(ld-1))/((ld-lc)^(ld-lc)) > -lc/ld )	
-				{return(FALSE)}
-			else 	{return(TRUE)}
-			}
-		# Second curved region 
-		if ((lambda4>-1)&(lambda4<0)&(lambda3>1)) {  # region 6 or not?
-			if ( ((1-ld)^(1-ld)*(lc-1)^(lc-1))/((lc-ld)^(lc-ld)) > -ld/lc )
-				{return(FALSE)}
-			else 	{return(TRUE)}
-			}
-		# There may be some limit results that mean these are not correct, but
-		# I'll check that later
-		# This is not the place where the possible l3,l4 zero values should appear
-		if (lambda3 == 0) {
-			warning('lambda 3 = 0 with RS parameterisation - possible problem')
-			if (lambda4 == 0) {return(FALSE)}
-			else {return(TRUE)}
-			}
-		if (lambda4 == 0) {
-			warning('lambda 5 = 0 with RS parameterisation - possible problem')
-			if (lambda4 == 0) {return(FALSE)}
-			else {return(TRUE)}
-			}
-		# If we get here, then the parameters are OK.
-		ret <- TRUE
-		}
-	},
-	fm5={
-		# make lambda5 - in here so it doesn't stuff up the other parameterisations
-		lambda5 <- lambdas[5]
-		if (lambda2<=0) {ret <- FALSE}
-		else { #Check lambda5 - should be between -1 and 1, but I haven't checked this against a piece of paper
-			if ((lambda5 >= -1) | (lambda5 <= 1)) {ret <- TRUE}
-			else {ret <- FALSE}
-		}	
-	},
-	stop("Error when checking validity of parameters.\n Parameterisation must be fmkl, rs or fm5")
-	) # closes "switch"
+	}, stop("Error when checking validity of parameters.\n Parameterisation must be fmkl, rs, gpd, vsk or fm5")) 
 ret
-} 
+}
