@@ -1,6 +1,6 @@
 qqgl <- function (y=NULL,lambda1=0,lambda2=NULL,lambda3=NULL,lambda4=NULL,
   param="fkml",lambda5=NULL,abline=TRUE,lambda.pars1=NULL,lambda.pars2=NULL,
-  param2="fkml",points.for.2.param.sets=1000,...)
+  param2="fkml",points.for.2.param.sets=4000,...)
 {
 # standard parameter fixin' - copied directly from dgl, but we want the 
 # warnings to happen in this function.
@@ -34,6 +34,7 @@ else { # A second set of parameters - compare two distributions
 	n <- points.for.2.param.sets
 	}
 u <- seq(from = 1/(n + 1), by = 1/(n + 1), length = n)
+    # change this to use ideal depths
 if(is.null(lambda.pars2)) { # No second set of parameters - compare to a dataset
 	Theoretical.Quantiles <- qgl(u, lambda1=lambdas, param=param)
 	Data <- y

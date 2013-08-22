@@ -31,6 +31,7 @@ names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
 result
 }
 
+#starship.adaptivegrid default lc,ld won't work for gpd
 starship.adaptivegrid <- function(data,initgrid=list(
   lcvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5), 
   ldvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5),

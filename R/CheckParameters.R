@@ -1,5 +1,6 @@
 .gl.parameter.tidy <- function(lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL) 
 {
+# parameter labels in .gl.parameter.tidy are not correct for GPD parameterisation, but the rest should work
 # Don't allow characters in lambda5 - common error with parameterisation stuff
 if(is.character(lambda5)) {stop(paste("lambda5=",lambda5,"It should be a number between -1 and 1"))}
 # Don't allow numbers in parameterisation - included as a warning here, so the main one is a stop.
@@ -11,7 +12,7 @@ if(length(lambda1) > 1) #using a vector for the parameters.
 	if (!(is.null(lambda2) & is.null(lambda3)& is.null(lambda4) & is.null(lambda5)) ) 
 		{ stop("Call includes vector version of the lambda parameters as well as the \nscalar version") }
 	if ((length(lambda1) < 4) | (length(lambda1) > 5 ) )  
-		{ stop(paste("argument lambda1 has length", length(lambda1),"\nThis should be 1 (lambda parameters given as seperate arguments), 4 (vector argument \n for RS or FKML parameterisation) or 5 (vector argument for fm5 parameterisation")) }
+		{ stop(paste("argument lambda1 has length", length(lambda1),"\nThis should be 1 (lambda parameters given as seperate arguments), 4 (vector argument \n for RS, FKML or GPD parameterisation) or 5 (vector argument for fm5 parameterisation")) }
 	if (length(lambda1)== 5)
 		{ if (param != "fm5") { 
 			stop(paste("argument lambda1 has length",length(lambda1),"which is not valid for the",param,"\nparameterisation")) 
@@ -44,8 +45,9 @@ else { # single parameter arguments - check they are there, then collect them to
 as.double(lambda1)
 }
 
+gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, param = "fkml", lambda5 = NULL, vect = FALSE)
 {
-    if (vect) { 
+    if (vect) {
         if (!is.null(lambda3)) {
             warning("lambda3 should be null because you claim the parameters are in a vector")
         }
@@ -53,7 +55,7 @@ as.double(lambda1)
     else {
         lambdas <- .gl.parameter.tidy(lambdas, lambda2, lambda3, 
             lambda4, param, lambda5)
-	# parameter labels in .gl.parameter.tidy are not correct for GPD parameterisation, but the rest should work
+
     }
     if (param == "fm5") {
         lambda5 = lambdas[5]
@@ -126,7 +128,7 @@ as.double(lambda1)
                   }
                 }
                 if (lambda4 == 0) {
-                  warning("lambda 5 = 0 with RS parameterisation - possible problem")
+                  warning("lambda 4 = 0 with RS parameterisation - possible problem")
                   if (lambda4 == 0) {
                     return(FALSE)
                   } else {
@@ -150,7 +152,7 @@ as.double(lambda1)
 		if (lambda2 <= 0) {
 			ret <- FALSE
 			warning("Negative or zero beta")
-		} else {
+		} else {  ## delta check
 			if ((lambda4 < 0)|(lambda4 > 1)) { ret <- FALSE 
 			} else 	{
 				ret <- TRUE 

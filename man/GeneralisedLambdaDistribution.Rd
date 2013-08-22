@@ -11,8 +11,8 @@
 \title{The Generalised Lambda Distribution}
 \description{Density, quantile density, distribution function, quantile 
 function and random generation for the generalised lambda distribution 
-(also known as the asymmetric lambda, or Tukey lambda).  Provides for three
-different parameterisations, the \code{fmkl} (recommended), the \code{rs} and 
+(also known as the asymmetric lambda, or Tukey lambda).  Provides for four
+different parameterisations, the \code{fmkl} (recommended), the \code{rs}, the \code{gpd} and 
 a five parameter version of the FMKL, the \code{fm5}.
 }
 \usage{
@@ -38,27 +38,28 @@ rgl(n, lambda1=0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
   \item{lambda1}{This can be either a single numeric value or a vector.  
   
   If it is a vector, it must be of length 4 for parameterisations 
-  \code{fmkl} or \code{rs} and of length 5 for parameterisation \code{fm5}.  
+  \code{fmkl}, \code{rs} and \code{gpd} and of length 5 for parameterisation \code{fm5}.  
   If it is a vector, it gives all the parameters of the generalised lambda 
   distribution (see below for details) and the other \code{lambda} arguments
   must be left as NULL.
         
  If it is a a single value, it is \eqn{\lambda_1}{lambda 1}, the location 
- parameter of the distribution and the other parameters are given by the
+ parameter of the distribution (\eqn{\alpha} for the \code{gpd} parameterisation).  The other parameters are given by the
  following arguments
  
  \emph{Note that the numbering of the \eqn{\lambda}{lambda} parameters for
  the \emph{fmkl} parameterisation is different to that used by Freimer, 
- Mudholkar, Kollia and Lin.}
+ Mudholkar, Kollia and Lin.  Note also that in the \code{gpd} parameterisation, the four parameters are labelled \eqn{\alpha, \beta, \lambda, \delta}.  NOTE:  This is I think the wrong order - shouldn't the skewing parameter come 3rd?}
 	}
-  \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter}
-  \item{lambda3}{\eqn{\lambda_3}{lambda 3} - first shape parameter}
-  \item{lambda4}{\eqn{\lambda_4}{lambda 4} - second shape parameter}
+  \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter (\eqn{\beta} for \code{gpd})}
+  \item{lambda3}{\eqn{\lambda_3}{lambda 3} - first shape parameter (Here \eqn{\beta} for \code{gpd})}
+  \item{lambda4}{\eqn{\lambda_4}{lambda 4} - second shape parameter (\eqn{\beta} for \code{gpd})}
   \item{lambda5}{\eqn{\lambda_5}{lambda 5} - a skewing parameter, in the
     fm5 parameterisation}
-  \item{param}{choose parameterisation: 
+  \item{param}{choose parameterisation (see below for details)
   \code{fmkl} uses \emph{Freimer, Mudholkar, Kollia and Lin (1988)} (default).
   \code{rs} uses \emph{Ramberg and Schmeiser (1974)}
+  \code{gpd} uses GLD\sub{GPD} parameterisation, see {van Staden and Loots (2009)}
   \code{fm5} uses the 5 parameter version of the FMKL parameterisation 
   (paper to appear)}
   \item{inverse.eps}{Accuracy of calculation for the numerical determination of 
@@ -89,6 +90,8 @@ lambda 2}
 This parameterisation has a complex series of rules determining which values 
 of the parameters produce valid statistical distributions.  See 
 \link{gl.check.lambda} for details.
+
+Another 
 
 A third parameterisation, the FM5, chosen by setting \code{param="fm5"} 
 adds an additional skewing parameter to the FMKL parameterisation.  

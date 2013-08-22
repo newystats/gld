@@ -24,9 +24,7 @@ dens
 pgl <- function(q,lambda1=0,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",
     lambda5=NULL,inverse.eps=.Machine$double.eps,max.iterations=500)
 {
-# Thanks to Steve Su, <s.su@qut.edu.au>, for improvements to this code
-# If lambda1 is a vector, the default value for lambda2 will cause a problem.
-# I did have a warning about this, but it will occur too often to make up for the benefit, so I've deleted it.
+# Thanks to Steve Su, see GLDEX package for contact details, for improvements to this code
 # Tidy the parameters so gl.check.lambda will work
 lambdas <- .gl.parameter.tidy(lambda1,lambda2,lambda3,lambda4,param,lambda5)
 # Check the parameters
@@ -74,10 +72,16 @@ result <- switch(param,
 		lambdas[4],lambdas[5], 
     		as.double(0),as.double(1),inverse.eps,
 		as.integer(max.iterations),as.double(q),as.double(u),
-		as.integer(length.of.vector),
-		PACKAGE="gld"),
-    	stop("Error: Parameterisation must be one of fmkl, fm5 or rs") 
-    	) # closes "switch" 
+		as.integer(length.of.vector),PACKAGE="gld"),
+    VSK=,
+    gpd=,
+    GPD=,
+    vsk=.C("gl_vsk_distfunc",lambdas[1],lambdas[2],lambdas[3],lambdas[4],
+        as.double(0),as.double(1),inverse.eps,
+        as.integer(max.iterations),as.double(q),as.double(u),
+        as.integer(length.of.vector),PACKAGE="gld"),
+    stop("Error: Parameterisation must be one of fmkl, rs, fm5 or vsk")
+    	) # closes "switch"
 if (!(is.numeric(result[[1]]))){ 
 	stop("Values for quantiles outside range. This shouldn't happen") 
 } 

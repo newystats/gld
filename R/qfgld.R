@@ -17,7 +17,9 @@ result <- switch(param,
 	RS=,
 	rs=.qgl.rs(p,lambdas),
 	fm5 = .qgl.fm5(p, lambdas),
-	stop("Error: Parameterisation must be fkml, fm5 or rs")
+    gpd=, GPD=, vsk = ,
+    VSK = .qgl.vsk(p, lambdas),
+	stop("Error: Parameterisation must be fkml, gpd, vsk, fm5 or rs")
 	) # closes "switch"
 result
 }
@@ -121,8 +123,30 @@ quants
 }
 
 
+.qgl.vsk <- function(p,lambdas)
+{
+	# lambdas is a parameter containining (alpha,beta,lambda,delta)
+	alpha <- lambdas[1]
+	p.beta <- lambdas[2]
+	lambda <- lambdas[3]
+	delta <- lambdas[4]
+	outside.range <- !as.logical((p <= 1) *
+                                 (p >= 0))
+	u <- p[!outside.range]
+	if (lambda == 0){
+		quants <- alpha + p.beta * ( (1-delta)*log(u) - delta*log(1-u))
+	} else {
+		quants <- alpha + p.beta * ( (1-delta)*(u^lambda -1)/lambda - delta*( (1-u)^lambda -1)/lambda )
+	}
+	result <- p * NaN
+	result[!outside.range] <- quants
+	result
+}
+
 qdgl <- function(p,lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL){
-	dqgl(p=p,lambda1=lambda1,lambda2=lambda2,lambda3=lambda3,lambda4=lambda4,param=param,lambda5=lambda5)}
+    # qdgl is here to retain backwards compatability.  This is
+    # actually the "density quantile function", so should be properly referred to by dqgl
+    dqgl(p=p,lambda1=lambda1,lambda2=lambda2,lambda3=lambda3,lambda4=lambda4,param=param,lambda5=lambda5)}
 
 dqgl <- function(p,lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL)
 {
@@ -146,7 +170,8 @@ result <- switch(param,
 	RS=,
 	rs=.dqgl.rs(p,lambdas),
 	fm5 = .dqgl.fm5(p, lambdas),
-	stop("Error: Parameterisation must be fkml, fm5 or rs")
+    gpd=, GPD=, vsk = , VSK = .dqgl.vsk(p, lambdas),
+	stop("Error: Parameterisation must be fkml, rs, fm5, gpd or vsk")
 	) # closes "switch"
 result
 }
@@ -199,3 +224,21 @@ dens <- lambdas[2]/((1-lambdas[5])*(u^(lambdas[3] - 1)) + (1+lambdas[5])*((1 - u
 dens
 }
 
+.dqgl.vsk <- function(p,lambdas)
+{
+	# lambdas is a parameter containing (alpha,beta,lambda,delta)
+	alpha <- lambdas[1]
+	p.beta <- lambdas[2]
+	lambda <- lambdas[3]
+	delta <- lambdas[4]
+	outside.range <- !as.logical((p <= 1) * (p >= 0))
+	u <- p[!outside.range]
+	if (lambda == 0){
+		dens <- u*(1-u)/(p.beta* (delta*u + (1-delta)*(1-u)))
+	} else {
+		dens <- 1/(p.beta * ( (1-delta)*(u^(lambda -1)) + delta*( (1-u)^(lambda -1))) )
+	}
+	result <- p * 0
+	result[!outside.range] <- dens
+	result
+}

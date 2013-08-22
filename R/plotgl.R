@@ -1,6 +1,6 @@
 plotgld <- function(lambda1=0,lambda2=NULL,lambda3=NULL,lambda4=NULL,
   param="fmkl",lambda5=NULL, add=NULL, truncate = 0, bnw = FALSE,
-  col.or.type = 1, granularity = 4000,xlab = "x", ylab=NULL, 
+  col.or.type = 1, granularity = 10000,xlab = "x", ylab=NULL,
   quant.probs = seq(0,1,.25), new.plot = NULL, ...)
 {
 # standard parameter fixin - copied directly from dgl, but we want the 
@@ -60,7 +60,7 @@ if (is.finite(check.for.jump2[1])) # warning and different plot
 		}
 	}
 if(truncate > 0) { 
-	# If truncated, not RS pathological problem, because density at the endpoint is zero
+	# If truncated, not RS pathological problem, because we are not plotting density at the endpoint
 	if(new.plot) {
 		if (is.null(ylab)){
 			ylab <- paste( "probability density (values below", deparse(substitute(truncate)), "not shown)")
@@ -138,7 +138,7 @@ else {
                         end.line <- granularity+1
 		}
 		if (bnw) {lines(quantiles[start.line:end.line], density[start.line:end.line], lty = col.or.type)}
-		else {lines(quantiles[start.line:end.line], density[start.line:end.line], type="l",xlab = xlab,ylab = ylab, lty=col.or.type, ...) }
+		else {lines(quantiles[start.line:end.line], density[start.line:end.line], type="l",xlab = xlab,ylab = ylab, col=col.or.type, ...) }
 		}
 	}
 if (!is.null(quant.probs)){quantile(quantiles,quant.probs) } 

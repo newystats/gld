@@ -1,2 +1,10 @@
 fix 
 gld.fmkl.fx.c:102: warning: implicit declaration of function `exit'
+
+Check if the sorting in pgl() is worth the computational cost
+
+starship for GPD parameterisation
+
+documentation for GPD parameterisation
+
+? support named elements of the vector for parameters ?
