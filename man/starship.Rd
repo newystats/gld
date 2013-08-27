@@ -3,7 +3,7 @@
 \title{Carry out the ``starship'' estimation method for the generalised
 lambda distribution} 
 \description{
-Calculates estimates for the FMKL parameterisation of the generalised lambda
+Estimates parameters of the generalised lambda
 distribution on the basis of data, using the starship method.
 The starship method is built on the fact that the 
 generalised lambda distribution (\code{\link{gld}})
@@ -40,6 +40,8 @@ For \code{rs}, both lcvect and ldvect default to:
 (\code{levect} is NULL).  Note that this restricts the estimates to only part of the region
 of the  \eqn{\lambda_3}{lambda 3}, \eqn{\lambda_4}{lambda 4} plane.
 
+For \code{gpd}, the defaults are: \eqn{\delta}: \tabular{ccc}{0.3\tab 0.5\tab 0.7} and \eqn{\lambda}: \tabular{cccccccc}{-1.5\tab-.5\tab0\tab.2\tab.4\tab0.8\tab1.5\tab5}
+
 For \code{fm5}, both lcvect and ldvect default to:
 \tabular{ccccccccccc}{-1.5\tab -1\tab -.5\tab -0.1\tab 0\tab 0.1\tab 0.2\tab 0.4\tab 0.8\tab 1\tab 1.5}
 and \code{levect} defaults to:
@@ -59,7 +61,7 @@ and \eqn{\lambda_2}{lambda 2} by the absolute value of their starting points.  }
 \item{return.data}{Logical: Should the function return the data (from the argument \code{data})?}
 }
 \details{
-The starship method is described in King \& MacGillivray, 1999 (see
+The starship method is described in King & MacGillivray, 1999 (see
 references). It is built on the fact that the 
 generalised lambda distribution (\code{\link{gld}})
 is a transformation of the uniform distribution.  Thus the inverse of this
@@ -99,7 +101,14 @@ the estimated parameters, in order,
   \eqn{\lambda_2}{lambda 2} - scale parameter
   \eqn{\lambda_3}{lambda 3} - first shape parameter
   \eqn{\lambda_4}{lambda 4} - second shape parameter
-(See \code{\link[gld]{gld}} for details of the parameters in the \emph{fm5} parameterisation)}
+(See \code{\link[gld]{gld}} for details of the parameters in the \emph{fm5} parameterisation)
+  
+  In the \emph{gpd} parameterisation, the parameters are labelled:
+  \eqn{\alpha}{alpha} - location parameter
+  \eqn{\beta}{beta} - scale parameter
+  \eqn{\delta}{delta} - skewness parameter
+  \eqn{\lambda}{lambda} - tailweight parameter  
+  }
   \item{grid.results}{output from the grid search - see
 \code{\link{starship.adaptivegrid}} for details}
   \item{optim}{output from the optim search -

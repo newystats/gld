@@ -116,8 +116,6 @@ lambda4 = lambdas[4]
 lambda3 = lambdas[3]
 lambda2 = lambdas[2]
 lambda1 = lambdas[1]
-# At present, I'm rejecting zero values for l3 and l4, though I think there 
-# are limit results, so one functional form.
 quants <- lambda1 + ( u ^ lambda3 - (1-u)^lambda4 ) / lambda2
 quants
 }
@@ -128,16 +126,25 @@ quants
 	# lambdas is a parameter containining (alpha,beta,lambda,delta)
 	alpha <- lambdas[1]
 	p.beta <- lambdas[2]
-	lambda <- lambdas[3]
-	delta <- lambdas[4]
-	outside.range <- !as.logical((p <= 1) *
+	delta <- lambdas[3]
+	lambda <- lambdas[4]
+  outside.range <- !as.logical((p <= 1) *
                                  (p >= 0))
 	u <- p[!outside.range]
 	if (lambda == 0){
 		quants <- alpha + p.beta * ( (1-delta)*log(u) - delta*log(1-u))
 	} else {
+    if (delta == 0){ # These special cases are here in case u=1 when delta is 0 and lambda is negative see delta zero question in Robert Kings gld package notes
+      quants <- alpha + p.beta * ( (1-delta)*(u^lambda -1)/lambda )
+    }
+    else {
+      if (delta ==1) {
+        quants <- alpha + p.beta * ( - delta*( (1-u)^lambda -1)/lambda )
+      } else {
 		quants <- alpha + p.beta * ( (1-delta)*(u^lambda -1)/lambda - delta*( (1-u)^lambda -1)/lambda )
-	}
+      }	# delta non 1
+    } # delta non zero
+	} # lambda non zero
 	result <- p * NaN
 	result[!outside.range] <- quants
 	result
@@ -229,9 +236,9 @@ dens
 	# lambdas is a parameter containing (alpha,beta,lambda,delta)
 	alpha <- lambdas[1]
 	p.beta <- lambdas[2]
-	lambda <- lambdas[3]
-	delta <- lambdas[4]
-	outside.range <- !as.logical((p <= 1) * (p >= 0))
+	delta <- lambdas[3]
+	lambda <- lambdas[4]
+  outside.range <- !as.logical((p <= 1) * (p >= 0))
 	u <- p[!outside.range]
 	if (lambda == 0){
 		dens <- u*(1-u)/(p.beta* (delta*u + (1-delta)*(1-u)))

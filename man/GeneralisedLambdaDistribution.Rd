@@ -49,17 +49,17 @@ rgl(n, lambda1=0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
  
  \emph{Note that the numbering of the \eqn{\lambda}{lambda} parameters for
  the \emph{fmkl} parameterisation is different to that used by Freimer, 
- Mudholkar, Kollia and Lin.  Note also that in the \code{gpd} parameterisation, the four parameters are labelled \eqn{\alpha, \beta, \lambda, \delta}.  NOTE:  This is I think the wrong order - shouldn't the skewing parameter come 3rd?}
+ Mudholkar, Kollia and Lin.  Note also that in the \code{gpd} parameterisation, the four parameters are labelled \eqn{\alpha, \beta, \delta, \lambda}.}
 	}
   \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter (\eqn{\beta} for \code{gpd})}
-  \item{lambda3}{\eqn{\lambda_3}{lambda 3} - first shape parameter (Here \eqn{\beta} for \code{gpd})}
-  \item{lambda4}{\eqn{\lambda_4}{lambda 4} - second shape parameter (\eqn{\beta} for \code{gpd})}
+  \item{lambda3}{\eqn{\lambda_3}{lambda 3} - first shape parameter (\eqn{\delta}, a skewness parameter for \code{gpd})}
+  \item{lambda4}{\eqn{\lambda_4}{lambda 4} - second shape parameter (\eqn{\lambda}, a tail-shape parameter for \code{gpd})}
   \item{lambda5}{\eqn{\lambda_5}{lambda 5} - a skewing parameter, in the
     fm5 parameterisation}
   \item{param}{choose parameterisation (see below for details)
   \code{fmkl} uses \emph{Freimer, Mudholkar, Kollia and Lin (1988)} (default).
   \code{rs} uses \emph{Ramberg and Schmeiser (1974)}
-  \code{gpd} uses GLD\sub{GPD} parameterisation, see {van Staden and Loots (2009)}
+  \code{gpd} uses GPD parameterisation, see {van Staden and Loots (2009)}
   \code{fm5} uses the 5 parameter version of the FMKL parameterisation 
   (paper to appear)}
   \item{inverse.eps}{Accuracy of calculation for the numerical determination of 
@@ -70,30 +70,38 @@ rgl(n, lambda1=0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
 \details{
 The generalised lambda distribution, also known as the asymmetric lambda, 
 or Tukey lambda distribution, is a distribution with a wide range of shapes.  
-The distribution is defined by its quantile function, the inverse of the
+The distribution is defined by its quantile function (Q(u)), the inverse of the
 distribution function.  The \code{gld} package implements three parameterisations of the distribution.  
 The default parameterisation (the FMKL) is that due to \emph{Freimer 
 Mudholkar, Kollia and Lin (1988)} (see references below), with a quantile 
 function:
-\deqn{F^{-1}(u)= \lambda_1 + { { \frac{u^{\lambda_3}-1}{\lambda_3} - 	%
+\deqn{Q(u)= \lambda_1 + { { \frac{u^{\lambda_3}-1}{\lambda_3} - 	%
 \frac{(1-u)^{\lambda_4}-1}{\lambda_4} } \over \lambda_2 } 		%
-}{F inverse (u) = lambda1 + ( (u^lambda3 -1)/lambda3 - ((1-u)^lambda4-1) 
+}{Q(u) = lambda1 + ( (u^lambda3 -1)/lambda3 - ((1-u)^lambda4-1) 
 /lambda4 ) / lambda 2}
 for \eqn{\lambda_2 > 0}{lambda2 >0}.
 
 A second parameterisation, the RS, chosen by setting \code{param="rs"} is 
 that due to \emph{Ramberg and Schmeiser (1974)}, with the quantile function:
-\deqn{F^{-1}(u)= \lambda_1 + \frac{u^{\lambda_3} - (1-u)^{\lambda_4}} 	%
-{\lambda_2} }{F inverse (u) = lambda1 + ( u^lambda3 - (1-u)^lambda4 ) / % 
+\deqn{Q(u)= \lambda_1 + \frac{u^{\lambda_3} - (1-u)^{\lambda_4}} 	%
+{\lambda_2} }{Q(u) = lambda1 + ( u^lambda3 - (1-u)^lambda4 ) / % 
 lambda 2}
 
 This parameterisation has a complex series of rules determining which values 
 of the parameters produce valid statistical distributions.  See 
 \link{gl.check.lambda} for details.
 
-Another 
+Another parameterisation, the GPD, chosen by setting \code{param="gpd"} is
+due to van Staden and Loots (2009), with a quantile function:
 
-A third parameterisation, the FM5, chosen by setting \code{param="fm5"} 
+\deqn{Q(u) = \alpha + \beta ((1-\delta)\frac{(u^\lambda -1)}{\lambda} - \delta\frac{((1-u)^\lambda -1)}{\lambda} )}{Q(u) = alpha + beta ((1-delta)(u^lambda -1)/(lambda) - delta((1-u)^lambda -1)/lambda }
+for \eqn{\beta > 0}{beta >0} 
+and \eqn{-1 \leq \delta \leq 1}{-1 <= delta <= 1}.
+(where the parameters appear in the \code{par} argument to the function in the order \eqn{\alpha,\beta,\delta,\lambda}).  This parameterisation has simpler 
+L-moments than other parameterisations and \eqn{\delta} is a skewness parameter
+and \eqn{\lambda} is a tailweight parameter.
+
+Another parameterisation, the FM5, chosen by setting \code{param="fm5"} 
 adds an additional skewing parameter to the FMKL parameterisation.  
 This uses the same approach as that used by 
 Gilchrist (2000)
@@ -151,6 +159,8 @@ Karian,  Zaven A. and Dudewicz, Edward J. (2000), \emph{Fitting statistical dist
 Ramberg, J. S. & Schmeiser, B. W. (1974), \emph{An approximate method for
 generating asymmetric random variables}, Communications of the ACM \bold{17}, 
 78--82.
+
+Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
 
 \url{http://tolstoy.newcastle.edu.au/~rking/gld/}
 }

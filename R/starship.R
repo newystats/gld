@@ -2,10 +2,33 @@ starship <- function(data,optim.method="Nelder-Mead",initgrid=NULL,
 	inverse.eps=.Machine$double.eps,param="FMKL",optim.control=NULL,return.data=FALSE) 
 {
 # call adaptive grid first to find a first minimum
-if (is.null(initgrid) ) {gridmin <- starship.adaptivegrid(data,inverse.eps=inverse.eps,param=param) }
+if (is.null(initgrid) ) {
+  # default initgrid - depends on parameters
+  if (param=="FMKL"| param=="FKML" | param=="fmkl"| param=="fkml" | param=="freimer" | param=="frm") {
+    initgrid=list(
+      lcvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5), 
+      ldvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5))
+    }
+  if (param=="RS"| param=="rs" | param=="ramberg" | param=="ram") {
+    initgrid = list(lcvect=c(0.1,0.2,4,0.8,1,1.5),
+      ldvect=c(0.1,0.2,4,0.8,1,1.5))
+    }
+  if (param=="fm5") {
+    initgrid=list(
+      lcvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5), 
+      ldvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5),
+      levect=c(-0.5,-0.25,0,0.25,0.5))
+    }
+  if (param=="VSK"| param=="vsk" | param=="gpd" | param=="GPD") {
+    initgrid=list(
+      ldvect=c(-1.5,-.5,0,.2,.4,0.8,1.5,5), # lambda
+      lcvect=c(0.3,0.5,0.7)) # delta - restricted to [0,1]
+    }
+  }
 else 	{
-	gridmin <- starship.adaptivegrid(data,initgrid,inverse.eps=inverse.eps,param=param)
+  # initgrid taken from arguments - the parameter values in grid are not checked
 	}
+gridmin <- starship.adaptivegrid(data,initgrid,inverse.eps=inverse.eps,param=param)
 # If they haven't sent any control parameters, scale by max(lambda1,1),
 # lambda2 (can't be <= 0), don't scale for lambda3, lambda4 or lambda5
 if (is.null(optim.control) ) {
@@ -27,25 +50,27 @@ if (return.data) {result$data = data}
 # Apply starship class to result
 class(result) <- "starship"
 # Add names to the lambda element - what names to use will depend on the parameterisation
-names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
+if (param=="VSK"| param=="vsk" | param=="gpd" | param=="GPD") {
+  names(result$lambda) <- c("alpha","beta","delta","lambda")
+  } else { # any other parameterisation
+  names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
+  }
 result
 }
 
-#starship.adaptivegrid default lc,ld won't work for gpd
-starship.adaptivegrid <- function(data,initgrid=list(
-  lcvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5), 
-  ldvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5),
-  levect=c(-0.5,-0.25,0,0.25,0.5)),inverse.eps=1e-8,param="FMKL") 
+starship.adaptivegrid <- function(data,initgrid,inverse.eps=1e-8,param="FMKL") 
 {
 data <- sort(data)
 quarts <- quantile(data)
 nombo <- length(data)
 minresponse <- 1000
-if (param=="RS"| param=="rs" | param=="ramberg" | param=="ram")
-	{
-	initgrid$lcvect <- initgrid$lcvect[initgrid$lcvect > 0]  
-	initgrid$ldvect <- initgrid$ldvect[initgrid$ldvect > 0]  
-	}
+if (is.null(initgrid)){
+  warning("use of starship.adaptivegrid without specifying the argument initgrid is now deprecated.  Continuing with a failsafe initgrid, but please change your code")
+  initgrid = list(
+    lcvect=c(-1.5,-1,-.5,-.1,0,.1,.2,.4,0.8,1,1.5), 
+    ldvect=c(0,.1,.2,.4,0.8,1),
+    levect=c(-0.5,-0.25,0,0.25,0.5))
+  }
 if (param=="fm5"){
 	minlambda <- c(NA,NA,NA,NA,NA)
 	# There are other options than copying this code, but they seem to involve doing a param check inside all the for loops, and that seems terribly inefficient to me.  If it doesn't actuallly impact efficiency, let me know - RK

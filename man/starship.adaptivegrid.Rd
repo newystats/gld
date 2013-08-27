@@ -12,10 +12,7 @@ parameters that transform the data closest to the uniform distribution.
 This function uses a grid-based search.
 }
 \usage{
-starship.adaptivegrid(data, initgrid=list(
-lcvect = c(-1.5, -1, -0.5, -0.1, 0, 0.1, 0.2, 0.4, 0.8, 1, 1.5), 
-ldvect = c(-1.5, -1, -0.5, -0.1, 0, 0.1, 0.2, 0.4, 0.8, 1, 1.5),
-levect = c(-0.5,-0.25,0,0.25,0.5)),inverse.eps = 1e-08, param="FMKL")
+starship.adaptivegrid(data, initgrid,inverse.eps = 1e-08, param="FMKL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,9 +22,7 @@ levect = c(-0.5,-0.25,0,0.25,0.5)),inverse.eps = 1e-08, param="FMKL")
   \code{ldvect}, a vector of values for \eqn{\lambda_4}{lambda 4} and
   \code{levect}, a vector of values for \eqn{\lambda_5}{lambda 5} 
   (\code{levect} is only required if \code{param} is \code{fm5}).
-
-\emph{Note:} if \code{param=rs}, the non-positive values are dropped from 
-\code{lcvect} and \code{ldvect}.
+  The parameter values given in \code{initgrid} are not checked with \code{\link{gl.check.lambda}}.
   }
   \item{inverse.eps}{Accuracy of calculation for the numerical determination of 
 	\eqn{F(x)}, defaults to \eqn{10^{-8}}{1e-8}}

@@ -36,6 +36,8 @@
 void vsk_funcd( double , double , double *, double *, double *, double *, double *, double *);
 
 /* the function that finds the root: this is almost generic */
+/* Since it is so generic, this function retains the parameters pa to pd, 
+  rather than renaming for the vsk */
 
 void gl_vsk_distfunc( double *pa,double *pb,double *pc,double *pd, 
 double  *pu1,double *pu2,double *pxacc, int *max_it,
@@ -45,8 +47,8 @@ double *ecks, double *u, int *lengthofdata)
 /* pa to pd:    pointers to the values of the parameters of the gld (vsk param)
  * pa		alpha
  * pb		beta
- * pc		lambda
- * pd		delta
+ * pc		delta
+ * pd		lambda
  * pu1:         minimum value of u, usually zero
  * pu2:         maximum value of u, usually 1
  * pxacc:       desired accuracy of the calculation
@@ -70,7 +72,7 @@ temp=0.0;xh=0.0;xl=0.0;rts=0.0;
 
 u1 = *pu1; u2 = *pu2; xacc = *pxacc;
 
-if (*pc < 0) {
+if (*pc < 0) {  /* shouldn't happen for this parameterisation */
 	if (u1 == 0) {
 		u1 = xacc;
 		}
@@ -97,11 +99,7 @@ for (i=0;i<*lengthofdata;i++)
 	if (fl*fh >= 0.0) 
 	{
 		/* This is suggested in writing R extensions, but still gives the warning */
-		error("Program aborted at parameter values %f, %f, %f, %f\n The data value being investigated was index %d, value: %f\n", *pa, *pb, *pc, *pd, i, x);
-		/* fprintf(stderr,"C code aborted at parameter values %f, %f, %f, %f\n", *pa, *pb, *pc, *pd);
-		fprintf(stderr,"The data value being investigated was index %d",i);
-		fprintf(stderr," value: %f\n",x);
-		error("C code numerical failure"); */
+		error("Program aborted at parameter values %f, %f, %f, %f\n The data value being investigated was index %d, value: %f\n iteration %d, fl: %f fh: %f u1: %f u2: %f df: %f", *pa, *pb, *pc, *pd, i, x,j,fl,fh,u1,u2,df);
 	}
 	if (fl < 0.0) {
 		xl = u1;
@@ -147,23 +145,26 @@ for (i=0;i<*lengthofdata;i++)
 }
 
 
-void vsk_funcd( double u, double x, double *F, double *dFdu, double *pa, double *pb, double *pc, double *pd)
+    void vsk_funcd( double u, double x, double *F, double *dFdu, double *alpha, double *beta, double *delta, double *lambda)
 {
-
+    /* double Qu,shouldnotbe0,shouldbe0;  for debugging */
 /* *F is the gld F-1(u), with x subtracted */            
 /* *dFdu is dF-1(u)/du	*/
 /* NOTE: *dFdu is 1/f(x) a.k.a. 1/f(F-1(u)) - the opposite of what's required for the pdf */
 
-if ( *pc == 0 ) {
+if ( *lambda == 0 ) {
 	/* lambda zero - special case */
-    *F = *pa + *pb * ( (1.0-*pd)*log(u) - *pd * log(1.0-u) ) - x;
-    *dFdu = *pb * ( (1.0-*pd)/u + *pd /(1.0-u)) ;
+    *F = *alpha + *beta * ( (1.0-*delta)*log(u) - *delta * log(1.0-u) ) - x;
+    *dFdu = *beta * ( (1.0-*delta)/u + *delta /(1.0-u)) ;
     }
 else {
-    /* UP TO HERE !!!! */
     /*	lambda non-zero	*/
-    *F = *pa + *pb * ( (1.0-*pd)*(pow((u),*pc) - 1.0 )/ *pc  - (*pd * pow((1.0-u),*pd) - 1.0 )/ *pd ) - x;
-    *dFdu = *pb *( (1.0 - *pd)*( pow((u),(*pc-1.0)) ) + ( *pd * pow( (1.0-u),(*pc-1.0)) ) );
+    /* Debugging
+     shouldnotbe0 = (1.0-*delta)*(pow((u),*lambda) - 1.0 )/ *lambda;
+    shouldbe0 = (*delta * (pow((1.0-u),*lambda) - 1.0))/ *lambda;
+    Qu = *alpha + *beta * ( (1.0-*delta)*(pow((u),*lambda) - 1.0 )/ *lambda  - (*delta * pow((1.0-u),*lambda) - 1.0 )/ *lambda ); */
+    *F = *alpha + *beta * ( (1.0-*delta)*(pow((u),*lambda) - 1.0 )/ *lambda  - (*delta * (pow((1.0-u),*lambda) - 1.0) )/ *lambda ) - x;
+    *dFdu = *beta *( (1.0 - *delta)*( pow((u),(*lambda-1.0)) ) + ( *delta * pow((1.0-u),  (*lambda-1.0)) ) );
 	}
 
 }

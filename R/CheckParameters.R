@@ -25,7 +25,7 @@ if(length(lambda1) > 1) #using a vector for the parameters.
 		# else --- 4 parameter versions in vector form, ready for gl.check.lambda 
 		}
 	}
-else { # single parameter arguments - check they are there, then collect them together
+else { # single parameter arguments - check they are there, then collect them together.  Ideally I would have a special section here to deal with GPD
 	if (is.null(lambda2)) { stop("No value for lambda2") }
 	if (is.null(lambda3)) { stop("No value for lambda3") }
 	if (is.null(lambda4)) { stop("No value for lambda4") }
@@ -120,22 +120,41 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                   }
                 }
                 if (lambda3 == 0) {
-                  warning("lambda 3 = 0 with RS parameterisation - possible problem")
+                  if (lambda4 > 0) {
+                    if (lambda2 < 0) {
+                      return(FALSE)
+                    }
+                    ret <- TRUE
+                  }
                   if (lambda4 == 0) {
-                    return(FALSE)
-                  } else {
-                    return(TRUE)
+                    warning("RS parameterisation: lambda3 and lambda4 zero gives a point mass at lambda1")
+                  }
+                  if (lambda4 <0) {
+                    if (lambda2 > 0) {
+                      return(FALSE)
+                    }
+                  ret <- TRUE
                   }
                 }
                 if (lambda4 == 0) {
-                  warning("lambda 4 = 0 with RS parameterisation - possible problem")
-                  if (lambda4 == 0) {
-                    return(FALSE)
-                  } else {
-                    return(TRUE)
+                  if (lambda3 > 0) {
+                    if (lambda2 < 0) {
+                      return(FALSE)
+                    }
+                    ret <- TRUE
+                  }
+                  if (lambda3 == 0) {
+                    warning("RS parameterisation: lambda3 and lambda4 zero gives a point mass at lambda1")
+                  }
+                  if (lambda3 <0) {
+                    if (lambda2 > 0) {
+                      return(FALSE)
+                    }
+                    ret <- TRUE
                   }
                 }
-                ret <- TRUE
+                if (is.null(ret)) {warning("RS param return not set: please email maintainer with example")
+                ret <- TRUE}
             }
         }, fm5 = {
             lambda5 <- lambdas[5]
@@ -153,7 +172,7 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
 			ret <- FALSE
 			warning("Negative or zero beta")
 		} else {  ## delta check
-			if ((lambda4 < 0)|(lambda4 > 1)) { ret <- FALSE 
+			if ((lambda3 < 0)|(lambda3 > 1)) { ret <- FALSE 
 			} else 	{
 				ret <- TRUE 
 			} 

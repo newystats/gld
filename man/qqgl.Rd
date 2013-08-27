@@ -7,7 +7,7 @@ for the generalised lambda distribution.  It does for the generalised lambda
 distribution what \code{\link{qqnorm}} does for the normal.
 }
 \usage{
-qqgl(y = NULL, lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, param = "fkml", lambda5 = NULL, abline = TRUE, lambda.pars1 = NULL, lambda.pars2 = NULL, param2 = "fkml", points.for.2.param.sets = 1000, ...)
+qqgl(y = NULL, lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, param = "fkml", lambda5 = NULL, abline = TRUE, lambda.pars1 = NULL, lambda.pars2 = NULL, param2 = "fkml", points.for.2.param.sets = 4000, ...)
 }
 \arguments{
   \item{y}{The data sample}

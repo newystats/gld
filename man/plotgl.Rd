@@ -14,10 +14,10 @@ uses the depths to produce the values to plot is more efficient
 \usage{
 plotgld(lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, 
   param = "fmkl", lambda5 = NULL, add = NULL, truncate = 0, 
-  bnw = FALSE, col.or.type = 1, granularity = 4000, xlab = "x", 
+  bnw = FALSE, col.or.type = 1, granularity = 10000, xlab = "x", 
   ylab = NULL, quant.probs = seq(0,1,.25), new.plot = NULL,  ...)
 plotglc(lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, 
-  param = "fmkl", lambda5 = NULL, granularity = 4000, xlab = "x", 
+  param = "fmkl", lambda5 = NULL, granularity = 10000, xlab = "x", 
   ylab = "cumulative probability", add = FALSE, ...)
 }
 \arguments{

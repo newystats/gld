@@ -145,7 +145,7 @@ if (!is.null(quant.probs)){quantile(quantiles,quant.probs) }
 }
 
 plotglc <- function(lambda1=0,lambda2=NULL,lambda3=NULL,lambda4=NULL,
-  param="fmkl",lambda5=NULL, granularity=4000, xlab="x",
+  param="fmkl",lambda5=NULL, granularity=10000, xlab="x",
   ylab="cumulative probability",add=FALSE,...)
 {
 # standard parameter fixin' - copied directly from dgl, but we want the 

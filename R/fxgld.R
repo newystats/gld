@@ -15,6 +15,7 @@ extreme<-qgl(c(0,1),lambda1=lambdas,param=param)
 # It may be better to change this to simply  
 # (x <= extreme[2])*(x >= extreme[1])
 outside.range <- !as.logical((x<=extreme[2])*(x>=extreme[1]))
+# possibly calculate the end points here, rather than in the C code?
 u <- pgl(x,lambdas,param=param,inverse.eps=inverse.eps,max.iterations=max.iterations)
 dens <- dqgl(u,lambda1=lambdas,param=param)
 dens[outside.range] <- 0
