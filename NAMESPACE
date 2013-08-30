@@ -1,3 +1,3 @@
 export(dgl,dqgl,gl.check.lambda,pgl,plotglc,plotgld,plot.starship,print.starship,qdgl,qgl,qqgl,rgl,starship,starship.adaptivegrid,starship.obj,summary.starship)
 import(graphics)
-useDynLib(gld,gl_fmkl_distfunc,gl_rs_distfunc,gl_fm5_distfunc)
+useDynLib(gld,gl_fmkl_distfunc,gl_rs_distfunc,gl_fm5_distfunc,gl_vsk_distfunc)
