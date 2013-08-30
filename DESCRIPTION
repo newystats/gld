@@ -1,6 +1,6 @@
 Package: gld
-Version: 2.0
-Date: 2013/08/30
+Version: 2.0.1
+Date: 2013/08/31
 Title: Estimation and use of the generalised (Tukey) lambda distribution
 Suggests: graphics, lmom
 Author: Robert King <Robert.King@newcastle.edu.au>

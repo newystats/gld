@@ -4,8 +4,8 @@
 \description{Plots to compare a Generalised Lambda Distribution fitted via 
 the \code{\link{starship}} to data}
 \usage{
-\method{plot}{starship}(x, data, ask = FALSE, one.page = TRUE, breaks = "Sturges", histogram.title = NULL,...)
-
+\method{plot}{starship}(x, data, ask = FALSE, one.page = TRUE, 
+    breaks = "Sturges", histogram.title = NULL,...)
 }
 \arguments{
   \item{x}{An object of class  \code{\link{starship}}.}

@@ -8,7 +8,8 @@ distribution}
   complex for the RS parameterisation.
 }
 \usage{
-gl.check.lambda(lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 =               NULL, param = "fkml", lambda5 = NULL, vect = FALSE)
+gl.check.lambda(lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, param = "fkml", 
+  lambda5 = NULL, vect = FALSE)
 }
 \arguments{
   \item{lambdas}{This can be either a single numeric value or a vector.  
