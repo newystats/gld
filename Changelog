@@ -1,3 +1,23 @@
+2.3
+Added calculation of moments for FKML given parameters and fitting 
+FKML with moments (given moment values - not calculating the moments yet)
+
+2.2.1
+Bugfixes - DLA wasn't being called correctly
+Also includes some C changes for fit.fkml.  The C code now assumes the data 
+to be fitted has already been sorted
+
+2.2
+New estimation methods for the FKML parameterisation:
+Numerical MLE, Maximum Spacings Product, Titteringtons, L Moments,
+TL Moments, Distributional Least Absolutes
+Starship has C speedups from Ben Dean, in fit.fkml function
+fit.fkml is called by starship() if param="fkml"
+Bugfixes - parameter checking error messages
+
+2.1 
+C speedups from Ben Dean (internal version)
+
 2.0.1 
 removed \usage lines wider than 90 characters
 

@@ -1,0 +1,8 @@
+2.3
+Moment estimation for FKML type
+
+2.2
+New estimation methods for the FKML parameterisation:
+Numerical MLE, Maximum Spacings Product, Titteringtons, L Moments,
+TL Moments, Distributional Least Absolutes
+Starship has C speedups from Ben Dean, in fit.fkml function
