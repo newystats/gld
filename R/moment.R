@@ -1,6 +1,6 @@
 # Method of Moments estimation for FKML, 
 # (c) Sigbert Klinke 2013
-# Edits by Robert King (c) 2013
+# Edits by Robert King (c) 2013,2014,2015
 # Licence GPL >= 2
 # based on method in 
 # Susanna W. M Au-Yeung (2003) Finding Probability Distributions From Moments, Master thesis

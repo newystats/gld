@@ -1,3 +1,5 @@
+# Still to change all the qd to dq 
+
 qgl <- function(p,lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL)
 {
 lambdas <- .gl.parameter.tidy(lambda1,lambda2,lambda3,lambda4,param,lambda5)
@@ -151,8 +153,12 @@ quants
 }
 
 qdgl <- function(p,lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL){
-    # qdgl is here to retain backwards compatability.  This is
-    # actually the "density quantile function", so should be properly referred to by dqgl
+  .Deprecated(new="dqgl",package = "gld",msg="the old qdgl() calculates the density quantile function of the GLD, so it has been renamed dqgl().")
+  dqgl(p=p,lambda1=lambda1,lambda2=lambda2,lambda3=lambda3,lambda4=lambda4,param=param,lambda5=lambda5)
+}
+
+dqgl <- function(p,lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL){
+    # This was qdgl, but it is actually the "density quantile function", so should be properly referred to by dqgl
     dqgl(p=p,lambda1=lambda1,lambda2=lambda2,lambda3=lambda3,lambda4=lambda4,param=param,lambda5=lambda5)}
 
 dqgl <- function(p,lambda1,lambda2=NULL,lambda3=NULL,lambda4=NULL,param="fkml",lambda5=NULL)

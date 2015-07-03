@@ -1,6 +1,5 @@
 \name{GeneralisedLambdaDistribution}
 \alias{dgl}
-\alias{qdgl}
 \alias{dqgl}
 \alias{pgl}
 \alias{qgl}
@@ -9,7 +8,7 @@
 \alias{GeneralisedLambdaDistribution}
 \alias{gld}
 \title{The Generalised Lambda Distribution}
-\description{Density, quantile density, distribution function, quantile 
+\description{Density, density quantile, distribution function, quantile 
 function and random generation for the generalised lambda distribution 
 (also known as the asymmetric lambda, or Tukey lambda).  Provides for four
 different parameterisations, the \code{fmkl} (recommended), the \code{rs}, the \code{gpd} and 
@@ -20,8 +19,6 @@ dgl(x, lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
   param = "fkml", lambda5 = NULL, inverse.eps = .Machine$double.eps,
   max.iterations = 500)
 dqgl(p, lambda1, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, 
-  param = "fkml", lambda5 = NULL)
-qdgl(p, lambda1, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, 
   param = "fkml", lambda5 = NULL)
 pgl(q, lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, 
   param = "fkml", lambda5 = NULL, inverse.eps = .Machine$double.eps,
@@ -116,9 +113,9 @@ and \eqn{-1 \leq \lambda_5 \leq 1}{-1 <= lambda5 <= 1}.
 The distribution is defined by its quantile function and its distribution and
 density functions do not exist in closed form.  Accordingly, the results 
 from \code{pgl} and \code{dgl} are the result of numerical solutions to the
-quantile function, using the Newton-Raphson method.  Since the quantile density
-function, \eqn{f(F^{-1}(u))}, does exist, an additional function, \code{qdgl},
-computes this.
+quantile function, using the Newton-Raphson method.  Since the density
+quantile function, \eqn{f(F^{-1}(u))}, does exist, an additional 
+function, \code{dqgl}, computes this.
 
 The functions \code{qdgl.fmkl}, \code{qdgl.rs}, \code{qdgl.fm5},
 \code{qgl.fmkl}, \code{qgl.rs} and \code{qgl.fm5} from versions 1.5 and 
