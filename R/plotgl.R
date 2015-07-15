@@ -27,7 +27,7 @@ u <- seq(from = 0, to = 1, by = 1/granularity)
 # Only difference across parameterisations is calculating the 
 # quantiles and density
 quantiles <- qgl(u,lambda1=lambdas,param=param)
-density <- qdgl(u,lambda1=lambdas,param=param)
+density <- dqgl(u,lambda1=lambdas,param=param)
 # Check for pathological densities - include check for all,
 dots.required <- FALSE
 nearzero <- .Machine$double.eps*c(0,1,3)

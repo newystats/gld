@@ -9,7 +9,7 @@ if(!gl.check.lambda(lambdas,param=param,vect=TRUE)) {
 "\ndo not produce a proper distribution with the",param,
 "parameterisation - see \ndocumentation for gl.check.lambda"))
         }
-# calculate u=F(x) numerically, then use qdgl
+# calculate u=F(x) numerically, then use dqgl
 # Unless x is outside the range, then density should be zero
 extreme<-qgl(c(0,1),lambda1=lambdas,param=param)
 # It may be better to change this to simply  
