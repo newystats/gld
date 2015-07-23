@@ -1,3 +1,6 @@
+2.3.1
+Bugfix - plotgld() was giving warnings due to use of the deprecated qdgl
+
 2.3
 Added calculation of moments for FKML given parameters and fitting 
 FKML with moments (given moment values - not calculating the moments yet)

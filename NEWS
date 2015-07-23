@@ -1,6 +1,3 @@
-2.3.1 
-Bugfix - plotgld() was giving warnings due to use of the deprecated qdgl
-
 2.3
 Moment estimation for FKML type
 qdgl function deprecated in favour of dqgl as it calculates the density quantile function of the gld
