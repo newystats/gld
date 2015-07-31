@@ -4,7 +4,8 @@ Date: 2015-07-17
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
 Suggests: lmom
 Imports: stats, graphics
-Author: Robert King <Robert.King@newcastle.edu.au>, Benjamin Dean <Benjamin.Dean@uon.edu.au>
+Author: Robert King <Robert.King@newcastle.edu.au>, 
+  Benjamin Dean <Benjamin.Dean@uon.edu.au>, Sigbert Klinke
 Maintainer: Robert King <Robert.King@newcastle.edu.au>
 Description: The  generalised lambda distribution, or Tukey lambda distribution, provides a wide variety of shapes with one functional form.   
   This package provides random numbers, quantiles, probabilities, densities and density quantiles for four different parameterisations of the distribution. 
