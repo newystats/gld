@@ -8,3 +8,5 @@ Lmoments from parameters
 Fitting gpd par with L moments
 
 Should moment fitting return object of class starship?
+
+Add e1071 dep, include moment calculation.  Check literature for type of skewness and kurtosis to use here.  Note multiple parameter values for the same moments issue in documentation.

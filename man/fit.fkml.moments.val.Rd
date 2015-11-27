@@ -4,7 +4,7 @@
 FKML type of the generalised lambda distribution using given moment values} 
 \description{Estimates parameters of the generalised lambda distribution
 (FKML type) using the Method of Moments on the basis of moment values 
-(mean, variance, skewness ratio and kurtosis ratio). 
+(mean, variance, skewness ratio and kurtosis ratio (note, not the \emph{excess kurtosis})). 
 }
 \usage{
 fit.fkml.moments.val(moments=c(mean=0, variance=1, skewness=0,
