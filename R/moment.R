@@ -111,6 +111,8 @@ fit.fkml.moments.val <- function (moments=c(mean=0, variance=1,
   # optimise.this fitting l3,l4 on the basis of the 3rd & 4th moments 
   # (actually the skewness and kurtosis ratios)
   # par is a vector of length 2, containing lambda3 and lambda4
+  # This should really be constrained optim because of the parameter restrictions for the moments to be finite.  See errors produced by 
+  # fit.fkml.moments.val(gld:::moments4data(rgl(100,c(10,1,-.3,-.3))))
   mean = moments[1]
   variance = moments[2]
   skewness = moments[3]
