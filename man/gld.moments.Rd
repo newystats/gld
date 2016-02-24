@@ -16,8 +16,7 @@ given parameter values.
   {\eqn{\lambda_3}{lambda 3} - first shape parameter}
   {\eqn{\lambda_4}{lambda 4} - second shape parameter}
     }
-  \item{type}{choose the type of generalised lambda distribution.  Currently
-  \code{gld.moments} only supports
+  \item{type}{choose the type of generalised lambda distribution.  Currently  \code{gld.moments} only supports
   \code{fkml} which uses \emph{Freimer, Kollia, Mudholkar, and Lin (1988)} (default).}
   \item{ratios}{Logical.  TRUE to give moment ratios for skewness and kurtosis, FALSE to give the third and fourth central moments instead.}
 }
@@ -68,7 +67,9 @@ Paul van Staden}
 \seealso{\code{\link{fit.fkml.moments.val}}
 }
 \examples{
-fit.fkml.moments.val(c(0,1,0,3))
+gld.moments(c(0,1.463551,0.1349124,0.1349124))
+gld.moments(c(0,1.813799,0,0))
+gld.moments(c(0,1,0,3))
 }
 \keyword{distribution}
 

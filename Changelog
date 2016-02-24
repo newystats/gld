@@ -1,3 +1,7 @@
+2.3.2 
+optimisation in fkml.moments.val is now constrained to the region on lambda3, lambda4 space where moments exist.  
+Documentation for moment fitting notes multiple parameter sets with the same first 4 moments
+
 2.3.1
 Bugfix - plotgld() was giving warnings due to use of the deprecated qdgl
 

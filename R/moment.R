@@ -111,13 +111,13 @@ fit.fkml.moments.val <- function (moments=c(mean=0, variance=1,
   # optimise.this fitting l3,l4 on the basis of the 3rd & 4th moments 
   # (actually the skewness and kurtosis ratios)
   # par is a vector of length 2, containing lambda3 and lambda4
-  # This should really be constrained optim because of the parameter restrictions for the moments to be finite.  See errors produced by 
-  # fit.fkml.moments.val(gld:::moments4data(rgl(100,c(10,1,-.3,-.3))))
+  # 4 moments exist provided that lambda3 and lambda4 > -0.25
   mean = moments[1]
   variance = moments[2]
   skewness = moments[3]
-  kurtosis = moments[4]
-  optimise.this <- function (par, skewness, kurtosis) {
+  kurtosis = moments[4]  
+  # Is this the correct thing to do about the the ?skewness missing - does it fix the NaNs?
+  optimise.this <- function (par, skewness=moments[3], kurtosis=moments[4]) {
     v1 <- vk(1, par[1], par[2])
     v2 <- vk(2, par[1], par[2])
     v3 <- vk(3, par[1], par[2])
@@ -130,7 +130,11 @@ fit.fkml.moments.val <- function (moments=c(mean=0, variance=1,
     return((skewness-a3)^2+(kurtosis-a4)^2)
   }
   par       <- starting.point # starting point for l3,l4
-  est       <- optim(par, optimise.this, method=optim.method,skewness=skewness, kurtosis=kurtosis, control=optim.control)
+  constraint.matrix <- diag(2)
+  constraint.vector <- -.25 + .Machine$double.eps
+  est       <- constrOptim(theta=par, f=optimise.this, 
+      ui=constraint.matrix,ci=constraint.vector,method=optim.method,
+      skewness=skewness, kurtosis=kurtosis, control=optim.control)
   lambda    <- c(NA,NA,est$par) # optim has produced estimates for shape parameters
   # Then get lambda2hat, lambda1hat as functions of lambda3hat lambda4hat 
   # and the mean and variance 
