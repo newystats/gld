@@ -1,3 +1,7 @@
+2.3.3 
+print.starship, summary.starship and plot.starship now display 
+estimation method and gld type
+
 2.3.2 
 optimisation in fkml.moments.val is now constrained to the region on lambda3, lambda4 space where moments exist.  
 Documentation for moment fitting notes multiple parameter sets with the same first 4 moments

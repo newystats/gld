@@ -49,6 +49,8 @@ result <- list(lambda=optimmin$par,grid.results=gridmin,optim.results=optimmin,p
 if (return.data) {result$data = data}
 # Apply starship class to result
 class(result) <- "starship"
+result$method.code <- "SM"
+result$method.name <- "Starship"
 # Add names to the lambda element - what names to use will depend on the parameterisation
 if (param=="VSK"| param=="vsk" | param=="gpd" | param=="GPD") {
   names(result$lambda) <- c("alpha","beta","delta","lambda")

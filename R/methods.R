@@ -2,12 +2,14 @@ print.starship <- function(x,digits = max(3, getOption("digits") - 3), ...)
 {
 # I should include the call
 # Add names to the vector in starship
-cat(paste(x$param,"parameterisation\n"))
+cat(paste(x$method.name,"estimate, gld type:",x$param,"\n"))
 print.default(format(x$lambda,digits=digits), print.gap = 2,quote=FALSE)
 }
 
 summary.starship <- function(object,...)
 {
+cat(paste("Generalised Lambda Distribution",object$param,"type.",
+          object$method.name," estimate.\n"))
 cat("\nAdaptive Grid estimates:\n")
 fake.lambda <- object$grid.results$lambda
 names(fake.lambda) <- paste("lambda",1:length(fake.lambda),sep="")
@@ -27,8 +29,11 @@ cat("Message: ")
 print(object$optim.results$message)
 }
 
-plot.starship <- function(x,data=NULL,ask=FALSE,one.page=TRUE,breaks="Sturges",histogram.title=NULL,...)
+plot.starship <- function(x,data=NULL,ask=FALSE,one.page=TRUE,breaks="Sturges",plot.title="default",...)
 {
+if (plot.title == "default") {
+  plot.title <- paste(x$method.name,"fit of",x$param,"type GLD")
+}
 allpar <- par()
 opar <- allpar[match(c("ask","mfrow"),names(allpar))]
 if (is.null(x$data)){
@@ -39,8 +44,8 @@ if (is.null(x$data)){
 		warning(paste(substitute(x),"has a data element and the data argument was also given.\nUsing ",paste(substitute(data))," instead of the data element of ",substitute(x))) } }
 if (ask) {par(ask=TRUE)}
 if (one.page) {par(mfrow=c(2,1))}
-qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab="Fitted Theoretical Quantiles")
-hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=histogram.title,...)
+qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab="Fitted Theoretical Quantiles",main=plot.title)
+hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
 plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
 par(opar) # Return to previous par
 }

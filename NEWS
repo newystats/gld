@@ -1,3 +1,7 @@
+2.3.3 
+print.starship, summary.starship and plot.starship now display 
+estimation method and gld type
+
 2.3
 Moment estimation for FKML type
 qdgl function deprecated in favour of dqgl as it calculates the density quantile function of the gld

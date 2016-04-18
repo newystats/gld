@@ -5,7 +5,7 @@
 the \code{\link{starship}} to data}
 \usage{
 \method{plot}{starship}(x, data, ask = FALSE, one.page = TRUE, 
-    breaks = "Sturges", histogram.title = NULL,...)
+    breaks = "Sturges", plot.title = "default",...)
 }
 \arguments{
   \item{x}{An object of class  \code{\link{starship}}.}
@@ -13,7 +13,11 @@ the \code{\link{starship}} to data}
   \item{ask}{Ask for user input before next plot --- passed to \code{\link{par}(ask)}.  Does not permanently change this setting. Ignored if \code{one.page} is TRUE}
   \item{one.page}{Put the two plots on one page using \code{\link{par}(mfrow=c(2,1))}. Does not permanently change this setting.}
   \item{breaks}{Control the number of histogram bins --- passed to \code{\link{hist}}.}
-  \item{histogram.title}{Main title for histogram --- passed to \code{\link{hist}(main=)}.}
+  \item{plot.title}{Main title for histogram and QQ --- passed 
+      to \code{\link{hist}(main=)} and \code{\link{qqgl}(main=)}.  
+      If you set this to \code{"default"}, it will include the fitting
+      method and gld type, for example 
+      ``Starship fit of FMKL type GLD''.}
   \item{\dots}{arguments passed to \code{\link{plot}} AND \code{\link{hist}}}
 }
 \details{
