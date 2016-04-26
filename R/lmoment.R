@@ -20,15 +20,18 @@ gld.lmoments <- function(pars,order=1:4,ratios=TRUE,type="GPD"){
     L1 = alpha + (beta*(2*delta -1))/(lambda +1 )
     L2 = beta / ((lambda+1)*(lambda+2))
     result <- rep(NA,length(order))
+    names(result) <- paste("L",order,sep="")
     result[(order==1)] <- L1
     result[(order==2)] <- L2
     if (ratios){
     result[(order>2)]<-((gamma(3+lambda))*(gamma(order[(order>2)]-1-lambda)))/
                         ((gamma(1-lambda))*(gamma(order[(order>2)]+1+lambda)))
+    taunames <- paste("tau",order,sep="")
+    names(result)[(order>2)] <- taunames[(order>2)]
     } else {
       result[(order>2)]<-((gamma(1+lambda))*(gamma(order[(order>2)]-1-lambda)))/
         ((gamma(1-lambda))*(gamma(order[(order>2)]+1+lambda)))
-    }
+      }
   } else {
   L1 = alpha + (beta*(2*delta -1))/(lambda +1 )
   L2 = beta / ((lambda+1)*(lambda+2))
