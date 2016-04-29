@@ -1,9 +1,9 @@
 Package: gld
-Version: 2.3.4
-Date: 2016-04-22
+Version: 2.4
+Date: 2016-04-27
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
-Suggests: lmom
-Imports: stats, graphics, e1071
+Suggests: 
+Imports: stats, graphics, e1071, lmom
 Author: Robert King <Robert.King@newcastle.edu.au>, 
   Benjamin Dean <Benjamin.Dean@uon.edu.au>, Sigbert Klinke
 Maintainer: Robert King <Robert.King@newcastle.edu.au>
