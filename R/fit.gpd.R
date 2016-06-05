@@ -58,11 +58,9 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   alphahatA <- l1+(betahatA*(1-2*deltahatA))/(lambdahatA+1)
   alphahatB <- l1+(betahatB*(1-2*deltahatB))/(lambdahatB+1)
   lmomestA <- c(alphahatA,betahatA,deltahatA,lambdahatA)
+  if (gl.check.lambda(lmomestA,par="gpd")) {  names(lmomestA) <- c("alpha","beta","delta","lambda")} else {lmomestA <- NA}
   lmomestB <- c(alphahatB,betahatB,deltahatB,lambdahatB)
-  names(lmomestA) <- c("alpha","beta","delta","lambda")
-  names(lmomestB) <- c("alpha","beta","delta","lambda")
-  # This does not detect when there is only one valid estimate
-  # Fix that
+  if (gl.check.lambda(lmomestB,par="gpd")) {  names(lmomestB) <- c("alpha","beta","delta","lambda")} else {lmomestB <- NA}
   #if (!is.null(n)){ # Sample size is known - calculate Std Errors
   if (FALSE){
     # Calculate standard errors for gld gpd - replace this
