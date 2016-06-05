@@ -19,40 +19,53 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE,
   # Store results
   if (record.cpu.time) {time.2 <- as.numeric(proc.time()[3]); runtime <- round(time.2-time.1,2) } else {runtime=NA}
   
-  result <- list(mx=mx.results)
-  #names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
-  
-   #result <- list(lambda= # a vector 
-   #                unclass(pars.est[1:4]),grid.results=grid.results,
-   #              optim.results=optim.results,param="fkml",
-  #               method.code=method,method.name=method.name,
-  #               fkml.oldstyle.results=old.style.results)
-  if (return.data) {result$data = x}
+  result <- list(lambda=mx.results[,1],mx=mx.results,cpu.time=runtime,
+                 param="gpd",method.code=method,method.name=method.name)
+ # check do they have  #names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
+    if (return.data) {result$data = x}
   class(result) <- "starship"
-   
-  result <- "function not finished yet"
+  result
 }
                    
 
-fit.gpd.lmom <- function(data,na.rm=TRUE){
+fit.gpd.lmom <- function(data,na.rm=TRUE,fail.noisily=TRUE){
   if (na.rm){ dataNArm <- data[!is.na(data)] 
   } else { if (any(is.na(data))) {
       stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
   }
-  fit.gpd.lmom.given(lmoms=lmom::samlmu(dataNArm,nmom=4),n=length(dataNArm))
+  fit.gpd.lmom.given(lmoms=lmom::samlmu(dataNArm,nmom=4),n=length(dataNArm),fail.noisily=fail.noisily)
 }
 
-
 fit.gpd.lmom.given <- function(lmoms,n=NULL){
-  warning("calculations here are still sld")
-  if (lmoms[3]>(1/3)) {stop("No QB skew logistic distribution corresponds to these L Moment values.\nThese L Moments are more right skew than the exponential distribution, the limiting case of the QB Skew Logistic.")} 
-  if (lmoms[3]<(-1/3)) {stop("No QB skew logistic distribution corresponds to these L Moment values.\nThese L Moments are more left skew than the reflected exponential distribution, the limiting case of the QB Skew Logistic.")}
-  ah = lmoms[1] - 6*(lmoms[3]*lmoms[2]) # alpha hat 
-  bh = 2*lmoms[2] # beta hat
-  dh = 0.5*(1+3*lmoms[3]) # delta hat
-  lmomest <- c(ah,bh,dh)
-  names(lmomest) <- c("alpha","beta","delta")
-  if (!is.null(n)){ # Sample size is known - calculate Std Errors
+  if (length(lmoms) < 4) {stop("4 L-Moments are required to fit the GLD gpd.\nArgument lmoms of fit.gpd.lmom.given is less than 4 long.")}
+  t4 <- lmoms[4]
+  t3 <- lmoms[3]
+  l2 <- lmoms[2]
+  l1 <- lmoms[1]
+  el.1 <- (3+7*t4)
+  if (abs(t3)>=1){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau 3 value: Tau3=",t3,"outside (-1,1) range")))}
+  if ( (5*t3^2-1)/4 > t4 ){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau3/Tau4 combination. (5*Tau3^2-1)/4 =",(5*t3^2-1)/4,"must be <= Tau4 =",t4)))}
+  if (t4>=1){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")))}
+  if ((t4^2+98*t4+1)<0) {return(list(estA=NA,estB=NA,error.message="No estimates possible, Tau4 too low (lowest possible value is approx -0.0102)"))}
+  el.2 <- sqrt(t4^2+98*t4+1)
+  denom <- (2*(1-t4))
+  lambdahatA <- (el.1 - el.2 )/ denom
+  lambdahatB <- (el.1 + el.2 )/ denom
+  deltahatA <- 0.5*(1-(t3*(lambdahatA+3))/(lambdahatA-1))
+  deltahatB <- 0.5*(1-(t3*(lambdahatB+3))/(lambdahatB-1))  
+  betahatA <- l2*(lambdahatA+1)*(lambdahatA+2)
+  betahatB <- l2*(lambdahatB+1)*(lambdahatB+2)
+  alphahatA <- l1+(betahatA*(1-2*deltahatA))/(lambdahatA+1)
+  alphahatB <- l1+(betahatB*(1-2*deltahatB))/(lambdahatB+1)
+  lmomestA <- c(alphahatA,betahatA,deltahatA,lambdahatA)
+  lmomestB <- c(alphahatB,betahatB,deltahatB,lambdahatB)
+  names(lmomestA) <- c("alpha","beta","delta","lambda")
+  names(lmomestB) <- c("alpha","beta","delta","lambda")
+  # This does not detect when there is only one valid estimate
+  # Fix that
+  #if (!is.null(n)){ # Sample size is known - calculate Std Errors
+  if (FALSE){
+    # Calculate standard errors for gld gpd - replace this
     om = dh*(1-dh) # omega
     se.alpha = bh * sqrt((57 + (125*pi^2-1308)*om)/(15*n))
     se.beta = bh * sqrt(4/(3*n) * (1 - (pi^2-8)*om))
@@ -62,7 +75,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
     dimnames(ret) <- list(c("alpha","beta","delta"),
                           c("Estimate","Std. Error"))
   } else {
-    ret <- lmomest # return just the estimates
+    ret <- list(estA=lmomestA,estB=lmomestB) # return just the estimates
   }
   ret
 }
