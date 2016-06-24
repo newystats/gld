@@ -28,7 +28,7 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE,
 }
                    
 
-fit.gpd.lmom <- function(data,na.rm=TRUE,fail.noisily=TRUE){
+fit.gpd.lmom <- function(data,na.rm=TRUE){
   if (na.rm){ dataNArm <- data[!is.na(data)] 
   } else { if (any(is.na(data))) {
       stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
@@ -46,7 +46,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   if (abs(t3)>=1){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau 3 value: Tau3=",t3,"outside (-1,1) range")))}
   if ( (5*t3^2-1)/4 > t4 ){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau3/Tau4 combination. (5*Tau3^2-1)/4 =",(5*t3^2-1)/4,"must be <= Tau4 =",t4)))}
   if (t4>=1){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")))}
-  if ((t4^2+98*t4+1)<0) {return(list(estA=NA,estB=NA,error.message="No estimates possible, Tau4 too low (lowest possible value is approx -0.0102)"))}
+  if ((t4^2+98*t4+1)<0) {return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, Tau4 too low (lowest possible value is approx -0.0102051). Tau4 here is ",t4)))}
   el.2 <- sqrt(t4^2+98*t4+1)
   denom <- (2*(1-t4))
   lambdahatA <- (el.1 - el.2 )/ denom
@@ -61,13 +61,13 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   if (gl.check.lambda(lmomestA,par="gpd")) {  names(lmomestA) <- c("alpha","beta","delta","lambda")} else {lmomestA <- NA}
   lmomestB <- c(alphahatB,betahatB,deltahatB,lambdahatB)
   if (gl.check.lambda(lmomestB,par="gpd")) {  names(lmomestB) <- c("alpha","beta","delta","lambda")} else {lmomestB <- NA}
-  #if (!is.null(n)){ # Sample size is known - calculate Std Errors
-  if (FALSE){
-    # Calculate standard errors for gld gpd - replace this
-    om = dh*(1-dh) # omega
-    se.alpha = bh * sqrt((57 + (125*pi^2-1308)*om)/(15*n))
-    se.beta = bh * sqrt(4/(3*n) * (1 - (pi^2-8)*om))
-    se.delta = sqrt((8-(397+160*om-20*pi^2*(om+2))*om)/(15*n))
+  if (FALSE){ #if (!is.null(n)){ # Sample size is known - calculate Std Errors
+    # Calculate standard errors for gld
+    # Check if SEs exist in region A (lambda > -0.5 )
+    #om = dh*(1-dh) # omega
+    #se.alpha = bh * sqrt((57 + (125*pi^2-1308)*om)/(15*n))
+    #se.beta = bh * sqrt(4/(3*n) * (1 - (pi^2-8)*om))
+    #se.delta = sqrt((8-(397+160*om-20*pi^2*(om+2))*om)/(15*n))
     lmomse <- c(se.alpha,se.beta,se.delta)
     ret <- cbind(lmomest,lmomse)
     dimnames(ret) <- list(c("alpha","beta","delta"),
@@ -77,3 +77,5 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   }
   ret
 }
+
+
