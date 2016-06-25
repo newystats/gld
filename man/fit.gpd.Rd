@@ -10,23 +10,37 @@ generalised lambda distribution type with closed form expressions.
 }
 \usage{
 fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE)
-fit.gpd.lmom(data,na.rm=TRUE)
-fit.gpd.lmom.given(lmoms,n=NULL)
+fit.gpd.lmom(data, na.rm = TRUE)
+fit.gpd.lmom.given(lmoms, n = NULL)
 }
 \arguments{
   \item{x}{Data to be fitted, as a vector}
   \item{method}{A character string, to select the estimation method.  Only Method of
   L-Moments "LM" is implemented.}
   \item{na.rm}{logical. Should missing values be removed?}
-  \item{record.cpu.time}{Boolean --- should the CPU time used in fitting be recorded in the fitted model object?}
-  \item{return.data}{Logical: Should the function return the data (from the argument \code{x})?}
+  \item{record.cpu.time}{Boolean: should the CPU time used in fitting be recorded in the fitted model object?}
+  \item{return.data}{Boolean: Should the function return the data (from the argument \code{x})?}
+  \item{data}{Data to be fitted, as a vector}
+  \item{lmoms}{A numeric vector containing two L-moments and two L-moment ratios, in the order \eqn{l_1,l_2,t_3,t_4}{l_1, l_2, t_3, t_4}.}
+  \item{n}{the sample size, defaults to NULL}
 }
-\details{The method of L-Moments equates sample L-Moments with expressions for the 
-L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
+\details{The method of L-Moments equates sample L-Moments with expressions 
+for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
 
-If 
+If the L-Moment ratio, \eqn{\tau_4}{tau4} is less than the minimum 
+value that \eqn{\tau_4}{tau4} can obtain for the GPD generalised lambda
+distribution;
 
-For many values 
+\deqn{\tau_4^{(min)}=\frac{12-5\sqrt{6}}{12+5\sqrt{6}} \approx -0.0102051,}{(12-5*sqrt(6))/(12+5*sqrt(6)) = approx -0.0102051,}
+
+there is no possible estimate, and this function returns
+
+For many values there are two possible estimates, in two regions of the
+GPD GLD parameter space, denoted region A and region B in van Staden (2013).
+
+See page 154
+
+This function returns both estimates.  In most cases, the 
 }
 \value{
 %%  ~Describe the value returned

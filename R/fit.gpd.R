@@ -33,7 +33,7 @@ fit.gpd.lmom <- function(data,na.rm=TRUE){
   } else { if (any(is.na(data))) {
       stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
   }
-  fit.gpd.lmom.given(lmoms=lmom::samlmu(dataNArm,nmom=4),n=length(dataNArm),fail.noisily=fail.noisily)
+  fit.gpd.lmom.given(lmoms=lmom::samlmu(dataNArm,nmom=4),n=length(dataNArm))
 }
 
 fit.gpd.lmom.given <- function(lmoms,n=NULL){
@@ -58,9 +58,9 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   alphahatA <- l1+(betahatA*(1-2*deltahatA))/(lambdahatA+1)
   alphahatB <- l1+(betahatB*(1-2*deltahatB))/(lambdahatB+1)
   lmomestA <- c(alphahatA,betahatA,deltahatA,lambdahatA)
-  if (gl.check.lambda(lmomestA,par="gpd")) {  names(lmomestA) <- c("alpha","beta","delta","lambda")} else {lmomestA <- NA}
+  if (gl.check.lambda(lmomestA,param="gpd")) {  names(lmomestA) <- c("alpha","beta","delta","lambda")} else {lmomestA <- NA}
   lmomestB <- c(alphahatB,betahatB,deltahatB,lambdahatB)
-  if (gl.check.lambda(lmomestB,par="gpd")) {  names(lmomestB) <- c("alpha","beta","delta","lambda")} else {lmomestB <- NA}
+  if (gl.check.lambda(lmomestB,param="gpd")) {  names(lmomestB) <- c("alpha","beta","delta","lambda")} else {lmomestB <- NA}
   if (FALSE){ #if (!is.null(n)){ # Sample size is known - calculate Std Errors
     # Calculate standard errors for gld
     # Check if SEs exist in region A (lambda > -0.5 )
