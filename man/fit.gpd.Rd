@@ -17,9 +17,9 @@ fit.gpd.lmom.given(lmoms, n = NULL)
   \item{x}{Data to be fitted, as a vector}
   \item{method}{A character string, to select the estimation method.  Only Method of
   L-Moments "LM" is implemented.}
-  \item{na.rm}{logical. Should missing values be removed?}
-  \item{record.cpu.time}{Boolean: should the CPU time used in fitting be recorded in the fitted model object?}
-  \item{return.data}{Boolean: Should the function return the data (from the argument \code{x})?}
+  \item{na.rm}{Logical: Should missing values be removed?}
+  \item{record.cpu.time}{Logical: should the CPU time used in fitting be recorded in the fitted model object?}
+  \item{return.data}{Logical: Should the function return the data (from the argument \code{x})?}
   \item{data}{Data to be fitted, as a vector}
   \item{lmoms}{A numeric vector containing two L-moments and two L-moment ratios, in the order \eqn{l_1,l_2,t_3,t_4}{l_1, l_2, t_3, t_4}.}
   \item{n}{the sample size, defaults to NULL}
@@ -27,27 +27,40 @@ fit.gpd.lmom.given(lmoms, n = NULL)
 \details{The method of L-Moments equates sample L-Moments with expressions 
 for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
 
-If the L-Moment ratio, \eqn{\tau_4}{tau4} is less than the minimum 
+For many values there are two possible estimates for the same L Moment
+values, one in each of two regions of the GPD GLD parameter space, 
+denoted region A and region B in van Staden (2013).  More details on these 
+regions can be found on page 154 of van Staden (2013).
+
+If the 4th L-Moment ratio, \eqn{\tau_4}{tau4} is less than the minimum 
 value that \eqn{\tau_4}{tau4} can obtain for the GPD generalised lambda
 distribution;
 
 \deqn{\tau_4^{(min)}=\frac{12-5\sqrt{6}}{12+5\sqrt{6}} \approx -0.0102051,}{(12-5*sqrt(6))/(12+5*sqrt(6)) = approx -0.0102051,}
 
-there is no possible estimate, and this function returns
-
-For many values there are two possible estimates, in two regions of the
-GPD GLD parameter space, denoted region A and region B in van Staden (2013).
-
-See page 154
-
-This function returns both estimates.  In most cases, the 
+there is no possible estimate (from either region A or B), and this 
+function returns NA for the estimates.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+\code{fit.gpd} returns an object of \code{\link[base]{class}} 
+\code{"GldFitMultiple"}.  It is a list, containing the
+following components:
+
+
+
+  \item{lambda}{A vector of length 4, giving 
+the estimated parameters, in order,
+  \eqn{\lambda_1}{lambda 1} - location parameter
+  \eqn{\lambda_2}{lambda 2} - scale parameter
+  \eqn{\lambda_3}{lambda 3} - first shape parameter
+  \eqn{\lambda_4}{lambda 4} - second shape parameter
+  }
+  \item{grid.results}{output from the grid search}
+  \item{optim}{output from the optim search,
+\code{\link{optim}} for details}
+  \item{cpu}{A vector showing the computing time used, returned if 
+    \code{record.cpu.time} is TRUE}     
+  \item{data}{The data, if \code{return.data} is TRUE}
 }
 \references{
 %% ~put references to the literature/web site here ~

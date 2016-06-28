@@ -1,3 +1,7 @@
+Add details on region A, B of GPD type
+
+New class for GPD fits (to take account of both fits)
+
 RS parameterisation l3=0 or l4=0 limit results
 
 Check if the sorting in pgl() is worth the computational cost

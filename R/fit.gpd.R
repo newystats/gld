@@ -12,9 +12,9 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE,
   if (method == "LM")  {method.name="Method of L-Moments"}
   
   if (method == "LM")  {
-    mx.results <- fit.gpd.lmom(data=x,na.rm=na.rm)
+    results <- fit.gpd.lmom(data=x,na.rm=na.rm)
   }
-  # results will always be a matrix (with SEs)
+  # results a list with 2 elements
   
   # Store results
   if (record.cpu.time) {time.2 <- as.numeric(proc.time()[3]); runtime <- round(time.2-time.1,2) } else {runtime=NA}
@@ -43,10 +43,18 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   l2 <- lmoms[2]
   l1 <- lmoms[1]
   el.1 <- (3+7*t4)
-  if (abs(t3)>=1){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau 3 value: Tau3=",t3,"outside (-1,1) range")))}
-  if ( (5*t3^2-1)/4 > t4 ){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau3/Tau4 combination. (5*Tau3^2-1)/4 =",(5*t3^2-1)/4,"must be <= Tau4 =",t4)))}
-  if (t4>=1){return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")))}
-  if ((t4^2+98*t4+1)<0) {return(list(estA=NA,estB=NA,error.message=paste("No estimates possible, Tau4 too low (lowest possible value is approx -0.0102051). Tau4 here is ",t4)))}
+  if (abs(t3)>=1){problem=paste("No estimates possible, impossible sample Tau 3 value: Tau3=",t3,"outside (-1,1) range")
+    warning(problem)
+    return(list(estA=NA,estB=NA,warn=problem))}
+  if ( (5*t3^2-1)/4 > t4 ){problem = paste("No estimates possible, impossible sample Tau3/Tau4 combination. (5*Tau3^2-1)/4 =",(5*t3^2-1)/4,"must be <= Tau4 =",t4)
+    warning(problem)
+    return(list(estA=NA,estB=NA,warn=problem))}
+  if (t4>=1){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")
+    warning(problem)
+    return(list(estA=NA,estB=NA,warn=problem))}
+  if ((t4^2+98*t4+1)<0) {problem = paste("No estimates possible, Tau4 too low (lowest possible value is approx -0.0102051). Tau4 here is ",t4)
+    warning(problem)
+    return(list(estA=NA,estB=NA,warn=problem))}
   el.2 <- sqrt(t4^2+98*t4+1)
   denom <- (2*(1-t4))
   lambdahatA <- (el.1 - el.2 )/ denom
