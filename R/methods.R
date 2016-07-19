@@ -49,3 +49,4 @@ hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
 plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
 par(opar) # Return to previous par
 }
+

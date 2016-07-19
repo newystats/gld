@@ -9,7 +9,7 @@ The Method of L-Moments estimates for the GPD type are the only estimates for an
 generalised lambda distribution type with closed form expressions.
 }
 \usage{
-fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE)
+fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = FALSE, return.data = FALSE)
 fit.gpd.lmom(data, na.rm = TRUE)
 fit.gpd.lmom.given(lmoms, n = NULL)
 }
@@ -42,80 +42,37 @@ there is no possible estimate (from either region A or B), and this
 function returns NA for the estimates.
 }
 \value{
-\code{fit.gpd} returns an object of \code{\link[base]{class}} 
-\code{"GldFitMultiple"}.  It is a list, containing the
-following components:
-
-
-
-  \item{lambda}{A vector of length 4, giving 
-the estimated parameters, in order,
-  \eqn{\lambda_1}{lambda 1} - location parameter
-  \eqn{\lambda_2}{lambda 2} - scale parameter
-  \eqn{\lambda_3}{lambda 3} - first shape parameter
-  \eqn{\lambda_4}{lambda 4} - second shape parameter
-  }
-  \item{grid.results}{output from the grid search}
-  \item{optim}{output from the optim search,
-\code{\link{optim}} for details}
+These funciton return an object of \code{\link[base]{class}} 
+"\code{GldFitMultiple}".  It is a list, containing these components (optional components noted here);
+  \item{estA}{The estimate in region A.  This will be NA if there is no estimate in region A}
+  \item{estB}{The estimate in region B.  This will be NA if there is no estimate in region B}
+  \item{warn}{(only if estA and estB are both NA), the reason there are no
+estimates.  If this is the case, the function also issues a \code{\link{warning}}.}
   \item{cpu}{A vector showing the computing time used, returned if 
-    \code{record.cpu.time} is TRUE}     
-  \item{data}{The data, if \code{return.data} is TRUE}
+    \code{record.cpu.time} is TRUE (only for \code{fit.gpd}).}     
+  \item{data}{The data, if \code{return.data} is TRUE (only for \code{fit.gpd}).}
+  \item{param}{The character \code{"gpd"}, indicating the GPD type of the
+  generalised lambda distribution.}
+
+  Each of the estimate elements (if they are not NA) are a vector of length 4,
+  giving the estimated parameters, in order;
+
+  \eqn{\alpha}{alpha} - location parameter
+  \eqn{\beta}{beta} - scale parameter
+  \eqn{\delta}{delta} - skewness parameter
+  \eqn{\lambda}{lambda} - kurtosis parameter
 }
 \references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
+Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+}
+\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{http://tolstoy.newcastle.edu.au/~rking/}
 
+Paul van Staden}
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{GeneralisedLambdaDistribution}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, 
-    return.data = FALSE) 
-{
-    if (record.cpu.time) {
-        time.1 <- as.numeric(proc.time()[3])
-    }
-    else {
-        time.1 <- "not timing"
-    }
-    if (method == "LM") {
-        method.name = "Method of L-Moments"
-    }
-    if (method == "LM") {
-        mx.results <- fit.gpd.lmom(data = x, na.rm = na.rm)
-    }
-    if (record.cpu.time) {
-        time.2 <- as.numeric(proc.time()[3])
-        runtime <- round(time.2 - time.1, 2)
-    }
-    else {
-        runtime = NA
-    }
-    result <- list(lambda = mx.results[, 1], mx = mx.results, 
-        cpu.time = runtime, param = "gpd", method.code = method, 
-        method.name = method.name)
-    if (return.data) {
-        result$data = x
-    }
-    class(result) <- "starship"
-    result
-  }
+fit.gpd.lmom.given(c(1,.3,.6,.8))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{distribution}
