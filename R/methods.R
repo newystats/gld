@@ -50,3 +50,26 @@ plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
 par(opar) # Return to previous par
 }
 
+print.GldGPDFit <- function(x,digits = max(3, getOption("digits") - 3), ...)
+{
+  if (is.na(x$estA[1])) {
+    if (is.na(x$estB[1])){
+      cat("No estimates for the GLD GPD\n")
+      cat(x$warn)
+    } else {
+      cat("Region B only:\n")
+      print.default(format(x$estB,digits=digits), print.gap = 2,quote=FALSE)
+      # This needs to be extended once the package calculates SEs
+    }
+  } else { # region A estimate exists
+    if (is.na(x$estB[1])){
+      cat("Region A only:\n")
+      print.default(format(x$estA,digits=digits), print.gap = 2,quote=FALSE)
+    } else {
+      cat("Region A:\n")
+      print.default(format(x$estA,digits=digits), print.gap = 2,quote=FALSE)
+      cat("\nRegion B:\n")
+      print.default(format(x$estB,digits=digits), print.gap = 2,quote=FALSE)
+    }
+  }
+}

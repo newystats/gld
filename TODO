@@ -1,7 +1,5 @@
 Add details on region A, B of GPD type
 
-New class for GPD fits (to take account of both fits)
-
 RS parameterisation l3=0 or l4=0 limit results
 
 Check if the sorting in pgl() is worth the computational cost
@@ -12,8 +10,6 @@ Lmoments from parameters
 Fitting gpd par with L moments
 
 Should moment fitting return object of class starship?
-
-Make lmom a depends rather than suggests
 
 Estimation of FKML with moments for data as well as given moment values
 

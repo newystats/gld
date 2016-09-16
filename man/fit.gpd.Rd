@@ -43,7 +43,7 @@ function returns NA for the estimates.
 }
 \value{
 These funciton return an object of \code{\link[base]{class}} 
-"\code{GldFitMultiple}".  It is a list, containing these components (optional components noted here);
+"\code{GldGPDFit}".  It is a list, containing these components (optional components noted here);
   \item{estA}{The estimate in region A.  This will be NA if there is no estimate in region A}
   \item{estB}{The estimate in region B.  This will be NA if there is no estimate in region B}
   \item{warn}{(only if estA and estB are both NA), the reason there are no
