@@ -1,3 +1,9 @@
+2.5
+Standard Errors for the L Moment estimates for the GPD type
+
+2.4
+Method of L Moment estimates for the gpd type
+
 2.3.3 
 print.starship, summary.starship and plot.starship now display 
 estimation method and gld type
