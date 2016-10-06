@@ -5,7 +5,7 @@ nu1 <- function(lambda){
 }
 
 nu2 <- function(lambda){
-  4*lambda^10 + 3*lambda^9 + 51*lambda^8 - 104*lambda^7 - 43*lambda^6 +
+  4*lambda^10 + 32*lambda^9 + 51*lambda^8 - 104*lambda^7 - 43*lambda^6 +
     735 * lambda^5 + 995 * lambda^4 + 6418 * lambda^3 + 22611*lambda^2 + 
     27911*lambda + 13966
 }
