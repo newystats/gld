@@ -37,6 +37,7 @@ Paul van Staden
 %}
 \seealso{
 \code{\link{beta}}
+\code{\link{gamma}}
 \code{\link{fit.gpd}} 
 \code{\link{GeneralisedLambdaDistribution}}
 }
