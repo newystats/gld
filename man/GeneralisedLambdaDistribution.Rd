@@ -60,7 +60,8 @@ rgl(n, lambda1=0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
   \code{fm5} uses the 5 parameter version of the FMKL parameterisation 
   (paper to appear)}
   \item{inverse.eps}{Accuracy of calculation for the numerical determination of 
-	\eqn{F(x)}, defaults to \code{.Machine$double.eps}}
+	\eqn{F(x)}, defaults to \code{.Machine$double.eps}.  You may wish to make
+	this a larger number to speed things up for large samples.}
   \item{max.iterations}{Maximum number of iterations in the numerical 
 	determination of \eqn{F(x)}, defaults to 500}
 }
@@ -165,7 +166,6 @@ Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation f
 
 \examples{
 qgl(seq(0,1,0.02),0,1,0.123,-4.3)
-pgl(seq(-2,2,0.2),0,1,-.1,-.2,param="fmkl",inverse.eps=.Machine$double.eps)
-# calculate the probabilities more accurately than normal
+pgl(seq(-2,2,0.2),0,1,-.1,-.2,param="fmkl")
 }
 \keyword{distribution}
