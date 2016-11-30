@@ -13,7 +13,7 @@ fit.fkml.moments.val(moments=c(mean=0, variance=1, skewness=0,
 }
 \arguments{
   \item{moments}{A vector of length 4, consisting of the mean, variance
-  and moment ratios for skewness and kurtosis}
+  and moment ratios for skewness and kurtosis (do not subtract 3 from the kurtosis ratio)}
   \item{optim.method}{Optimisation method for \code{\link{optim}} to use, 
 defaults to Nelder-Mead}
   \item{optim.control}{argument \code{control}, passed to \code{\link{optim}}.}
@@ -41,8 +41,8 @@ generalised \eqn{\lambda}{lambda} distribution.  Typically,
 for a set of moments that correspond to a unimodal gld, there is
 another set of parameters that give a distrbution with the same first 
 4 moments.  This other distribution has a truncated appearance 
-(that is it is on finite support and the density is non-zero at the
-end points).  See the examples below.
+(that is, the distribution has finite support and the density is non-zero 
+at the end points).  See the examples below.
 }
 \value{
 A vector containing the parameters of the FKML type generalised lambda;
@@ -88,7 +88,7 @@ norm.approx
 # Another distribution with the same moments
 another <- fit.fkml.moments.val(c(0,1,0,3),start=c(2,2))
 # Compared
-plotgld(norm.approx,ylim=c(0,0.75),main="Approximation of the standard normal")
+plotgld(norm.approx,ylim=c(0,0.75),main="Approximation to the standard normal",sub="and another GLD with the same first 4 moments")
 plotgld(another,add=TRUE,col=2)
 }
 \keyword{distribution}
