@@ -1,6 +1,9 @@
 2.5
 Standard Errors for the L Moment estimates for the GPD type
 
+2.4.1
+Fix pgl() example comment - inverse.eps had defaulted to .Machine$double.eps since version 1.9
+
 2.4
 Method of L Moment estimates for the gpd type
 
@@ -68,6 +71,7 @@ Provided qdgl() as a duplicate of dqgl() because these are actually the quantile
 Allowed for the FKML parameterisation to be referred to as either FKML or FMKL to allow for the different uses in the literature.
 Added a plot method for the starship class.  This compares the fitted gld to the data.
 Added add argument to plotgld() and plotglc()
+Changed inverse.eps default to .Machine$double.eps
 
 1.8.5
 Added QQ plot to compare two sets of parameter values
