@@ -26,9 +26,15 @@ if(length(lambda1) > 1) #using a vector for the parameters.
 		}
 	}
 else { # single parameter arguments - check they are there, then collect them together.  Ideally I would have a special section here to deal with GPD
-	if (is.null(lambda2)) { stop("No value for lambda2") }
-	if (is.null(lambda3)) { stop("No value for lambda3") }
-	if (is.null(lambda4)) { stop("No value for lambda4") }
+	if (is.null(lambda2)) { if(param=="gpd"|param=="GPD"|param=="vsk"|param=="VSK"){
+	  stop("No value for beta") } else {
+	    stop("No value for lambda2") } }
+	if (is.null(lambda3)) { if(param=="gpd"|param=="GPD"|param=="vsk"|param=="VSK"){
+	  stop("No value for delta") } else {
+	    stop("No value for lambda3") } }
+	if (is.null(lambda4)) { if(param=="gpd"|param=="GPD"|param=="vsk"|param=="VSK"){
+	  stop("No value for lambda") } else {
+	    stop("No value for lambda4") } }
 	if ((is.null(lambda5)) & param=="fm5" ) { stop("No value for lambda5") }
 	if (!(is.null(lambda5)) & param!="fm5") { stop(paste("lambda5=",lambda5," but there is no lambda 5 for the\n",param,"parameterisation")) }
 	if (param != "fm5") { # A 4 parameter version

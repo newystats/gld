@@ -4,7 +4,7 @@
 distribution}
 \description{
   Checks the validity of parameters of the generalized lambda.  The tests 
-  are simple for the FMKL and FM5 parameterisations, and  much more 
+  are simple for the FMKL, FM5 and GPD types, and  much more 
   complex for the RS parameterisation.
 }
 \usage{
@@ -28,9 +28,9 @@ gl.check.lambda(lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL, param =
  the \emph{fmkl} parameterisation is different to that used by Freimer, 
  Mudholkar, Kollia and Lin.}
 	}
-  \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter}
-  \item{lambda3}{\eqn{\lambda_3}{lambda 3} - first shape parameter}
-  \item{lambda4}{\eqn{\lambda_4}{lambda 4} - second shape parameter}
+  \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter (\eqn{\beta} for \code{gpd})} 
+  \item{lambda3}{\eqn{\lambda_3}{lambda 3} - first shape parameter (\eqn{\delta}, skewness parameter for \code{gpd})}
+  \item{lambda4}{\eqn{\lambda_4}{lambda 4} - second shape parameter  (\eqn{\lambda}, kurtosis parameter for \code{gpd})}
   \item{lambda5}{\eqn{\lambda_5}{lambda 5} - a skewing parameter, in the
     fm5 parameterisation}
   \item{param}{choose parameterisation:
@@ -97,6 +97,8 @@ Equation 2
 - lambda4 / lambda 3
 }
 
+  The GPD type gives a valid distribution provided \eqn{\beta} is 
+  positive and \eqn{0 \leq \delta \leq 1}{0 <= delta <= 1}.
 }
 \value{This logical function takes on a value of TRUE if the parameter values 
 given produce a valid statistical distribution and FALSE if they don't}

@@ -50,6 +50,8 @@ van Staden, Paul J. 2013 \emph{Modeling of generalized families of probability d
 PhD thesis, University of Pretoria.
 \url{http://hdl.handle.net/2263/40265}
 
+Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
+
 Quantile based Skew logistic distribution
 
 \url{http://tolstoy.newcastle.edu.au/rking/SLD/SLD.html}

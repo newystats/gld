@@ -18,9 +18,8 @@ BetaLambdaLambda(lambda)
   \item{lambda}{A vector, each element of which is used for both 
   arguments of the Beta function.}
 }
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{\code{NaN} is returned for any negative integer elements of \code{lambda}.
+}
 \value{
 A vector the same length as \code{lambda}, containing 
   Beta(lambda,lambda)
