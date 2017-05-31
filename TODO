@@ -13,3 +13,4 @@ Should moment fitting return object of class starship?
 
 Estimation of FKML with moments for data as well as given moment values
 
+Trimmed L Moment estimation of FKML should return the trimming values in the fitted object

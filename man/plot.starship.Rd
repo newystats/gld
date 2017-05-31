@@ -4,7 +4,7 @@
 \description{Plots to compare a Generalised Lambda Distribution fitted via 
 the \code{\link{starship}} to data}
 \usage{
-\method{plot}{starship}(x, data, ask = FALSE, one.page = TRUE, 
+\method{plot}{starship}(x, data, ask = FALSE, one.page = FALSE, 
     breaks = "Sturges", plot.title = "default",...)
 }
 \arguments{

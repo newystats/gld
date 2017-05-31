@@ -1,5 +1,6 @@
 2.5
 Standard Errors for the L Moment estimates for the GPD type
+plot.starship() default for one.page changed from TRUE to FALSE
 
 2.4
 L Moment estimation for the GPD type
