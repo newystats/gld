@@ -36,7 +36,7 @@ lambda2 = lambdas[2]
 lambda1 = lambdas[1]
 p <- as.double(p)
 # abandoned this for the simpler one below
-# outside.range <- !as.logical(((p<1)*(p>0))|(sapply(p, all.equal,1)=="TRUE")| (sapply(p, all.equal, 0)=="TRUE"))
+# # Note this would need to be wrapped in isTRUE outside.range <- !as.logical(((p<1)*(p>0))|(sapply(p, all.equal,1)=="TRUE")| (sapply(p, all.equal, 0)=="TRUE"))
 outside.range <- !as.logical((p<=1)*(p>=0))
 # u gets only the probabilities in [0,1]
 u <- p[!outside.range]
@@ -78,7 +78,7 @@ lambda2 = as.double(lambdas[2])
 lambda1 = as.double(lambdas[1])
 p <- as.double(p)
 # abandoned this for the simpler
-# outside.range <- !as.logical(((p<1)*(p>0))|(sapply(p, all.equal,1)=="TRUE")| (sapply(p, all.equal, 0)=="TRUE"))
+# # Note this would need to be wrapped in isTRUE outside.range <- !as.logical(((p<1)*(p>0))|(sapply(p, all.equal,1)=="TRUE")| (sapply(p, all.equal, 0)=="TRUE"))
 outside.range <- !as.logical((p<=1)*(p>=0))
 # u gets only the probabilities in [0,1]
 u <- p[!outside.range]
