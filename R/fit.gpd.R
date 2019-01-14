@@ -1,3 +1,4 @@
+
 # omnibus gpd fitter - modelled on fit.fkml
 fit.gpd <- function(x,method="LM",na.rm=TRUE,
       record.cpu.time = FALSE, return.data=FALSE){
@@ -72,7 +73,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   betahatB <- l2*(lambdahatB+1)*(lambdahatB+2)
   alphahatA <- l1+(betahatA*(1-2*deltahatA))/(lambdahatA+1)
   alphahatB <- l1+(betahatB*(1-2*deltahatB))/(lambdahatB+1)
-  if (all.equal(lambdahatA,0)) { # lamdbahatA is close to zero
+  if (isTRUE(all.equal(lambdahatA,0))) { # lamdbahatA is close to zero
     # Use SLD special case
     AisSLD = TRUE
     lambdahatA = 0 
