@@ -29,7 +29,7 @@ cat("Message: ")
 print(object$optim.results$message)
 }
 
-plot.starship <- function(x,data=NULL,ask=FALSE,one.page=FALSE,breaks="Sturges",plot.title="default",...)
+plot.starship <- function(x,data=NULL,ask=FALSE,one.page=TRUE,breaks="Sturges",plot.title="default",...)
 {
 if (plot.title == "default") {
   plot.title <- paste(x$method.name,"fit of",x$param,"type GLD")

@@ -1,6 +1,11 @@
-2.5
+2.6 (to come ...)
 Standard Errors for the L Moment estimates for the GPD type
-plot.starship() default for one.page changed from TRUE to FALSE
+
+2.5
+BetaLambdaLambda function added (utility function for gpd L-Moment estimation)
+
+2.4.1
+Fix pgl() example comment - inverse.eps had defaulted to .Machine$double.eps since version 1.9
 
 2.4
 L Moment estimation for the GPD type
