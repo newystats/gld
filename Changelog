@@ -1,5 +1,4 @@
-2.5
-Standard Errors for the L Moment estimates for the GPD type
+See NEWSfor changes after 2.4.1
 
 2.4.1
 Fix pgl() example comment - inverse.eps had defaulted to .Machine$double.eps since version 1.9

@@ -29,7 +29,7 @@ cat("Message: ")
 print(object$optim.results$message)
 }
 
-plot.starship <- function(x,data=NULL,ask=FALSE,one.page=TRUE,breaks="Sturges",plot.title="default",...)
+plot.starship <- function(x,data=NULL,ask=NULL,one.page=NULL,breaks="Sturges",plot.title="default",...)
 {
 if (plot.title == "default") {
   plot.title <- paste(x$method.name,"fit of",x$param,"type GLD")
@@ -42,6 +42,11 @@ if (is.null(x$data)){
 	if (is.null(data)) {data <- x$data #using data returned by starship function
 		} else { 
 		warning(paste(substitute(x),"has a data element and the data argument was also given.\nUsing ",paste(substitute(data))," instead of the data element of ",substitute(x))) } }
+if (is.null(one.page)) { if (interactive()) {one.page=TRUE} else {one.page=FALSE}}
+if (is.null(ask)) {if (one.page) {ask=FALSE} else {
+  if (interactive()) {ask=TRUE} else {ask=FALSE}
+    }
+  }
 if (ask) {par(ask=TRUE)}
 if (one.page) {par(mfrow=c(2,1))}
 qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here

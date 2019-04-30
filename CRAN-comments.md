@@ -1,23 +1,20 @@
 CRAN comments
 
 ## Test environment:
-* local OS X install, R 3.3.1
+* local OS X install, R 3.5.1
 * win-builder (release and devel)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
+There were no ERRORs or WARNINGs 
 
-There was 1 NOTE:
-
-Possibly mis-spelled words in DESCRIPTION 
-  FKML (15:106)
-  Quantile (13:64, 13:73)
-  Titterington's (16:66)
-  Tukey (4:47, 11:55)
-  parameterisation (15:111)
-  parameterisations (12:118, 15:50)
-  quantiles (12:41, 12:89)
-  spacings (16:56)
-  starship (15:34)
-  
-  All these are spelled correctly
+There was one NOTE
+Found the following (possibly) invalid URLs:
+  URL: http://nova.newcastle.edu.au/vital/access/manager/Repository/uon:13503
+    From: man/fit.fkml.Rd
+    Status: Error
+    Message: libcurl error code 56:
+      	SSL read: error:00000000:lib(0):func(0):reason(0), errno 10054
+  URL: https://www.jstor.org/stable/1267789
+    From: man/fit.fkml.Rd
+    Status: 403
+    Message: Forbidden

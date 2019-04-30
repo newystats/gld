@@ -120,7 +120,7 @@ Distribution}, Computational Statistics & Data Analysis, \bold{51}, 4484--4496.
 
 Cheng, R.C.H. & Amin, N.A.K. (1981), \emph{Maximum Likelihood Estimation of Parameters in the Inverse Gaussian Distribution, with Unknown Origin}, 
 Technometrics, \bold{23(3)}, 257--263.
-\url{http://www.jstor.org/stable/1267789}
+\url{https://www.jstor.org/stable/1267789}
 
 Dean, B. (2013) \emph{Improved Estimation and Regression Techniques with the Generalised Lambda Distribution}, PhD Thesis, University of Newcastle
 \url{http://nova.newcastle.edu.au/vital/access/manager/Repository/uon:13503}
@@ -135,7 +135,7 @@ Statistics \bold{41}, 353--374.
 Titterington, D. M. (1985), \emph{Comment on `Estimating Parameters in Continuous Univariate Distributions'}, Journal of the Royal Statistical Society, Series B, \bold{47}, 115--116.
 }
 \author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{http://tolstoy.newcastle.edu.au/~rking/}
+\url{https://tolstoy.newcastle.edu.au/~rking/}
 
 Ben Dean, University of Newcastle
 \email{benjamin.dean@uon.edu.au}

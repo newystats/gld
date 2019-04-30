@@ -1,7 +1,8 @@
-2.6 (to come ...)
+2.5 (to come ...)
 Standard Errors for the L Moment estimates for the GPD type
 
-2.5
+2.4.2
+Fix bug in fit.gpd
 BetaLambdaLambda function added (utility function for gpd L-Moment estimation)
 
 2.4.1

@@ -1,6 +1,6 @@
 Package: gld
-Version: 2.4.9
-Date: 2017-06-01
+Version: 2.4.2
+Date: 2019-04-28
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
 Suggests: 
 Imports: stats, graphics, e1071, lmom
@@ -8,10 +8,11 @@ Author: Robert King <Robert.King@newcastle.edu.au>,
   Benjamin Dean <Benjamin.Dean@uon.edu.au>, Sigbert Klinke, Paul van Staden
 Maintainer: Robert King <Robert.King@newcastle.edu.au>
 Description: The  generalised lambda distribution, or Tukey lambda distribution, provides a wide variety of shapes with one functional form.   
-  This package provides random numbers, quantiles, probabilities, densities and density quantiles for four different parameterisations of the distribution. 
+  This package provides random numbers, quantiles, probabilities, densities and density quantiles for four different types of the distribution;
+  see documentation for details.
   It provides the density function, distribution function, and Quantile-Quantile plots.  
   It implements a variety of estimation methods for the distribution, including diagnostic plots. 
-  Estimation methods include the starship (all 4 parameterisations), 
+  Estimation methods include the starship (all 4 types), 
   method of L-Moments for the GPD and FKML types, and a number of methods for only the FKML parameterisation.  
   These include maximum likelihood, maximum product of spacings, Titterington's method, Moments, Trimmed L-Moments and Distributional Least Absolutes. 
 License: GPL (>= 2)
