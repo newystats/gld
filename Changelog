@@ -148,8 +148,8 @@ Added plotgld
 improved error messages
 Fixed bug in qgl and qdgl for parameterisation RS (was using FMKL
 parameterisation values even if RS was requested)
-added alias for GeneralisedLamndaDistribution to
-GeneralisedLamndaDistribution.Rd as requested by Kurt
+added alias for GeneralisedLambdaDistribution to
+GeneralisedLambdaDistribution.Rd as requested by Kurt
 
 0.7 
 Note that R CMD build complains about the INDEX file, but I want it the way I
