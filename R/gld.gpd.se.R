@@ -4,11 +4,11 @@
 # They also need the nu functions from gldgpdNus.R
 
 se.alphahat <- function(alpha,beta,delta,lambda,n){
-  omega <- delta*(1-delta)
-  beta*sqrt(1/(n*(lambda-1)^2*(lambda+2)*nu1(lambda)))*sqrt(
-               (nu2(lambda) - (omega/(lambda*(lambda+1)))*(
-    (nu3(lambda)/4 - omega*nu4(lambda)*nu5(lambda))*BetaLambdaLambda(lambda)))+
-      nu6(lambda)*(nu7(lambda)-4*omega*nu4(lambda)*nu8(lambda)))
+    omega <- delta*(1-delta)
+    beta*sqrt(1/(n*(lambda-1)^2*(lambda+2)*nu1(lambda)))*sqrt(
+    nu2(lambda) - (omega/(lambda*(lambda+1)))*(
+    (nu3(lambda)/4 - omega*nu4(lambda)*nu5(lambda))*BetaLambdaLambda(lambda)+
+    nu6(lambda)*(nu7(lambda)-4*omega*nu4(lambda)*nu8(lambda))))
 }
 
 se.betahat <- function(alpha,beta,delta,lambda,n){

@@ -31,10 +31,10 @@ nu6 <- function(lambda){
 }
 
 nu7 <- function(lambda){
-  4*lambda^15 + 52*lambda^14 + 243*lambda^13 + 167*lambda^12 -
-  2343*lambda^11 - 3244*lambda^10 + 27697*lambda^9 +
-  74517*lambda^8 + 8739*lambda^7 + 244921*lambda^6 + 
-  1532136*lambda^5 + 1771024*lambda^4 + 923048*lambda^3 -
+    4*lambda^15 + 52*lambda^14 + 243*lambda^13 + 167*lambda^12 -
+    2343*lambda^11 - 3244*lambda^10 + 27697*lambda^9 +
+    74517*lambda^8 + 8739*lambda^7 + 244921*lambda^6 +
+    1532136*lambda^5 + 1771024*lambda^4 - 923048*lambda^3 -
     1541641*lambda^2 + 686268*lambda + 550620
 }
 
@@ -58,11 +58,11 @@ nu10 <- function(lambda){
 }
 
 nu11 <- function(lambda){
-  8*lambda^15 + 172*lambda^14 +1742*lambda^13 + 10633*lambda^12 + 
-    39856*lambda^11 + 79701*lambda^10 + 31792*lambda^9 - 
+    8*lambda^15 + 172*lambda^14 +1742*lambda^13 + 10633*lambda^12 +
+    39856*lambda^11 + 79701*lambda^10 + 31792*lambda^9 -
     125933*lambda^8 + 172824*lambda^7 + 1449179*lambda^6 +
     2083778*lambda^5 + 200988*lambda^4 - 1588440*lambda^3 -
-    552332*lambda^2 + 624208*lambda -283920
+    552332*lambda^2 + 624208*lambda +283920
 }
 
 nu12 <- function(lambda){
