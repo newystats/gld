@@ -53,7 +53,12 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
     res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
     class(res) <- "GldGPDFit"
     return(res)}
-  if (t4>=1){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")
+  if (t4 < -0.25){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,"< -0.25")
+  warning(problem)
+  res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
+  class(res) <- "GldGPDFit"
+  return(res)}
+    if (t4>=1){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")
     warning(problem)
     res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
     class(res) <- "GldGPDFit"
@@ -84,16 +89,18 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
     RegionAest = TRUE} else {lmomestA <- NA
     RegionAest = FALSE}
   lmomestB <- c(alphahatB,betahatB,deltahatB,lambdahatB)
-  if (gl.check.lambda(lmomestB,param="gpd")) {  names(lmomestB) <- c("alpha","beta","delta","lambda")} else {lmomestB <- NA}
- if (FALSE){ # code which is iffed out below
+  if (gl.check.lambda(lmomestB,param="gpd")) {  
+    names(lmomestB) <- c("alpha","beta","delta","lambda")
+    RegionBest = TRUE
+    } else {
+    lmomestB = NA
+    RegionBest = FALSE}
+ #if (FALSE){ # code which is iffed out below
    # calculates SEs in the SLD special case, but not in 
-   # the main gld GPD case if (!is.null(n)){ # Sample size is known - calculate Std Errors
+   # the main gld GPD case 
+  if (!is.null(n)){ # Sample size is known - calculate Std Errors
     # Calculate standard errors for gld
     # Check if SEs exist in region A (lambda > -0.5 )
-    #om = dh*(1-dh) # omega
-    #se.alpha = bh * sqrt((57 + (125*pi^2-1308)*om)/(15*n))
-    #se.beta = bh * sqrt(4/(3*n) * (1 - (pi^2-8)*om))
-    #se.delta = sqrt((8-(397+160*om-20*pi^2*(om+2))*om)/(15*n))
     if (RegionAest){
       # calculate SEs for region A estimate
       # Don't do this test for region B, because they always exist?
@@ -101,6 +108,10 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
         # lambda = 0, so this is the SLD - SE calculation ...
         # see fit.R in R package, sld
         warning("Since lambda estimate is zero, the estimated distribution\nis a special case, the Quantile Based Skew Logistic Distribution.\nNo standard errors are available for lambda, but SEs for the other\nparameters are given from the Quantile Based SLD.")
+        #om = dh*(1-dh) # omega
+        #se.alpha = bh * sqrt((57 + (125*pi^2-1308)*om)/(15*n))
+        #se.beta = bh * sqrt(4/(3*n) * (1 - (pi^2-8)*om))
+        #se.delta = sqrt((8-(397+160*om-20*pi^2*(om+2))*om)/(15*n))
         omega = lmomestA[3]*(1-lmomestA[3])
         se.alpha = lmomestA[2] * sqrt((57 + (125*pi^2-1308)*omega)/(15*n))
         se.beta = lmomestA[2] * sqrt(4/(3*n) * (1 - (pi^2-8)*omega))
@@ -108,12 +119,22 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
         lmomestA <- cbind(lmomestA,c(se.alpha,se.beta,se.delta,NA))
         dimnames(lmomestA) <- list(c("alpha","beta","delta","lambda"),c("Estimate","Std. Error"))
         
-      } else {warning("SE calculation not yet implemented")
+      } else {
+        if (lambdahatA > -0.5) { # We can calculate SEs
+          alphahatA.se = se.alphahat(alphahatA,betahatA,deltahatA,lambdahatA,n)
+          betahatA.se = se.betahat(alphahatA,betahatA,deltahatA,lambdahatA,n)
+          deltahatA.se = se.deltahat(alphahatA,betahatA,deltahatA,lambdahatA,n)
+          lambdahatA.se = se.lambdahat(alphahatA,betahatA,deltahatA,lambdahatA,n)
+          SEs.A = c(alphahatA.se,betahatA.se,deltahatA.se,lambdahatA.se)
+          lmomestA = cbind(lmomestA,SEs.A)
+          dimnames(lmomestA)[[2]] = c("Estimate","Std. Error")
+        } else { warning("Region A Standard Errors are undefined since lambda is estimated as <= -0.5")}
       }
     } 
       # calculate SEs for region B estimate
+    if (RegionBest) {
       # If we have go this far, there is always a region B estimate?
-      if (lmomestB[[4]] == 0){
+      if (lmomestB[4] == 0){
         # lambda = 0, so this is the SLD - SE calculation ...
         # see fit.R in R package, sld
         warning("Since lambda estimate is zero, the estimate is a special case,\nthe Quantile Based Skew Logistic Distribution.  No standard errors are available for lambda,\nbut SEs for the other parameters are given from the Quantile Based SLD.")
@@ -124,14 +145,32 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
         lmomestB <- cbind(lmomestB,c(se.alpha,se.beta,se.delta,NA))
         dimnames(lmomestB) <- list(c("alpha","beta","delta","lambda"),c("Estimate","Std. Error"))
         
-      } else {warning("SE calculation not yet implemented")
+      } else {
+        if (lambdahatB > -0.5) { # We can calculate SEs
+          alphahatB.se = se.alphahat(alphahatB,betahatB,deltahatB,lambdahatB,n)
+          betahatB.se = se.betahat(alphahatB,betahatB,deltahatB,lambdahatB,n)
+          deltahatB.se = se.deltahat(alphahatB,betahatB,deltahatB,lambdahatB,n)
+          lambdahatB.se = se.lambdahat(alphahatB,betahatB,deltahatB,lambdahatB,n)
+          SEs.B = c(alphahatB.se,betahatB.se,deltahatB.se,lambdahatB.se)
+          lmomestB = cbind(lmomestB,SEs.B)
+          dimnames(lmomestB)[[2]] = c("Estimate","Std. Error")
+        } else { # no need for SEs, stay as before
+          warning("Region B Standard Errors are undefined since lambda is estimated as <= -0.5")
+        } 
       }
-  } else {
-    # return just the estimates
-  }
+    }
   ret <- list(estA=lmomestA,estB=lmomestB,param="gpd")
+  }
+  if (RegionAest){ 
+    ret <- list(estA=lmomestA,estB=lmomestB,param="gpd")
+    } else {
+      if (RegionBest) {
+        ret <- list(estB=lmomestB,param="gpd")
+      } else {
+        ret <- list(param="gpd")
+      }
+  }
   class(ret) <- "GldGPDFit"
   ret
 }
-
 

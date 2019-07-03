@@ -57,8 +57,8 @@ par(opar) # Return to previous par
 
 print.GldGPDFit <- function(x,digits = max(3, getOption("digits") - 3), ...)
 {
-  if (is.na(x$estA[1])) {
-    if (is.na(x$estB[1])){
+  if (is.null(x$estA)) {
+    if (is.null(x$estB)) {
       cat("No estimates for the GLD GPD\n")
       cat(x$warn)
     } else {
@@ -67,7 +67,7 @@ print.GldGPDFit <- function(x,digits = max(3, getOption("digits") - 3), ...)
       # This needs to be extended once the package calculates SEs
     }
   } else { # region A estimate exists
-    if (is.na(x$estB[1])){
+    if (is.null(x$estB)){
       cat("Region A only:\n")
       print.default(format(x$estA,digits=digits), print.gap = 2,quote=FALSE)
     } else {
