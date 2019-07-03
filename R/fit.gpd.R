@@ -1,7 +1,7 @@
 
 # omnibus gpd fitter - modelled on fit.fkml
 fit.gpd <- function(x,method="LM",na.rm=TRUE,
-      record.cpu.time = FALSE, return.data=FALSE){
+      record.cpu.time = TRUE, return.data=FALSE){
   # rec.cpu.time TRUE for consistency with fit.fkml
   
   # Start timing
