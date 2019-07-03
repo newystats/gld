@@ -61,8 +61,10 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
     else {
         lambdas <- .gl.parameter.tidy(lambdas, lambda2, lambda3, 
             lambda4, param, lambda5)
-
     }
+   if (any(is.na(lambdas))) {
+     return(FALSE)
+   }
     if (param == "fm5") {
         lambda5 = lambdas[5]
     }
