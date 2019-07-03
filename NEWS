@@ -1,5 +1,7 @@
-2.5 (to come ...)
+2.5
 Standard Errors for the L Moment estimates for the GPD type
+fit.gpd defaults to recording cpu time usage (so that it is the
+same as fit.fkml)
 
 2.4.2
 Fix bug in fit.gpd
