@@ -5,11 +5,10 @@
 \title{Estimate parameters of the GPD type generalised lambda distribution}
 \description{Estimates parameters of the GPD type generalised \eqn{\lambda}{lambda} Distribution.  Currently, only estimation via method of L moments is implemented.
 
-The Method of L-Moments estimates for the GPD type are the only estimates for any
-generalised lambda distribution type with closed form expressions.
+The Method of L-Moments estimates for the GPD type are the only estimates for any generalised lambda distribution type with closed form expressions, and the only with algebraic results for standard errors of the estimates.
 }
 \usage{
-fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = FALSE, return.data = FALSE)
+fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE)
 fit.gpd.lmom(data, na.rm = TRUE)
 fit.gpd.lmom.given(lmoms, n = NULL)
 }
@@ -24,8 +23,7 @@ fit.gpd.lmom.given(lmoms, n = NULL)
   \item{lmoms}{A numeric vector containing two L-moments and two L-moment ratios, in the order \eqn{l_1,l_2,t_3,t_4}{l_1, l_2, t_3, t_4}.}
   \item{n}{the sample size, defaults to NULL}
 }
-\details{The method of L-Moments equates sample L-Moments with expressions 
-for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
+\details{The method of L-Moments equates sample L-Moments with expressions for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
 
 For many values there are two possible estimates for the same L Moment
 values, one in each of two regions of the GPD GLD parameter space, 
@@ -40,13 +38,16 @@ distribution;
 
 there is no possible estimate (from either region A or B), and this 
 function returns NA for the estimates.
+
+When estimating from data, or for given L-Moments with \eqn{n} given, 
+standard errors of the estimates are calculated if possible (standard errors are only finite if \eqn{\lambda < -0.5}{lambda < -0.5}).
 }
 \value{
-These funciton return an object of \code{\link[base]{class}} 
+These functions return an object of \code{\link[base]{class}} 
 "\code{GldGPDFit}".  It is a list, containing these components (optional components noted here);
-  \item{estA}{The estimate in region A.  This will be NA if there is no estimate in region A}
-  \item{estB}{The estimate in region B.  This will be NA if there is no estimate in region B}
-  \item{warn}{(only if estA and estB are both NA), the reason there are no
+  \item{estA}{The estimate in region A.  This will be NULL if there is no estimate in region A}
+  \item{estB}{The estimate in region B.  This will be NULL if there is no estimate in region B}
+  \item{warn}{(only if estA and estB are both NULL), the reason there are no
 estimates.  If this is the case, the function also issues a \code{\link{warning}}.}
   \item{cpu}{A vector showing the computing time used, returned if 
     \code{record.cpu.time} is TRUE (only for \code{fit.gpd}).}     
@@ -54,13 +55,12 @@ estimates.  If this is the case, the function also issues a \code{\link{warning}
   \item{param}{The character \code{"gpd"}, indicating the GPD type of the
   generalised lambda distribution.}
 
-  Each of the estimate elements (if they are not NA) are a vector of length 4,
-  giving the estimated parameters, in order;
-
-  \eqn{\alpha}{alpha} - location parameter
-  \eqn{\beta}{beta} - scale parameter
-  \eqn{\delta}{delta} - skewness parameter
-  \eqn{\lambda}{lambda} - kurtosis parameter
+  Each of the estimate elements (if they are not NULL) are either a vector of length 4, or a 4 by 2 matrix if standard errors are calculated. The elements of the vector, or rows of the matrix are the estimated parameters, in order;
+  \item{\eqn{\alpha}{alpha}}{location parameter}
+  \item{\eqn{\beta}{beta}}{scale parameter}
+  \item{\eqn{\delta}{delta}}{skewness parameter}
+  \item{\eqn{\lambda}{lambda}}{kurtosis parameter}
+  The columns of the matrix are the parameter, and its standard error.
 }
 \references{
 Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
