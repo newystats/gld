@@ -9,8 +9,12 @@ Check if the sorting in pgl() is worth the computational cost
 Lmoments from parameters
 Fitting gpd par with L moments
 
-Should moment fitting return object of class starship?
+Should moment fitting return object of class starship? Copy class name 
+to FitFKML
 
 Estimation of FKML with moments for data as well as given moment values
 
 Trimmed L Moment estimation of FKML should return the trimming values in the fitted object
+
+Fix plot.fittedgld to have a slightly higher upper ylim
+
