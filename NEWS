@@ -1,3 +1,8 @@
+2.5.1
+In fit.fkml
+Return and print trimming values in Trimmed mean estimates
+Add LMom method which is trimmed mean with zero trimming
+
 2.5
 Standard Errors for the L Moment estimates for the GPD type
 fit.gpd defaults to recording cpu time usage (so that it is the

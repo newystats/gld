@@ -6,13 +6,11 @@
 # 3. Titterington's Method (TM)
 # 4. Starship Method (SM)
 # 5. Method of TL-moments (TL)
+# 5a. Method of L-moments (LMom) (TL with trim=0 and low and high)
 # 6. Distributional Least Absolute (DLA)
-
 # Written by Benjamin Dean (24/09/2010) 
-# Changes 2013,2014 Robert King
-# Example use:
-# x <- rlogis(100)
-# fit.fkml(x, method="ML")
+# Changes 2013,2014,2019 Robert King
+
 
 ########################################################################
 #                                 Fit data                             #
@@ -28,6 +26,7 @@ fit.fkml <- function(x, method="ML", t1=0, t2=0,
 if(record.cpu.time) { time.1 <- as.numeric(proc.time()[3]) 
 } else { time.1 <- "not timing"
 }
+  
 # Sample size
 n <- length(x)
 # Sort the data
@@ -43,11 +42,40 @@ if (method == "MPS") {method.id <- 2; method.name="Maximum Product of Spacings"}
 if (method == "TM")  {method.id <- 3; method.name="Titterington's"}
 if (method == "SM")  {method.id <- 4; method.name="Starship"}
 if (method == "TL")  {method.id <- 5; method.name="Trimmed L-Moments"}
+if (method == "LMom")  {method.id <- 5; method.name="L-Moments"}
 if (method == "DLA")  {method.id <- 6; method.name="Distributional Least Absolutes"}
+
+# t1,t2 check
+if (length(t1)>1) {
+  warning(paste("Argument t1 should be only 1 value.  It has been truncated to its first value,",t1[1]))
+  t1 = t1[1]
+}
+if (length(t2)>1) {
+  warning(paste("Argument t2 should be only 1 value.  It has been truncated to its first value,",t2[1]))
+  t2 = t2[1]
+}
+if (method.id != 5) {
+  if (t1 != 0) {
+    warning(paste("Trimming only used in trimmed L-Moments.  Lower trim of ",t1,"has been changed to zero."))
+    t1=0
+  }
+  if (t2 != 0) {
+    warning(paste("Trimming only used in trimmed L-Moments.  Upper trim of ",t2,"has been changed to zero."))
+    t2=0
+  }
+}
+# LMom is just TL with t1=0, t2=0.  Check for this
+if (method=="LMom") {
+  if (!(t1==0 && t2==0)) {
+message(paste("L-Moments method called with trimming arguments, low=",t1,"high=",t2,"\nSo, renamed to Trimmed L-Moments"))
+    method.name="Trimmed L-Moments"
+    method="TL"
+  }
+}
 
 # Perform the fitting process: 
 
-if (method.id != 5) { # ML, MSP, TM, SM or DLA (not TL)
+if (method.id != 5) { # ML, MSP, TM, SM or DLA (not TL, LM)
 
   # Starting values from grid search
   grid.results <- grid.search(l3.grid,l4.grid,method.id,x,n,
@@ -81,7 +109,7 @@ if (method.id != 5) { # ML, MSP, TM, SM or DLA (not TL)
   if (return.data) {result$data = x}
   class(result) <- "starship"
   names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
-} else { # TL
+} else { # TL, LM
 
   # Starting values from grid search
   grid.results <- grid.search.tl(l3.grid,l4.grid,method.id,x,n,
@@ -121,6 +149,10 @@ if (record.cpu.time) {time.2 <- as.numeric(proc.time()[3]); runtime <- round(tim
     method.code=method,method.name=method.name,
     fkml.oldstyle.results=old.style.results)
   if (return.data) {result$data = x}
+  if (method=="TL") {
+    result$trim = c(t1,t2,n)
+    names(result$trim) = c("lower","upper","n")
+    }
   class(result) <- "starship"
   names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
 }

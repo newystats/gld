@@ -3,6 +3,7 @@ print.starship <- function(x,digits = max(3, getOption("digits") - 3), ...)
 # I should include the call
 # Add names to the vector in starship
 cat(paste(x$method.name,"estimate, gld type:",x$param,"\n"))
+if(!is.null(x$trim)){cat(paste("trimmed",x$trim[1],"low,",x$trim[2],"high. n=",x$trim[3],"\n"))}
 print.default(format(x$lambda,digits=digits), print.gap = 2,quote=FALSE)
 }
 
@@ -10,9 +11,16 @@ summary.starship <- function(object,...)
 {
 cat(paste("Generalised Lambda Distribution",object$param,"type.",
           object$method.name," estimate.\n"))
+if(!is.null(object$trim)){
+  cat(paste("L Moments based on data trimmed by;\n",object$trim[1],"lowest and",object$trim[2],"highest observations out of",object$trim[3]))
+  }
 cat("\nAdaptive Grid estimates:\n")
 fake.lambda <- object$grid.results$lambda
-names(fake.lambda) <- paste("lambda",1:length(fake.lambda),sep="")
+if (object$method.code=="TL"){
+    names(fake.lambda) <- paste("lambda",3:4)
+  } else {
+    names(fake.lambda) <- paste("lambda",1:length(fake.lambda),sep="")
+  }
 fake.starship.object <- list(param=object$param,lambda=fake.lambda)
 print.starship(fake.starship.object)
 cat(paste("internal g-o-f measure at grid minimum:",
