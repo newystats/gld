@@ -14,3 +14,4 @@ Estimation of FKML with moments for data as well as given moment values
 
 Fix plot.fittedgld to have a slightly higher upper ylim
 
+L Moments for other types in gld.lmoments
