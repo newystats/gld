@@ -227,6 +227,7 @@ fkml.moments <- function(par,ratios=TRUE){
 
 calc.moments <- function(data,type=3,var.divisor="n-1"){
   mean = mean(data)
+  # This function is not exported
   if (var.divisor=="n"){
     n = length(data)
     var = ((n-1)/n)*var(data)
@@ -238,7 +239,7 @@ calc.moments <- function(data,type=3,var.divisor="n-1"){
     var = var(data)
   }
   skew = e1071::skewness(data,type=type)
-  kurt = e1071::kurtosis(data,type=type)
+  kurt = e1071::kurtosis(data,type=type)+3 # note the +3, the gld fitting stuff uses the kurtosis, not the "excess kurtosis"
   c(mean,var,skew,kurt)
 }
 
