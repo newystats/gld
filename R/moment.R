@@ -1,6 +1,6 @@
 # Method of Moments estimation for FKML, 
 # (c) Sigbert Klinke 2013
-# Edits by Robert King (c) 2013,2014,2015
+# Edits by Robert King (c) 2013,2014,2015,201
 # Licence GPL >= 2
 # based on method in 
 # Susanna W. M Au-Yeung (2003) Finding Probability Distributions From Moments, Master thesis
@@ -10,8 +10,8 @@
 # Staden, PhD thesis, University of Pretoria 2013
 
 # To do - integration with fit.fkml
-# This function will fit to 4 moments - the fit.fkml version will
-# include calculating the moments
+# This function will fit to 4 moments 
+## 2019 adding calculating moments using e1071 package
 
 # An element of the expression for the moments when l3 and l4 are non-zero
 # Thanks to Sigbert Klinke
@@ -108,7 +108,7 @@ m4.1zero.1nonzero <- function(k,lj){
 fit.fkml.moments.val <- function (moments=c(mean=0, variance=1, 
     skewness=0, kurtosis=3), optim.method="Nelder-Mead",
     optim.control= list(), starting.point = c(0,0)) {
-  # optimise.this fitting l3,l4 on the basis of the 3rd & 4th moments 
+  # optimise.this fitting l3,l4 on the basis of the 3rd & 4th moments
   # (actually the skewness and kurtosis ratios)
   # par is a vector of length 2, containing lambda3 and lambda4
   # 4 moments exist provided that lambda3 and lambda4 > -0.25
@@ -151,8 +151,9 @@ fit.fkml.moments.val <- function (moments=c(mean=0, variance=1,
 
 gld.moments <- function(par,type="fkml",ratios=TRUE){
   # par has length 4, the lambda parameters
-  # should include an option to only calculate some moments, rather than
-  # just insist on 1:4
+  # I considered adding a parameter order to only calculate some, 
+  # but the expressions for the 4th moment includes all the earlier
+  # ones, so better to stay calculating all 4 moments.
   if (type != "fkml"){
     if (type != "fmkl") {stop("Only the FKML type is currently implemented")}
   }
@@ -161,15 +162,17 @@ gld.moments <- function(par,type="fkml",ratios=TRUE){
 
 fkml.moments <- function(par,ratios=TRUE){
   # par is the lambda parameters for the FKML type
-  # should include an option to only calculate some moments, rather than
-  # just insist on 1:4
+  # I considered adding a parameter order to only calculate some, 
+  # but the expressions for the 4th moment includes all the earlier
+  # ones, so better to stay calculating all 4 moments.
+  calc1 = TRUE 
+  calc2 = TRUE 
+  calc3 = TRUE
+  calc4 = TRUE
   if ((par[4] <= -1)|(par[3] <= -1)) {
     return(c(NA,NA,NA,NA))
   }
   a3 = NA; a4 = NA; m3 = NA; m4 = NA # set to NA in case they aren't calculated
-  calc2 = TRUE
-  calc3 = TRUE
-  calc4 = TRUE
   if ((par[4] <= -1/2)|(par[3] <= -1/2)) {
     calc2 = FALSE
     calc3 = FALSE
@@ -183,7 +186,7 @@ fkml.moments <- function(par,ratios=TRUE){
     calc4 = FALSE
   }
   v1 <- vk(1, par[3], par[4])
-  if (calc2){
+  if (calc2|calc3){
     v2 <- vk(2, par[3], par[4])
   }
   if (calc3){
@@ -219,3 +222,35 @@ fkml.moments <- function(par,ratios=TRUE){
   }
   result
 }
+
+## Calculate the mean, variance, skewness coeff & kurtosis coeff of a dataset
+
+calc.moments <- function(data,type=3,var.divisor="n-1"){
+  mean = mean(data)
+  if (var.divisor=="n"){
+    n = length(data)
+    var = ((n-1)/n)*var(data)
+  } else { if (var.divisor=="n-1"){
+      # n-1 
+      } else {
+      warning(paste("var.divisor should be n or n-1.  n-1 used instead of given value of",var.divisor))
+      }
+    var = var(data)
+  }
+  skew = e1071::skewness(data,type=type)
+  kurt = e1071::kurtosis(data,type=type)
+  c(mean,var,skew,kurt)
+}
+
+fit.fkml.moments  <- function(data,na.rm=TRUE,optim.method="Nelder-Mead",
+      optim.control= list(), starting.point = c(0,0)){
+  if (na.rm){ dataNArm <- data[!is.na(data)] 
+  } else { if (any(is.na(data))) {
+    stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
+  }
+  res <- fit.fkml.moments.val(moments=calc.moments(dataNArm),optim.method=optim.method,optim.control = optim.control,starting.point = starting.point)
+  res
+}
+
+# This is giving both nonsense estimates, and estimates that match the 
+# first two moments, but not a3, a4
