@@ -4,14 +4,14 @@
 \description{Plots to compare a Generalised Lambda Distribution fitted via 
 the \code{\link{starship}} to data}
 \usage{
-\method{plot}{starship}(x, data, ask = NULL, one.page = NULL, 
+\method{plot}{starship}(x, data, ask = NULL, one.page = FALSE, 
     breaks = "Sturges", plot.title = "default",...)
 }
 \arguments{
   \item{x}{An object of class  \code{\link{starship}}.}
   \item{data}{Data to which the gld was fitted.  Leave this as NULL if the return.data argument was TRUE in the \code{\link{starship}} call that created x.}
   \item{ask}{Ask for user input before next plot.  The default of NULL changes to TRUE if one.page is FALSE and \code{plot} is called interactively, otherwise it changes to FALSE this is then passed to \code{\link{par}(ask)}.  Does not permanently change this setting. The argument is ignored if \code{one.page} is TRUE}
-  \item{one.page}{Put the two plots on one page using \code{\link{par}(mfrow=c(2,1))}. Does not permanently change this setting.  The default of NULL changes to TRUE if \code{plot} is called interactively, otherwise it changes to FALSE}
+  \item{one.page}{If TRUE, put the two plots on one page using \code{\link{par}(mfrow=c(2,1))}. Does not permanently change this setting.}
   \item{breaks}{Control the number of histogram bins --- passed to \code{\link{hist}}.}
   \item{plot.title}{Main title for histogram and QQ --- passed 
       to \code{\link{hist}(main=)} and \code{\link{qqgl}(main=)}.  
