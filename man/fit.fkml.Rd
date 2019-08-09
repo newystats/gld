@@ -18,8 +18,8 @@ fit.fkml(x, method = "ML", t1 = 0, t2 = 0,
 }
 \arguments{
   \item{x}{Data to be fitted, as a vector}
-  \item{method}{A character string, to select the estimation method.  One of: \code{ML} for Numerical Maximum Likelihood, \code{MPS} or \code{MSP}
-  for Maximum Product of Spacings, \code{TM} for Titterington's Method, \code{SM} for  Starship Method, \code{TL} for  Method of TL-moments, or \code{DLA} for the method of distributional least absolutes.}
+  \item{method}{A character string, to select the estimation method.  One of: \code{ML} for numerical Maximum Likelihood, \code{MPS} or \code{MSP}
+  for Maximum Spacings Product, \code{TM} for Titterington's Method, \code{SM} for  Starship Method, \code{TL} for  method of TL-moments, \code{DLA} for the method of Distributional Least Absolutes, or \code{Mom} for method of Moments.}
   \item{t1}{Number of observations to be trimmed from the left in the conceptual sample, \eqn{t_1}{t1} (A non-negative integer, only used by TL-moment estimation, see details section)}
   \item{t2}{Number of observations to be trimmed from the right in the conceptual sample, \eqn{t_2}{t2} (A non-negative integer, only used by TL-moment estimation, see details section). These two arguments are 
   restricted by \eqn{t_1+t_2 < n}{t1+t2 < n}, where n is the sample size}
@@ -87,6 +87,9 @@ See Elamir and Seheult (2003) for more on
 TL-Moments in general, Asquith, (2007) for TL-Moments of the RS parameterisation of the gld and Dean (2013) for more details on TL-Moment estimation of the gld.
 
 The method of distributional least absolutes (DLA) minimises the sum of absolute deviations between the order statistics and their medians (based on the candidate parameters). See Dean (2013) for more information.
+
+Moment estimation chooses the values of the parameters that minimise the 
+(sum of the squared) difference between the first four sample moments of the data and the first four moments of the fitted distribution.  
 }
 \value{
 \code{fit.fkml} returns an object of \code{\link[base]{class}} 
