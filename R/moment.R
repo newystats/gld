@@ -144,9 +144,16 @@ fit.fkml.moments.val <- function (moments=c(mean=0, variance=1,
     lambda[1] <- mean - (vk(1,lambda[3], lambda[4]))/lambda[2]    
   } else { #l3,l4 nonequal, nonzero case
   lambda[1] <- mean - (vk(1,lambda[3], lambda[4]) - 1/lambda[3] + 1/lambda[4]) /lambda[2]
-  }
+  }  
+  result <- list()
+  result$optim.results = est
   names(lambda) <- paste("lambda",1:4,sep="")
-  return (lambda)  # estimated lambda parameters 
+  result$lambda <- lambda
+  result$param = "FKML"
+  result$method.name = "Method of Moments"
+  result$method.code = 7
+  class(result) = "starship"
+  result
 }
 
 gld.moments <- function(par,type="fkml",ratios=TRUE){
@@ -252,6 +259,3 @@ fit.fkml.moments  <- function(data,na.rm=TRUE,optim.method="Nelder-Mead",
   res <- fit.fkml.moments.val(moments=calc.moments(dataNArm),optim.method=optim.method,optim.control = optim.control,starting.point = starting.point)
   res
 }
-
-# This is giving both nonsense estimates, and estimates that match the 
-# first two moments, but not a3, a4

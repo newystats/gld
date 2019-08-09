@@ -38,15 +38,15 @@ penalty.value <- optim.penalty
 
 # Aliases
 method.id <- 0 # if this is not updated, no method was defined.
-if (method == "ML")  {method.id <- 1; method.name="Maximum Likelihood"}
-if (method == "MSP") {method.id <- 2; method.name="Maximum Spacings Product"}
-if (method == "MPS") {method.id <- 2; method.name="Maximum Product of Spacings"}
-if (method == "TM")  {method.id <- 3; method.name="Titterington's"}
-if (method == "SM")  {method.id <- 4; method.name="Starship"}
-if (method == "TL")  {method.id <- 5; method.name="Trimmed L-Moments"}
-if (method == "LMom")  {method.id <- 5; method.name="L-Moments"}
-if (method == "DLA")  {method.id <- 6; method.name="Distributional Least Absolutes"}
-if (method == "Mom") {method.id <- 7; method.name="Moments"}
+if (toupper(method) == "ML")  {method.id <- 1; method.name="Maximum Likelihood"}
+if (toupper(method) == "MSP") {method.id <- 2; method.name="Maximum Spacings Product"}
+if (toupper(method) == "MPS") {method.id <- 2; method.name="Maximum Product of Spacings"}
+if (toupper(method) == "TM")  {method.id <- 3; method.name="Titterington's"}
+if (toupper(method) == "SM")  {method.id <- 4; method.name="Starship"}
+if (toupper(method) == "TL")  {method.id <- 5; method.name="Trimmed L-Moments"}
+if (toupper(method) == "LMOM")  {method.id <- 5; method.name="L-Moments"}
+if (toupper(method) == "DLA")  {method.id <- 6; method.name="Distributional Least Absolutes"}
+if (toupper(method) == "MOM") {method.id <- 7; method.name="Moments"}
 
 if (method.id == 0) {
   stop(paste("unknown estimation method code:",method))
@@ -60,6 +60,8 @@ if (length(t2)>1) {
   warning(paste("Argument t2 should be only 1 value.  It has been truncated to its first value,",t2[1]))
   t2 = t2[1]
 }
+if ((t1>0)&(t1<1)) {warning(paste("Trimming arguments should be integers to give number of trimmed observations, rather than t1=",t1))}
+if ((t2>0)&(t2<1)) {warning(paste("Trimming arguments should be integers to give number of trimmed observations, rather than t2=",t2))}
 if (method.id != 5) {
   if (t1 != 0) {
     warning(paste("Trimming only used in trimmed L-Moments.  Lower trim of ",t1,"has been changed to zero."))
@@ -78,7 +80,10 @@ message(paste("L-Moments method called with trimming arguments, low=",t1,"high="
     method="TL"
   }
 }
-
+if (t1+t2>(n-1)) {
+  stop(paste("No observations left in data after trimming!
+    t1=",t1,", t2=",t2,". Total data, n=",n,sep=""))
+}
 # Perform the fitting process: 
 if ((method.id != 5)&(method.id != 7)) { # ML, MSP, TM, SM or DLA (not TL, LM, Mom)
 
@@ -116,8 +121,6 @@ if ((method.id != 5)&(method.id != 7)) { # ML, MSP, TM, SM or DLA (not TL, LM, M
   names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
 } else { # TL, LM, Mom
   if (method.id==5) { # TL, LM
-    # This will need a seperate case for Moments - do I extend to region A estimate, region B estimate?
-  
   # Starting values from grid search
   grid.results <- grid.search.tl(l3.grid,l4.grid,method.id,x,n,
     penalty.value,t1,t2,inverse.eps)
@@ -134,6 +137,7 @@ if ((method.id != 5)&(method.id != 7)) { # ML, MSP, TM, SM or DLA (not TL, LM, M
   l3.est <- optim.results$par[1]; l4.est <- optim.results$par[2]
   conv <- optim.results$convergence; its <- optim.results$counts[["function"]]
   obj <- optim.results$value
+  if (obj==optim.penalty) {stop("optimisation unable to find estimate")}
   # Add the optimisation method to the list
   optim.results$optim.method = optim.method 
   
@@ -164,9 +168,14 @@ if (record.cpu.time) {time.2 <- as.numeric(proc.time()[3]); runtime <- round(tim
   names(result$lambda) <- paste("lambda",1:length(result$lambda),sep="")
   } else { # This should just be moments, but let's double check
     if (method.id==7) {
-      data.moments = calc.moments(data = x)
-      fit.fkml.moments.val(data.moments) # other arguments need to be added here ....
+      #  Moments - do I extend to region A estimate, region B estimate?
+      
+      result = fit.fkml.moments(x) #  This returns an object of class starship
+      if (return.data) {result$data = x}
+      # Store results
+      if (record.cpu.time) {time.2 <- as.numeric(proc.time()[3]); runtime <- round(time.2-time.1,2)} else {runtime <- NA}
     }
+    else {stop("Unknown estimation method id")}
   }
 }
 
