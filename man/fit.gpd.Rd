@@ -40,7 +40,7 @@ there is no possible estimate (from either region A or B), and this
 function returns NA for the estimates.
 
 When estimating from data, or for given L-Moments with \eqn{n} given, 
-standard errors of the estimates are calculated if possible (standard errors are only finite if \eqn{\lambda < -0.5}{lambda < -0.5}).
+standard errors of the estimates are calculated if possible (standard errors are only finite if \eqn{\lambda > -0.5}{lambda > -0.5}).
 }
 \value{
 These functions return an object of \code{\link[base]{class}} 
