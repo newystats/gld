@@ -1,5 +1,17 @@
-gld.lmoments <- function(pars,order=1:4,ratios=TRUE,type="GPD"){
-  # pars is the vector of parameters for the GPD type GLD
+gld.lmoments <- function(pars,order=1:4,ratios=TRUE,type="GPD",param=NULL){
+  # pars is the vector of parameters for the GPD type GLD 
+  # param is here for backwards compatibility - use type instead
+  if (!is.null(param)) {
+    if (param!=type) {
+      if (type=="GPD"){  # Assume param was set, and type wasn't
+        type = param
+        message(paste("Using",type,"gld"))
+      } else {
+        stop("Conflicting arguments.  Use the type argument to choose gld type, and leave param argument NULL.")
+      }
+    }
+  }
+  if (type=="GPD"){
   gl.check.lambda(lambdas = pars,param = type)
   if (length(order) == 0) {stop ("argument order of gld.lmoments requires values")}
   if (any(is.na(order))) {stop ("argument order of gld.lmoments does not support NA values")}
@@ -46,6 +58,9 @@ gld.lmoments <- function(pars,order=1:4,ratios=TRUE,type="GPD"){
     names(result) <- paste("L",1:4,sep="")
     result <- result[order]
     }
+  }
+  } else {
+    stop("Only GPD type currently implemented.")
   }
   result
 }

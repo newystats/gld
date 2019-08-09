@@ -6,7 +6,7 @@ distribution for given parameter values}
 generalised \eqn{\lambda}{lambda} distribution for given parameter 
 values.}
 \usage{
-  gld.lmoments(pars,order=1:4,ratios=TRUE,type="GPD")
+  gld.lmoments(pars,order=1:4,ratios=TRUE,type="GPD",param=NULL)
 }
 \arguments{
   \item{pars}{A vector of length 4, giving the parameters of the 
@@ -26,6 +26,7 @@ values.}
     kurtosis (\eqn{\tau_3}{tau 3} and \eqn{\tau_4}{tau 4}) (and all higher
     orders), 
     FALSE gives the requested L-moments instead.}
+  \item{param}{alias for the type argument.  The \code{type} argument is preferred.}
 }
 \details{
 The GPD type generalised \eqn{\lambda}{lambda} distribution was
