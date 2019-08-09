@@ -88,9 +88,9 @@ norm.approx
 # Another distribution with the same moments
 another <- fit.fkml.moments.val(c(0,1,0,3),start=c(2,2))
 # Compared
-plotgld(norm.approx,ylim=c(0,0.75),main="Approximation to the standard normal",
+plotgld(norm.approx$lambda,ylim=c(0,0.75),main="Approximation to the standard normal",
   sub="and another GLD with the same first 4 moments")
-plotgld(another,add=TRUE,col=2)
+plotgld(another$lambda,add=TRUE,col=2)
 }
 \keyword{distribution}
 
