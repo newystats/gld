@@ -1,4 +1,3 @@
-
 RS parameterisation l3=0 or l4=0 limit results
 
 Check if the sorting in pgl() is worth the computational cost
@@ -15,3 +14,7 @@ Estimation of FKML with moments for data as well as given moment values
 Fix plot.fittedgld to have a slightly higher upper ylim
 
 L Moments for other types in gld.lmoments
+
+New class for FKML estimates - as well as class starship
+
+Change examples in qgl

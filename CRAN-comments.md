@@ -1,7 +1,7 @@
 CRAN comments
 
 ## Test environment:
-* local OS X install, R 3.5.1
+* local OS X install, R 3.6.1
 * win-builder (release and devel)
 
 ## R CMD check results
