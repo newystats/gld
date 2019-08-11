@@ -18,3 +18,5 @@ L Moments for other types in gld.lmoments
 New class for FKML estimates - as well as class starship
 
 Change examples in qgl
+
+Remove calc.moments, replace by e1071wrap function with divisor added - change the 2.6 version
