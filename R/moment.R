@@ -230,25 +230,6 @@ fkml.moments <- function(par,ratios=TRUE){
   result
 }
 
-## Calculate the mean, variance, skewness coeff & kurtosis coeff of a dataset
-
-calc.moments <- function(data,type=3,var.divisor="n-1"){
-  mean = mean(data)
-  # This function is not exported
-  if (var.divisor=="n"){
-    n = length(data)
-    var = ((n-1)/n)*var(data)
-  } else { if (var.divisor=="n-1"){
-      # n-1 
-      } else {
-      warning(paste("var.divisor should be n or n-1.  n-1 used instead of given value of",var.divisor))
-      }
-    var = var(data)
-  }
-  skew = e1071::skewness(data,type=type)
-  kurt = e1071::kurtosis(data,type=type)+3 # note the +3, the gld fitting stuff uses the kurtosis, not the "excess kurtosis"
-  c(mean,var,skew,kurt)
-}
 
 fit.fkml.moments  <- function(data,na.rm=TRUE,optim.method="Nelder-Mead",
       optim.control= list(), starting.point = c(0,0)){
@@ -256,6 +237,6 @@ fit.fkml.moments  <- function(data,na.rm=TRUE,optim.method="Nelder-Mead",
   } else { if (any(is.na(data))) {
     stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
   }
-  res <- fit.fkml.moments.val(moments=calc.moments(dataNArm),optim.method=optim.method,optim.control = optim.control,starting.point = starting.point)
+  res <- fit.fkml.moments.val(moments=moments4data(dataNArm),optim.method=optim.method,optim.control = optim.control,starting.point = starting.point)
   res
 }
