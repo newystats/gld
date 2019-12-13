@@ -1,7 +1,7 @@
 
 # omnibus gpd fitter - modelled on fit.fkml
 fit.gpd <- function(x,method="LM",na.rm=TRUE,
-      record.cpu.time = TRUE, return.data=FALSE){
+      record.cpu.time = TRUE, return.data=FALSE,LambdaZeroEpsilon=1e-15){
   # rec.cpu.time TRUE for consistency with fit.fkml
   
   # Start timing
@@ -13,7 +13,7 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE,
   if (method == "LM")  {method.name="Method of L-Moments"}
   
   if (method == "LM")  {
-    results <- fit.gpd.lmom(data=x,na.rm=na.rm)
+    results <- fit.gpd.lmom(data=x,na.rm=na.rm,LambdaZeroEpsilon=LambdaZeroEpsilon)
   }
   # results a list with 2 elements
   
@@ -33,10 +33,10 @@ fit.gpd.lmom <- function(data,na.rm=TRUE){
   } else { if (any(is.na(data))) {
       stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
   }
-  fit.gpd.lmom.given(lmoms=lmom::samlmu(dataNArm,nmom=4),n=length(dataNArm))
+  fit.gpd.lmom.given(lmoms=lmom::samlmu(dataNArm,nmom=4),n=length(dataNArm),LambdaZeroEpsilon=LambdaZeroEpsilon)
 }
 
-fit.gpd.lmom.given <- function(lmoms,n=NULL){
+fit.gpd.lmom.given <- function(lmoms,n=NULL,LambdaZeroEpsilon=1e-15){
   if (length(lmoms) < 4) {stop("4 L-Moments are required to fit the GLD gpd.\nArgument lmoms of fit.gpd.lmom.given is less than 4 long.")}
   t4 <- lmoms[4]
   t3 <- lmoms[3]
@@ -78,7 +78,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL){
   betahatB <- l2*(lambdahatB+1)*(lambdahatB+2)
   alphahatA <- l1+(betahatA*(1-2*deltahatA))/(lambdahatA+1)
   alphahatB <- l1+(betahatB*(1-2*deltahatB))/(lambdahatB+1)
-  if (isTRUE(all.equal(lambdahatA,0))) { # lamdbahatA is close to zero
+  if (abs(lambdahatA)<LambdaZeroEpsilon) { # lamdbahatA is close to zero
     # Use SLD special case
     AisSLD = TRUE
     lambdahatA = 0 

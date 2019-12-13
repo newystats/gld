@@ -8,9 +8,9 @@
 The Method of L-Moments estimates for the GPD type are the only estimates for any generalised lambda distribution type with closed form expressions, and the only with algebraic results for standard errors of the estimates.
 }
 \usage{
-fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE)
-fit.gpd.lmom(data, na.rm = TRUE)
-fit.gpd.lmom.given(lmoms, n = NULL)
+fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE,DeltaZeroDelta=1e-15)
+fit.gpd.lmom(data, na.rm = TRUE,DeltaZeroDelta=1e-15)
+fit.gpd.lmom.given(lmoms, n = NULL,DeltaZeroDelta=1e-15)
 }
 \arguments{
   \item{x}{Data to be fitted, as a vector}
@@ -22,6 +22,7 @@ fit.gpd.lmom.given(lmoms, n = NULL)
   \item{data}{Data to be fitted, as a vector}
   \item{lmoms}{A numeric vector containing two L-moments and two L-moment ratios, in the order \eqn{l_1,l_2,t_3,t_4}{l_1, l_2, t_3, t_4}.}
   \item{n}{the sample size, defaults to NULL}
+  \item{LambdaZeroEpsilon}{tolerance for lambda estimate of zero}
 }
 \details{The method of L-Moments equates sample L-Moments with expressions for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
 
@@ -41,6 +42,9 @@ function returns NA for the estimates.
 
 When estimating from data, or for given L-Moments with \eqn{n} given, 
 standard errors of the estimates are calculated if possible (standard errors are only finite if \eqn{\lambda > -0.5}{lambda > -0.5}).
+
+If \eqn{\lambda}{lambda} is zero, the GPD gld is a special case
+the Quantile Based Skew Logistic Distribution.  If the estimated \eqn{\lambda}{lambda} is within \code{LambdaZeroEpsilon} of zero, standard errors for alpha, beta and delta are calculated for the Quantile Based Skew Logistic Distribution and NA is returned as the standard error of \eqn{\lambda}{lambda}.
 }
 \value{
 These functions return an object of \code{\link[base]{class}} 
