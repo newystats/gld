@@ -8,9 +8,10 @@
 The Method of L-Moments estimates for the GPD type are the only estimates for any generalised lambda distribution type with closed form expressions, and the only with algebraic results for standard errors of the estimates.
 }
 \usage{
-fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE,DeltaZeroDelta=1e-15)
-fit.gpd.lmom(data, na.rm = TRUE,DeltaZeroDelta=1e-15)
-fit.gpd.lmom.given(lmoms, n = NULL,DeltaZeroDelta=1e-15)
+fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE,
+    LambdaZeroEpsilon=1e-15)
+fit.gpd.lmom(data, na.rm = TRUE,LambdaZeroEpsilon=1e-15)
+fit.gpd.lmom.given(lmoms, n = NULL,LambdaZeroEpsilon=1e-15)
 }
 \arguments{
   \item{x}{Data to be fitted, as a vector}

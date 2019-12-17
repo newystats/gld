@@ -110,7 +110,7 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                 lc <- lambda3
                 ld <- lambda4
                 if ((lambda3 > -1) & (lambda3 < 0) & (lambda4 > 
-                  1)) {
+                  1)) { #checking for region 5
                   if (((1 - lc)^(1 - lc) * (ld - 1)^(ld - 1))/((ld - 
                     lc)^(ld - lc)) > -lc/ld) {
                     return(FALSE)
@@ -126,6 +126,12 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                   } else {
                     return(TRUE)
                   }
+                }
+                if ((lambda3 < -1) & (lambda4 >1)) { # Region 1
+                  if (lambda2 < 0) {return(TRUE)} else {return(FALSE)}
+                }
+                if ((lambda4 < -1) & (lambda3 >1)) { # Region 2
+                  if (lambda2 < 0) {return(TRUE)} else {return(FALSE)}
                 }
                 if (lambda3 == 0) {
                   if (lambda4 > 0) {
@@ -161,7 +167,7 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                     ret <- TRUE
                   }
                 }
-                if (is.null(ret)) {warning("RS param return not set: please email maintainer with example")
+                if (!exists("ret")) {warning("RS param return not set: please email maintainer with example")
                 ret <- TRUE}
             }
         }, fm5 = {

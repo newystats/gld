@@ -1,7 +1,7 @@
 
 # omnibus gpd fitter - modelled on fit.fkml
-fit.gpd <- function(x,method="LM",na.rm=TRUE,
-      record.cpu.time = TRUE, return.data=FALSE,LambdaZeroEpsilon=1e-15){
+fit.gpd <- function(x,method="LM",na.rm=TRUE, record.cpu.time = TRUE, 
+          return.data=FALSE,LambdaZeroEpsilon=1e-15){
   # rec.cpu.time TRUE for consistency with fit.fkml
   
   # Start timing
@@ -28,7 +28,7 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE,
 }
                    
 
-fit.gpd.lmom <- function(data,na.rm=TRUE){
+fit.gpd.lmom <- function(data,na.rm=TRUE,LambdaZeroEpsilon=1e-15){
   if (na.rm){ dataNArm <- data[!is.na(data)] 
   } else { if (any(is.na(data))) {
       stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
