@@ -80,22 +80,24 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                 return(TRUE)
             }
         }, ramberg = , ram = , RS = , rs = {
-            if (lambda3 * lambda4 > 0) {
-                if ((lambda3 > 0) & (lambda4 > 0)) {
+            if ( (lambda3 * lambda4) >= 0) {
+                if ((lambda3 >= 0) & (lambda4 >= 0)) { # Region 3
+                  if ((lambda3 == 0)&(lambda4 == 0)) {
+                    warning("RS parameterisation: lambda3 and lambda4 zero gives a point mass at lambda1")
+                    return(TRUE)
+                  }
                   if (lambda2 <= 0) {
-                    ret <- FALSE
+                    return(FALSE)
                   } else {
-                    ret <- TRUE
+                    return(TRUE)
                   }
-                }
-                if ((lambda3 < 0) & (lambda4 < 0)) {
-                  if (lambda2 >= 0) {
-                    ret <- FALSE
-                  } else {
-                    ret <- TRUE
+                } else {
+                    # region 4
+                    if (lambda2 <= 0) {
+                      return(TRUE) 
+                    } else { return(FALSE) }
                   }
-                }
-            } else {
+                } # end Region3 or Region 4
                 if (lambda2 >= 0) {
                   return(FALSE)
                 }
@@ -109,7 +111,7 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                 }
                 lc <- lambda3
                 ld <- lambda4
-                if ((lambda3 > -1) & (lambda3 < 0) & (lambda4 > 
+                if ((lambda3 >= -1) & (lambda3 < 0) & (lambda4 >= 
                   1)) { #checking for region 5
                   if (((1 - lc)^(1 - lc) * (ld - 1)^(ld - 1))/((ld - 
                     lc)^(ld - lc)) > -lc/ld) {
@@ -118,8 +120,8 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                     return(TRUE)
                   }
                 }
-                if ((lambda4 > -1) & (lambda4 < 0) & (lambda3 > 
-                  1)) {
+                if ((lambda4 >= -1) & (lambda4 < 0) & (lambda3 >= 
+                  1)) {  # Checking for region 6
                   if (((1 - ld)^(1 - ld) * (lc - 1)^(lc - 1))/((lc - 
                     ld)^(lc - ld)) > -ld/lc) {
                     return(FALSE)
@@ -127,10 +129,10 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                     return(TRUE)
                   }
                 }
-                if ((lambda3 < -1) & (lambda4 >1)) { # Region 1
+                if ((lambda3 <= -1) & (lambda4 >= 1)) { # Region 1
                   if (lambda2 < 0) {return(TRUE)} else {return(FALSE)}
                 }
-                if ((lambda4 < -1) & (lambda3 >1)) { # Region 2
+                if ((lambda4 <= -1) & (lambda3 >= 1)) { # Region 2
                   if (lambda2 < 0) {return(TRUE)} else {return(FALSE)}
                 }
                 if (lambda3 == 0) {
@@ -139,9 +141,17 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                       return(FALSE)
                     }
                     ret <- TRUE
-                  }
-                  if (lambda4 == 0) {
-                    warning("RS parameterisation: lambda3 and lambda4 zero gives a point mass at lambda1")
+                  } else { # lambda4 <= 0 
+                    if (lambda4 == 0) {
+                      warning("RS parameterisation: lambda3 and lambda4 zero gives a point mass at lambda1")
+                      ret <- TRUE
+                    } else {
+                      if (lambda4 < 0) { # l3 zero, l4 negative, boundary of region 4
+                        if (lambda2 <0) {
+                          return(TRUE)
+                        } else {return(FALSE)}
+                      }
+                    }
                   }
                   if (lambda4 <0) {
                     if (lambda2 > 0) {
@@ -157,9 +167,6 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                     }
                     ret <- TRUE
                   }
-                  if (lambda3 == 0) {
-                    warning("RS parameterisation: lambda3 and lambda4 zero gives a point mass at lambda1")
-                  }
                   if (lambda3 <0) {
                     if (lambda2 > 0) {
                       return(FALSE)
@@ -167,9 +174,8 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
                     ret <- TRUE
                   }
                 }
-                if (!exists("ret")) {warning("RS param return not set: please email maintainer with example")
-                ret <- TRUE}
-            }
+                if (!exists("ret")) {warning(paste("RS param return not set: please email maintainer with example",lambda3,lambda4))
+                ret <- NA}
         }, fm5 = {
             lambda5 <- lambdas[5]
             if (lambda2 <= 0) {
