@@ -36,10 +36,10 @@ fitting the generalised \eqn{\lambda}{lambda} distributions},
 Australian and New Zealand Journal of
 Statistics \bold{41}, 353--374
 
-\url{http://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
 }
 \author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{http://tolstoy.newcastle.edu.au/~rking/}
+\url{https://tolstoy.newcastle.edu.au/~rking/}
 }
 \seealso{
 \code{\link{starship}},

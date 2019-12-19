@@ -117,9 +117,9 @@ Ramberg, J. S. & Schmeiser, B. W. (1974), \emph{An approximate method for
 generating asymmetric random variables}, Communications of the ACM \bold{17},
 78--82.
 
-\url{http://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{http://tolstoy.newcastle.edu.au/~rking/}}
+\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{https://tolstoy.newcastle.edu.au/~rking/}}
 \note{The complex nature of the rules in this function for the RS
 parameterisation are the reason for the invention of the FMKL
 parameterisation and its status as the default parameterisation in the other

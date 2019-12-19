@@ -71,7 +71,7 @@ estimates.  If this is the case, the function also issues a \code{\link{warning}
 Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
 
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{http://tolstoy.newcastle.edu.au/~rking/}
+\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{https://tolstoy.newcastle.edu.au/~rking/}
 
 Paul van Staden}
 \seealso{

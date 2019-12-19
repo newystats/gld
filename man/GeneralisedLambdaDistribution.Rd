@@ -160,9 +160,9 @@ generating asymmetric random variables}, Communications of the ACM \bold{17},
 
 Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
 
-\url{http://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{http://tolstoy.newcastle.edu.au/~rking/}}
+\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{https://tolstoy.newcastle.edu.au/~rking/}}
 
 \examples{
 qgl(seq(0,1,0.02),0,1,0.123,-4.3)

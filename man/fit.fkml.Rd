@@ -126,7 +126,7 @@ Technometrics, \bold{23(3)}, 257--263.
 \url{https://www.jstor.org/stable/1267789}
 
 Dean, B. (2013) \emph{Improved Estimation and Regression Techniques with the Generalised Lambda Distribution}, PhD Thesis, University of Newcastle
-\url{http://nova.newcastle.edu.au/vital/access/manager/Repository/uon:13503}
+\url{https://nova.newcastle.edu.au/vital/access/manager/Repository/uon:13503}
 
 Elamir, E. A. H., and Seheult, A. H. (2003), \emph{Trimmed L-Moments}, Computational Statistics & Data Analysis, \bold{43}, 299--314.
 

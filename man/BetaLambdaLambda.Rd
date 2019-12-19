@@ -25,9 +25,9 @@ A vector the same length as \code{lambda}, containing
   Beta(lambda,lambda)
 }
 \references{
-\url{http://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{http://tolstoy.newcastle.edu.au/~rking/}
+\author{Robert King, \email{robert.king@newcastle.edu.au}, \url{https://tolstoy.newcastle.edu.au/~rking/}
 
 Paul van Staden
 }

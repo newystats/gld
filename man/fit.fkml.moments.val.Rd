@@ -55,7 +55,7 @@ A vector containing the parameters of the FKML type generalised lambda;
 \references{
 Au-Yeung, Susanna W. M. (2003) \emph{Finding Probability Distributions From 
 Moments}, Masters thesis, Imperial College of Science, Technology and Medicine (University of London), Department of Computing
-\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.106.6130&rep=rep1&type=pdf}
+\url{https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.106.6130&rep=rep1&type=pdf}
 
 Freimer, M., Mudholkar, G. S., Kollia, G. & Lin, C. T. (1988), 
   \emph{A study of the generalized tukey lambda family}, Communications 
@@ -68,12 +68,12 @@ Algo Research Quarterly, \bold{3(3)}:47--58
 van Staden, Paul (2013) \emph{Modeling of generalized families of 
 probability distributions inthe quantile statistical universe},
 PhD thesis, University of Pretoria.
-\url{http://repository.up.ac.za/handle/2263/40265}
+\url{https://repository.up.ac.za/handle/2263/40265}
 
-\url{http://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
 }
 \author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{http://tolstoy.newcastle.edu.au/~rking/}
+\url{https://tolstoy.newcastle.edu.au/~rking/}
 
 Sigbert Klinke
 
