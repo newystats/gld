@@ -1,6 +1,6 @@
 Package: gld
-Version: 2.6.1
-Date: 2019-12-17
+Version: 2.6.2
+Date: 2020-01-06
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
 Suggests: 
 Imports: stats, graphics, e1071, lmom
