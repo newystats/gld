@@ -1,3 +1,6 @@
+2.6.2
+gl.check.lambda bugfix
+
 2.6.1
 Add LambdaZeroEpsilon argument to fit.gpd to allow wider range of Lambda values to count as zero, and thus Quantile Based Skew Logistic.  This is necessary because for abs(lambda) < 1e-15, SE(lambda) can be over 5e5
 
