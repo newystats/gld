@@ -76,7 +76,6 @@ print.GldGPDFit <- function(x,digits = max(3, getOption("digits") - 3), ...)
     } else {
       cat("Region B only:\n")
       print.default(format(x$estB,digits=digits), print.gap = 2,quote=FALSE)
-      # This needs to be extended once the package calculates SEs
     }
   } else { # region A estimate exists
     if (is.null(x$estB)){
