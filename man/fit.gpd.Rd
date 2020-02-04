@@ -15,8 +15,7 @@ fit.gpd.lmom.given(lmoms, n = NULL,LambdaZeroEpsilon=1e-15)
 }
 \arguments{
   \item{x}{Data to be fitted, as a vector}
-  \item{method}{A character string, to select the estimation method.  Only Method of
-  L-Moments "LM" is implemented.}
+  \item{method}{A character string, to select the estimation method.  Only Method of L-Moments "LM" is implemented.}
   \item{na.rm}{Logical: Should missing values be removed?}
   \item{record.cpu.time}{Logical: should the CPU time used in fitting be recorded in the fitted model object?}
   \item{return.data}{Logical: Should the function return the data (from the argument \code{x})?}
