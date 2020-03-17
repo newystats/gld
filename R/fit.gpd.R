@@ -43,27 +43,27 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL,LambdaZeroEpsilon=1e-15){
   l2 <- lmoms[2]
   l1 <- lmoms[1]
   el.1 <- (3+7*t4)
-  if (abs(t3)>=1){problem=paste("No estimates possible, impossible sample Tau 3 value: Tau3=",t3,"outside (-1,1) range")
+  if (abs(t3)>=1){problem=paste("No estimates possible, impossible sample Tau 3 value: Tau3=",t3,"outside (-1,1) range\n")
     warning(problem)
     res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
     class(res) <- "GldGPDFit"
     return(res)}
-  if ( (5*t3^2-1)/4 > t4 ){problem = paste("No estimates possible, impossible sample Tau3/Tau4 combination. (5*Tau3^2-1)/4 =",(5*t3^2-1)/4,"must be <= Tau4 =",t4)
+  if ( (5*t3^2-1)/4 > t4 ){problem = paste("No estimates possible, impossible sample Tau3/Tau4 combination. (5*Tau3^2-1)/4 =",(5*t3^2-1)/4,"must be <= Tau4 =",t4,"\n")
     warning(problem)
     res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
     class(res) <- "GldGPDFit"
     return(res)}
-  if (t4 < -0.25){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,"< -0.25")
+  if (t4 < -0.25){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,"< -0.25\n")
   warning(problem)
   res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
   class(res) <- "GldGPDFit"
   return(res)}
-    if (t4>=1){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1")
+    if (t4>=1){problem = paste("No estimates possible, impossible sample Tau 4 value: Tau4=",t4,">= 1\n")
     warning(problem)
     res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
     class(res) <- "GldGPDFit"
     return(res)}
-  if ((t4^2+98*t4+1)<0) {problem = paste("No estimates possible, Tau4 too low (lowest possible value is approx -0.0102051). Tau4 here is ",t4)
+  if ((t4^2+98*t4+1)<0) {problem = paste("No estimates possible, Tau4 too low (lowest possible value is approx -0.0102051). Tau4 here is ",t4,"\n")
     warning(problem)
     res <- list(estA=NA,estB=NA,warn=problem,param="gpd")
     class(res) <- "GldGPDFit"
@@ -107,7 +107,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL,LambdaZeroEpsilon=1e-15){
       if (AisSLD){
         # lambda = 0, so this is the SLD - SE calculation ...
         # see fit.R in R package, sld
-        warning("Since lambda estimate is zero, the estimated distribution\nis a special case, the Quantile Based Skew Logistic Distribution.\nNo standard errors are available for lambda, but SEs for the other\nparameters are given from the Quantile Based SLD.")
+        warning("Since lambda estimate is zero, the estimated distribution\nis a special case, the Quantile Based Skew Logistic Distribution.\nNo standard errors are available for lambda, but SEs for the other\nparameters are given from the Quantile Based SLD.\n")
         #om = dh*(1-dh) # omega
         #se.alpha = bh * sqrt((57 + (125*pi^2-1308)*om)/(15*n))
         #se.beta = bh * sqrt(4/(3*n) * (1 - (pi^2-8)*om))
@@ -128,7 +128,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL,LambdaZeroEpsilon=1e-15){
           SEs.A = c(alphahatA.se,betahatA.se,deltahatA.se,lambdahatA.se)
           lmomestA = cbind(lmomestA,SEs.A)
           dimnames(lmomestA)[[2]] = c("Estimate","Std. Error")
-        } else { warning("Region A Standard Errors are undefined since lambda is estimated as <= -0.5")}
+        } else { warning("Region A Standard Errors are undefined since lambda is estimated as <= -0.5\n")}
       }
     } 
       # calculate SEs for region B estimate
@@ -137,7 +137,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL,LambdaZeroEpsilon=1e-15){
       if (lmomestB[4] == 0){
         # lambda = 0, so this is the SLD - SE calculation ...
         # see fit.R in R package, sld
-        warning("Since lambda estimate is zero, the estimate is a special case,\nthe Quantile Based Skew Logistic Distribution.  No standard errors are available for lambda,\nbut SEs for the other parameters are given from the Quantile Based SLD.")
+        warning("Since lambda estimate is zero, the estimate is a special case,\nthe Quantile Based Skew Logistic Distribution.  No standard errors are available for lambda,\nbut SEs for the other parameters are given from the Quantile Based SLD.\n")
         omega = lmomestB$delta*(1-lmomestB$delta)
         se.alpha = lmomestB$beta * sqrt((57 + (125*pi^2-1308)*omega)/(15*n))
         se.beta = lmomestB$beta * sqrt(4/(3*n) * (1 - (pi^2-8)*omega))
@@ -155,7 +155,7 @@ fit.gpd.lmom.given <- function(lmoms,n=NULL,LambdaZeroEpsilon=1e-15){
           lmomestB = cbind(lmomestB,SEs.B)
           dimnames(lmomestB)[[2]] = c("Estimate","Std. Error")
         } else { # no need for SEs, stay as before
-          warning("Region B Standard Errors are undefined since lambda is estimated as <= -0.5")
+          warning("Region B Standard Errors are undefined since lambda is estimated as <= -0.5\n")
         } 
       }
     }
