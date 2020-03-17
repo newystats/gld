@@ -2,9 +2,8 @@
 gl.check.lambda bugfix
 
 2.6.1
-Add LambdaZeroEpsilon argument to fit.gpd to allow wider range of Lambda values to count as zero, and thus Quantile Based Skew Logistic.  This is necessary because for abs(lambda) < 1e-15, SE(lambda) can be over 5e5
+Add LambdaZeroEpsilon argument to fit.gpd to allow wider range of Lambda values to count as zero, and thus Quantile Based Skew Logistic.  
 
-Correct gl.check.lambda, which was missing correct parameter values in regions 1 and 2 of the Ramberg & Schmeiser type
 
 2.6
 plot method for starship, plot.starship now defaults to one.page=FALSE
@@ -12,7 +11,6 @@ The fit.fkml function now;
 * Returns and prints trimming values in Trimmed mean estimates
 * Has the LMom method which is trimmed mean with zero trimming
 * Has MoM, method of moments
-Error in documentation for fit.gpd fixed
 
 2.5
 Standard Errors for the L Moment estimates for the GPD type

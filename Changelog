@@ -9,7 +9,22 @@ Add LambdaZeroEpsilon argument to fit.gpd to allow wider range of Lambda values 
 
 Correct gl.check.lambda, which was missing correct parameter values in regions 1 and 2 of the Ramberg & Schmeiser type
 
-See NEWSfor changes from 2.4.2 to 2.6
+2.6
+plot method for starship, plot.starship now defaults to one.page=FALSE
+The fit.fkml function now;
+* Returns and prints trimming values in Trimmed mean estimates
+* Has the LMom method which is trimmed mean with zero trimming
+* Has MoM, method of moments
+Error in documentation for fit.gpd fixed
+
+2.5
+Standard Errors for the L Moment estimates for the GPD type
+fit.gpd defaults to recording cpu time usage (so that it is the
+same as fit.fkml)
+
+2.4.2
+Fix bug in fit.gpd
+BetaLambdaLambda function added (utility function for gpd L-Moment estimation)
 
 2.4.1
 Fix pgl() example comment - inverse.eps had defaulted to .Machine$double.eps since version 1.9
