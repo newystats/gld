@@ -3,9 +3,11 @@
 \alias{fit.gpd.lmom}
 \alias{fit.gpd.lmom.given} 
 \title{Estimate parameters of the GPD type generalised lambda distribution}
-\description{Estimates parameters of the GPD type generalised \eqn{\lambda}{lambda} Distribution.  Currently, only estimation via method of L moments is implemented.
+\description{Estimates parameters of the GPD type generalised \eqn{\lambda}{lambda} Distribution.  Estimation is via method of L moments or the starship method.
 
 The Method of L-Moments estimates for the GPD type are the only estimates for any generalised lambda distribution type with closed form expressions, and the only with algebraic results for standard errors of the estimates.
+
+For further details on the starship method, see \code{\link{starship}}.
 }
 \usage{
 fit.gpd(x, method = "LM", na.rm = TRUE, record.cpu.time = TRUE, return.data = FALSE,
@@ -15,7 +17,7 @@ fit.gpd.lmom.given(lmoms, n = NULL,LambdaZeroEpsilon=1e-15)
 }
 \arguments{
   \item{x}{Data to be fitted, as a vector}
-  \item{method}{A character string, to select the estimation method.  Only Method of L-Moments "LM" is implemented.}
+  \item{method}{A character string, to select the estimation method. The available methods are 1. "LM" for Method of L-Moments, 2. "SM" or "starship" for the Starship method.}
   \item{na.rm}{Logical: Should missing values be removed?}
   \item{record.cpu.time}{Logical: should the CPU time used in fitting be recorded in the fitted model object?}
   \item{return.data}{Logical: Should the function return the data (from the argument \code{x})?}
@@ -24,7 +26,9 @@ fit.gpd.lmom.given(lmoms, n = NULL,LambdaZeroEpsilon=1e-15)
   \item{n}{the sample size, defaults to NULL}
   \item{LambdaZeroEpsilon}{tolerance for lambda estimate of zero}
 }
-\details{The method of L-Moments equates sample L-Moments with expressions for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
+\details{The starship method calls the \code{\link{starship}} function - see its help for more details.
+
+The method of L-Moments equates sample L-Moments with expressions for the L-Moments of the GPD type GLD.  Closed form expressions exist to give these estimates.
 
 For many values there are two possible estimates for the same L Moment
 values, one in each of two regions of the GPD GLD parameter space, 

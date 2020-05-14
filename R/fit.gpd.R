@@ -1,7 +1,6 @@
 
 # omnibus gpd fitter - modelled on fit.fkml
-fit.gpd <- function(x,method="LM",na.rm=TRUE, record.cpu.time = TRUE, 
-          return.data=FALSE,LambdaZeroEpsilon=1e-15){
+fit.gpd <- function(x,method="LM",na.rm=TRUE, record.cpu.time = TRUE,return.data=FALSE,LambdaZeroEpsilon=1e-15){
   # rec.cpu.time TRUE for consistency with fit.fkml
   
   # Start timing
@@ -11,12 +10,23 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE, record.cpu.time = TRUE,
   
   # set long method name
   if (method == "LM")  {method.name="Method of L-Moments"}
-  
+  if (method == "SM")  {method.name="Starship"}
+  if (method == "starship")  {
+    method.name="Starship"
+    method="SM" }
   if (method == "LM")  {
     results <- fit.gpd.lmom(data=x,na.rm=na.rm,LambdaZeroEpsilon=LambdaZeroEpsilon)
   }
   # results a list with 2 elements
-  
+  if (method == "SM") {
+    if (na.rm) {warning("na.rm not yet implemented for GPD starship")}
+    starship.results <- starship(data=x,param="gpd",return.data=return.data)
+    region = gldGPDRegionID(pars=starship.results$lambda)
+    if (region == "A"){
+      results = list(estA=starship.results$lambda,estB=NULL,param="gpd",starship=starship.results) }
+    if (region == "B"){
+      results = list(estA=NULL,estB=starship.results$lambda,param="gpd",starship=starship.results) }
+    } 
   # add optional elements
   if (record.cpu.time) {
     time.2 <- as.numeric(proc.time()[3]); runtime <- round(time.2-time.1,2) 
