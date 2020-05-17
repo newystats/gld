@@ -89,3 +89,27 @@ print.GldGPDFit <- function(x,digits = max(3, getOption("digits") - 3), ...)
     }
   }
 }
+
+plot.GldGPDFit <- function(x,data=NULL,ask=NULL,breaks="Sturges",plot.title="default",col1="darkorange",col2="purple",...)
+{
+  if (plot.title == "default") {
+    plot.title <- paste(x$method.name,"fit of",x$param,"type GLD")
+  }
+  # No one.page option here 
+  allpar <- par()
+  opar <- allpar[match(c("ask","mfrow"),names(allpar))]
+  if (is.null(x$data)){
+    if (is.null(data)) {stop("No data to compare to fit.  Use return.data=TRUE")} 
+  } else {
+    if (is.null(data)) {data <- x$data #using data returned by fit.gpd function
+    } else { 
+      warning(paste(substitute(x),"has a data element and the data argument was also given.\nUsing ",paste(substitute(data))," instead of the data element of ",substitute(x))) } }
+  if (is.null(ask)) {
+    if (interactive()) {ask=TRUE} else {ask=FALSE}
+  }
+  if (ask) {par(ask=TRUE)}  ## up to here ## 
+  qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here
+  hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
+  plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
+  if (one.page) {par(opar)} # Return to previous par
+}
