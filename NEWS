@@ -1,3 +1,6 @@
+2.6.3
+fit.gpd() now allows method="starship", then calls starship()
+
 2.6.2
 gl.check.lambda bugfix
 

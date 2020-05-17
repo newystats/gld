@@ -62,6 +62,7 @@ estimates.  If this is the case, the function also issues a \code{\link{warning}
   \item{data}{The data, if \code{return.data} is TRUE (only for \code{fit.gpd}).}
   \item{param}{The character \code{"gpd"}, indicating the GPD type of the
   generalised lambda distribution.}
+  \item{starship}{The value returned by \code{\link{starship}}, if the \code{starship} method is used.}
 
   Each of the estimate elements (if they are not NULL) are either a vector of length 4, or a 4 by 2 matrix if standard errors are calculated. The elements of the vector, or rows of the matrix are the estimated parameters, in order;
   \item{\eqn{\alpha}{alpha}}{location parameter}
