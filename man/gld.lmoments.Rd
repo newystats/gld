@@ -49,7 +49,7 @@ van Staden, P.J. and King, Robert A.R. (2015) \emph{The quantile-based skew logi
 
 van Staden, Paul J. 2013 \emph{Modeling of generalized families of probability distribution in the quantile statistical universe}. 
 PhD thesis, University of Pretoria.
-\url{https://hdl.handle.net/2263/40265}
+\url{https://repository.up.ac.za/handle/2263/40265}
 
 Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation for the Generalized Lambda Distribution}. In Proceedings of the Third Annual ASEARC Conference. Callaghan, NSW 2308 Australia: School of Mathematical and Physical Sciences, University of Newcastle.
 

@@ -1,6 +1,6 @@
 Package: gld
 Version: 2.6.3
-Date: 2020-05-14
+Date: 2020-07-06
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
 Suggests: 
 Imports: stats, graphics, e1071, lmom
@@ -15,7 +15,8 @@ Authors@R:
     person(given="Sigbert",family="Klinke",
       role="aut"),
     person(given="Paul",family="van Staden",
-      role="aut")
+      role="aut",email="paul.vanstaden@up.ac.za",
+      comment=c(ORCID="0000-0002-5710-5984"))
     )
 Description: The generalised lambda distribution, or Tukey lambda distribution, 
   provides a wide variety of shapes with one functional form.   
