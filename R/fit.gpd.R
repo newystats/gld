@@ -20,7 +20,7 @@ fit.gpd <- function(x,method="LM",na.rm=TRUE, record.cpu.time = TRUE,return.data
   # results a list with 2 elements
   if (method == "SM") {
     if (na.rm) {warning("na.rm not yet implemented for GPD starship")}
-    starship.results <- starship(data=x,param="gpd",return.data=return.data)
+    starship.results <- starship(data=x,param="gpd",return.data=FALSE) # returning data is dealt with below
     region = gldGPDRegionID(pars=starship.results$lambda)
     if (region == "A"){
       results = list(estA=starship.results$lambda,estB=NULL,param="gpd",starship=starship.results) }
