@@ -2,8 +2,8 @@
  * language.
  *
  * Copyright (C) Robert King 1993,2000,2001,2006,2011,2013
- * robert.king@newcastle.edu.au
- * http://tolstoy.newcastle.edu.au/~rking/publ/software.html
+ * robert.king.newcastle@gmail.com
+ * https://github.com/newystats/gld/
  *
  * This program is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by the Free 

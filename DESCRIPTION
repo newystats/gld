@@ -1,13 +1,13 @@
 Package: gld
 Version: 2.6.3
-Date: 2020-07-06
+Date: 2021-11-24
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
 Suggests: 
 Imports: stats, graphics, e1071, lmom
 Authors@R:  
   c(person(given="Robert",family="King",
       role=c("aut","cre"),
-      email="Robert.King@newcastle.edu.au",
+      email="Robert.King.newcastle@gmail.com",
       comment=c(ORCID="0000-0001-7495-6599")),
     person(given="Benjamin",family="Dean",
       role="aut",
@@ -34,4 +34,4 @@ Description: The generalised lambda distribution, or Tukey lambda distribution,
   These include maximum likelihood, maximum product of spacings, 
   Titterington's method, Moments, Trimmed L-Moments and Distributional Least Absolutes. 
 License: GPL (>= 2)
-URL: http://tolstoy.newcastle.edu.au/~rking/publ/rprogs/information.html
+URL: https://github.com/newystats/gld/

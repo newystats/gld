@@ -70,10 +70,10 @@ probability distributions inthe quantile statistical universe},
 PhD thesis, University of Pretoria.
 \url{https://repository.up.ac.za/handle/2263/40265}
 
-\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://github.com/newystats/gld/}
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{https://tolstoy.newcastle.edu.au/~rking/}
+\author{Robert King, \email{robert.king.newcastle@gmail.com},
+\url{https://github.com/newystats/}
 
 Sigbert Klinke
 

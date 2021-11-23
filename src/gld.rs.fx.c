@@ -2,7 +2,7 @@
  * language.
  *
  * Copyright (C) Robert King 1993,2000,2001
- * robert.king@newcastle.edu.au
+ * robert.king.newcastle@gmail.com
  * http://maths.newcastle.edu.au/~rking/publ/software.html
  *
  * This program is free software; you can redistribute it and/or modify it 
