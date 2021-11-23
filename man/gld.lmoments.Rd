@@ -59,10 +59,10 @@ Quantile based Skew logistic distribution
 
 Generalised Lambda Distribution
 
-\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://github.com/newystats/gld/}
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{https://tolstoy.newcastle.edu.au/~rking/}
+\author{Robert King, \email{robert.king.newcastle@gmail.com},
+\url{https://github.com/newystats/}
 
 Paul van Staden}
 \seealso{

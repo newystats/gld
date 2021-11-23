@@ -137,8 +137,8 @@ Statistics \bold{41}, 353--374.
 
 Titterington, D. M. (1985), \emph{Comment on `Estimating Parameters in Continuous Univariate Distributions'}, Journal of the Royal Statistical Society, Series B, \bold{47}, 115--116.
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{https://tolstoy.newcastle.edu.au/~rking/}
+\author{Robert King, \email{robert.king.newcastle@gmail.com},
+\url{https://github.com/newystats/}
 
 Ben Dean, University of Newcastle
 \email{benjamin.dean@uon.edu.au}

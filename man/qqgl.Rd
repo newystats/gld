@@ -76,10 +76,10 @@ fitting the generalised \eqn{\lambda}{lambda} distributions},
 Australian and New Zealand Journal of
 Statistics \bold{41}, 353--374
 
-\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://github.com/newystats/gld/}
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{https://tolstoy.newcastle.edu.au/~rking/}}
+\author{Robert King, \email{robert.king.newcastle@gmail.com},
+\url{https://github.com/newystats/}}
 
 \seealso{\code{\link{gld}},\code{\link{starship}} }
 \examples{

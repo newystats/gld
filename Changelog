@@ -1,4 +1,5 @@
 2.6.3
+New email address and URL
 plot.starship documentation correctly describes working with fit.fkml
 fit.gpd() now allows method="starship", then calls starship()
 

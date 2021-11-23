@@ -98,11 +98,11 @@ Karian, Z.E. & Dudewicz, E.J. (2000), \emph{Fitting Statistical Distributions to
 Data: The generalised Lambda Distribution and the Generalised Bootstrap
 Methods}, CRC Press.
 
-\url{https://tolstoy.newcastle.edu.au/~rking/gld/}
+\url{https://github.com/newystats/gld/}
 
 }
-\author{Robert King, \email{robert.king@newcastle.edu.au},
-\url{https://tolstoy.newcastle.edu.au/~rking/}}
+\author{Robert King, \email{robert.king.newcastle@gmail.com},
+\url{https://github.com/newystats/}}
 
 \seealso{\code{\link{GeneralisedLambdaDistribution}}}
 \examples{
