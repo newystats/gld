@@ -111,5 +111,5 @@ plot.GldGPDFit <- function(x,data=NULL,ask=NULL,breaks="Sturges",plot.title="def
   qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here
   hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
   plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
-  if (one.page) {par(opar)} # Return to previous par
+ # No one.page option - check this - but I think we don't need to save par further up this function  if (one.page) {par(opar)} # Return to previous par
 }
