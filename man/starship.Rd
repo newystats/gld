@@ -141,7 +141,7 @@ Darren Wraith}
 \code{\link{starship.obj}} 
 }
 \examples{
-exampledata <- rgl(400,c(0,1,0.2,0))
+exampledata <- rgl(300,c(0,1,0.2,0))
 starship(exampledata)
 }
 \keyword{distribution}
