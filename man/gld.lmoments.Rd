@@ -45,7 +45,7 @@ lambda.  If \code{ratio} is true, the vector contains L-Moment ratios for orders
 }
 \references{
 van Staden, P.J. and King, Robert A.R. (2015) \emph{The quantile-based skew logistic distribution}, Statistics and Probability Letters \bold{96} 109--116.
-\url{https://dx.doi.org/10.1016/j.spl.2014.09.001}
+\doi{10.1016/j.spl.2014.09.001}
 
 van Staden, Paul J. 2013 \emph{Modeling of generalized families of probability distribution in the quantile statistical universe}. 
 PhD thesis, University of Pretoria.
@@ -55,7 +55,6 @@ Van Staden, Paul J., & M.T. Loots. (2009), \emph{Method of L-moment Estimation f
 
 Quantile based Skew logistic distribution
 
-\url{https://tolstoy.newcastle.edu.au/rking/SLD/SLD.html}
 
 Generalised Lambda Distribution
 
