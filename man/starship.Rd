@@ -141,8 +141,7 @@ Darren Wraith}
 \code{\link{starship.obj}} 
 }
 \examples{
-data <- rgl(100,0,1,.2,.2)
-starship(data,optim.method="Nelder-Mead",initgrid=list(lcvect=(0:4)/10,
-ldvect=(0:4)/10))
+exampledata <- rgl(400,c(0,1,0.2,0))
+starship(exampledata)
 }
 \keyword{distribution}
