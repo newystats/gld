@@ -44,8 +44,8 @@ if (toupper(method) == "MPS") {method.id <- 2; method.name="Maximum Product of S
 if (toupper(method) == "TM")  {method.id <- 3; method.name="Titterington's"}
 if (toupper(method) == "SM")  {method.id <- 4; method.name="Starship"}
 if (toupper(method) == "TL")  {method.id <- 5; method.name="Trimmed L-Moments"}
-if (toupper(method) == "LMOM")  {method.id <- 5; method.name="L-Moments"}
-if (toupper(method) == "DLA")  {method.id <- 6; method.name="Distributional Least Absolutes"}
+if (toupper(method) == "LMOM"){method.id <- 5; method.name="L-Moments"}
+if (toupper(method) == "DLA") {method.id <- 6; method.name="Distributional Least Absolutes"}
 if (toupper(method) == "MOM") {method.id <- 7; method.name="Moments"}
 
 if (method.id == 0) {

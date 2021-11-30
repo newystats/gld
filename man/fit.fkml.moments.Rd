@@ -1,17 +1,23 @@
-\name{fit.fkml.moments.val}
+\name{fit.fkml.moments}
+\alias{fit.fkml.moments}
 \alias{fit.fkml.moments.val}
 \title{Method of moments estimation for the
-FKML type of the generalised lambda distribution using given moment values} 
+FKML type of the generalised lambda distribution} 
 \description{Estimates parameters of the generalised lambda distribution
-(FKML type) using the Method of Moments on the basis of moment values 
-(mean, variance, skewness ratio and kurtosis ratio (note, not the \emph{excess kurtosis})). 
+(FKML type) using the Method of Moments, on the basis of moments calculated from data, 
+or moment values (mean, variance, skewness ratio and kurtosis ratio (note, not the \emph{excess kurtosis})).
 }
 \usage{
+fit.fkml.moments(data,na.rm=TRUE,
+  optim.method="Nelder-Mead",
+  optim.control= list(), starting.point = c(0,0))
 fit.fkml.moments.val(moments=c(mean=0, variance=1, skewness=0,
   kurtosis=3), optim.method="Nelder-Mead", optim.control= list(), 
   starting.point = c(0,0))
 }
 \arguments{
+  \item{data}{A vector of data}
+  \item{na.rm}{Logical - should NAs be removed from the data - if FALSE, any NAs in the data will cause an error}
   \item{moments}{A vector of length 4, consisting of the mean, variance
   and moment ratios for skewness and kurtosis (do not subtract 3 from the kurtosis ratio)}
   \item{optim.method}{Optimisation method for \code{\link{optim}} to use, 
@@ -24,7 +30,7 @@ defaults to Nelder-Mead}
 (FKML type) using Method of Moments on the basis of moment values (mean,
 variance, skewness ratio and kurtosis ratio).  Note this is the fourth
 central moment divided by the second central moment, without subtracting 3.
-\code{fit.fkml.moments} (to come in version 2.4 of the \code{gld} package) will estimate
+\code{fit.fkml.moments} will estimates
 using the method of moments for a dataset, including calculating the
 sample moments.
 This function uses \code{\link{optim}} to find the parameters that
@@ -78,15 +84,20 @@ PhD thesis, University of Pretoria.
 Sigbert Klinke
 
 Paul van Staden}
-\seealso{ 
+\seealso{
 \code{\link{gld.moments}} 
 }
 \examples{
+# Moment estimate
+example.data = rgl(n=400,lambda1=c(0,1,0.4,0),
+  param="fkml")
+fit.fkml.moments(example.data)
 # Approximation to the standard normal distribution
 norm.approx <- fit.fkml.moments.val(c(0,1,0,3))
 norm.approx
 # Another distribution with the same moments
 another <- fit.fkml.moments.val(c(0,1,0,3),start=c(2,2))
+another
 # Compared
 plotgld(norm.approx$lambda,ylim=c(0,0.75),main="Approximation to the standard normal",
   sub="and another GLD with the same first 4 moments")

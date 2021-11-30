@@ -234,9 +234,12 @@ fkml.moments <- function(par,ratios=TRUE){
 fit.fkml.moments  <- function(data,na.rm=TRUE,optim.method="Nelder-Mead",
       optim.control= list(), starting.point = c(0,0)){
   if (na.rm){ dataNArm <- data[!is.na(data)] 
-  } else { if (any(is.na(data))) {
+  } else {
+    dataNArm <- data
+    if (any(is.na(data))) {
     stop(paste("NA values in ",deparse(substitute(data)),". use na.rm=TRUE to fit these data.",sep=""))} else {dataNArm <- data}
   }
+  if (length(dataNArm) < 2) {stop("Unable to calculate moments\n")}
   res <- fit.fkml.moments.val(moments=moments4data(dataNArm),optim.method=optim.method,optim.control = optim.control,starting.point = starting.point)
   res
 }

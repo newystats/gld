@@ -7,7 +7,7 @@ Estimates parameters of the FKML parameterisation of the Generalised \eqn{\lambd
 Numerical Maximum Likelihood, 
 Maximum Product of Spacings, Titterington's Method, 
 the Starship (also available in the \code{\link{starship}} function, which uses the same underlying code as this for the fkml parameterisation),
-and Trimmed L-Moments.
+Trimmed L-Moments, L-Moments, Distributional Least Absolutes, and Method of Moments.
 }
 \usage{
 fit.fkml(x, method = "ML", t1 = 0, t2 = 0, 
@@ -19,7 +19,7 @@ fit.fkml(x, method = "ML", t1 = 0, t2 = 0,
 \arguments{
   \item{x}{Data to be fitted, as a vector}
   \item{method}{A character string, to select the estimation method.  One of: \code{ML} for numerical Maximum Likelihood, \code{MPS} or \code{MSP}
-  for Maximum Spacings Product, \code{TM} for Titterington's Method, \code{SM} for  Starship Method, \code{TL} for  method of TL-moments, \code{DLA} for the method of Distributional Least Absolutes, or \code{Mom} for method of Moments.}
+  for Maximum Spacings Product, \code{TM} for Titterington's Method, \code{SM} for  Starship Method, \code{TL} for  method of Trimmed L-moments, \code{Lmom} for  method of L-moments, \code{DLA} for the method of Distributional Least Absolutes, or \code{Mom} for method of Moments.}
   \item{t1}{Number of observations to be trimmed from the left in the conceptual sample, \eqn{t_1}{t1} (A non-negative integer, only used by TL-moment estimation, see details section)}
   \item{t2}{Number of observations to be trimmed from the right in the conceptual sample, \eqn{t_2}{t2} (A non-negative integer, only used by TL-moment estimation, see details section). These two arguments are 
   restricted by \eqn{t_1+t_2 < n}{t1+t2 < n}, where n is the sample size}

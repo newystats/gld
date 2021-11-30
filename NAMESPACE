@@ -1,6 +1,6 @@
 export(dgl,dqgl,gl.check.lambda,pgl,plotglc,plotgld,
       print.starship,qdgl,qgl,qqgl,rgl,starship,starship.adaptivegrid,
-      starship.obj,summary.starship,fit.fkml,fit.fkml.moments.val,
+      starship.obj,summary.starship,fit.fkml,fit.fkml.moments,fit.fkml.moments.val,
       gld.moments,gld.lmoments,fit.gpd,fit.gpd.lmom,
       BetaLambdaLambda,fit.gpd.lmom.given)
 S3method(plot,starship)
