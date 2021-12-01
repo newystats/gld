@@ -41,7 +41,7 @@ distribution;
 
 \deqn{\tau_4^{(min)}=\frac{12-5\sqrt{6}}{12+5\sqrt{6}} \approx -0.0102051,}{(12-5*sqrt(6))/(12+5*sqrt(6)) = approx -0.0102051,}
 
-there is no possible estimate (from either region A or B), and this 
+there is no possible L-Moment estimate (from either region A or B), and this 
 function returns NA for the estimates.
 
 When estimating from data, or for given L-Moments with \eqn{n} given, 
