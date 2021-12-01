@@ -83,5 +83,8 @@ Paul van Staden}
 }
 \examples{
 fit.gpd.lmom.given(c(1,.3,.6,.8))
+example.data = rgl(n=300,c(5,2,0.8,-0.1),param="gpd")
+fit.gpd(example.data)
+fit.gpd(example.data,method="starship")
 }
 \keyword{distribution}
