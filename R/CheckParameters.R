@@ -193,6 +193,7 @@ gl.check.lambda <- function (lambdas, lambda2 = NULL, lambda3 = NULL, lambda4 = 
 			warning("Negative or zero beta")
 		} else {  ## delta check
 			if ((lambda3 < 0)|(lambda3 > 1)) { ret <- FALSE 
+			warning("Delta parameter must be in the range [0,1]")
 			} else 	{
 				ret <- TRUE 
 			} 
