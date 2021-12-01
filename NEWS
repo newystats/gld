@@ -1,3 +1,7 @@
+2.6.4 
+New function fit.fkml.moment() - does the same as fit.fkml(method="MoM")
+na.rm now works for starship method in fit.gpd
+
 2.6.3
 New maintainer email address
 fit.gpd() now allows method="starship", then calls starship()

@@ -1,5 +1,7 @@
 2.6.4 
 Export fit.fkml.moment
+Improve error message in rgl() for invalid parameter values
+na.rm now works for starship method in fit.gpd
 
 2.6.3
 New email address and URL
