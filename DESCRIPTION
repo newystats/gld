@@ -1,13 +1,13 @@
 Package: gld
 Version: 2.6.4
-Date: 2021-12-12
+Date: 2021-12-16
 Title: Estimation and Use of the Generalised (Tukey) Lambda Distribution
 Suggests: 
 Imports: stats, graphics, e1071, lmom
 Authors@R:  
   c(person(given="Robert",family="King",
       role=c("aut","cre"),
-      email="Robert.King.newcastle@gmail.com",
+      email="Robert.King.Newcastle@gmail.com",
       comment=c(ORCID="0000-0001-7495-6599")),
     person(given="Benjamin",family="Dean",
       role="aut",
