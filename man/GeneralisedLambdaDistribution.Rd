@@ -143,7 +143,7 @@ Freimer, M., Mudholkar, G. S., Kollia, G. & Lin, C. T. (1988),
 	\emph{A study of the generalized tukey lambda family}, Communications 
 	in Statistics - Theory and Methods \bold{17}, 3547--3567.
 
-Gilchrist, Warren G. (2000), \emph{Statistical Modelling with Quantile Functions}, Chapman \& Hall
+Gilchrist, Warren G. (2000), \emph{Statistical Modelling with Quantile Functions}, Chapman and Hall
 
 Karian, Z.A., Dudewicz, E.J., and McDonald, P. (1996), \emph{The extended 
     generalized lambda distribution system for fitting distributions to data: 

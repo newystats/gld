@@ -24,7 +24,7 @@ definitions of these parameters}
   \code{rs} uses \emph{Ramberg and Schmeiser (1974)}}
 }
 \details{
-The starship method is described in King \& MacGillivray, 1999 (see
+The starship method is described in King and MacGillivray, 1999 (see
 references). It is built on the fact that the 
 generalised lambda distribution (\code{\link{gld}})
 is a transformation of the uniform distribution.  Thus the inverse of this
