@@ -65,10 +65,10 @@ estimates.  If this is the case, the function also issues a \code{\link{warning}
   \item{starship}{The value returned by \code{\link{starship}}, if the \code{starship} method is used.}
 
   Each of the estimate elements (if they are not NULL) are either a vector of length 4, or a 4 by 2 matrix if standard errors are calculated. The elements of the vector, or rows of the matrix are the estimated parameters, in order;
-  \item{\eqn{\alpha}{alpha}}{location parameter}
-  \item{\eqn{\beta}{beta}}{scale parameter}
-  \item{\eqn{\delta}{delta}}{skewness parameter}
-  \item{\eqn{\lambda}{lambda}}{kurtosis parameter}
+  \item{alpha}{location parameter}
+  \item{beta}{scale parameter}
+  \item{delta}{skewness parameter}
+  \item{lambda}{kurtosis parameter}
   The columns of the matrix are the parameter, and its standard error.
 }
 \references{
