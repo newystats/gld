@@ -45,7 +45,8 @@ rgl(n, lambda1=0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
  following arguments
  
  \emph{Note that the numbering of the \eqn{\lambda}{lambda} parameters for
- the \emph{fmkl} parameterisation is different to that used by Freimer, 
+ the fmkl
+ parameterisation is different to that used by Freimer, 
  Mudholkar, Kollia and Lin.  Note also that in the \code{gpd} parameterisation, the four parameters are labelled \eqn{\alpha, \beta, \delta, \lambda}.}
 	}
   \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter (\eqn{\beta} for \code{gpd})}

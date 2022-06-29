@@ -34,7 +34,7 @@ plotglc(lambda1 = 0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
  following arguments
  
  \emph{Note that the numbering of the \eqn{\lambda}{lambda} parameters for
- the \emph{fmkl} parameterisation is different to that used by Freimer, 
+ the fmkl parameterisation is different to that used by Freimer, 
  Mudholkar, Kollia and Lin.}
 	}
   \item{lambda2}{\eqn{\lambda_2}{lambda 2} - scale parameter}
