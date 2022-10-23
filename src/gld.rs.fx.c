@@ -37,6 +37,8 @@ static double la, lb, lc, ld, x;
 
 /* the function that finds the root */
 
+void funcd(double,double *,double *);
+
 void gl_rs_distfunc( double *pa,double *pb,double *pc,double *pd, 
 double  *px1,double *px2,double *pxacc, int *max_it,
 double *ecks, double *u, int *pl)
@@ -59,7 +61,7 @@ double *ecks, double *u, int *pl)
 	int i,j;
 	double df,dx,dxold,f,fh,fl;
 	double temp,xh,xl,rts;
-	void funcd();
+	/* void funcd(); */
 
 	x1 = *px1; x2 = *px2; xacc = *pxacc;
 	a = *pa; b = *pb; c = *pc; d = *pd;
@@ -118,8 +120,7 @@ for (i=0;i<l;i++)
 }
 
 
-void funcd(u,a,b)
-double u,*a,*b;
+void funcd(double u,double *a,double *b)
 {
 
 /* function is the gld F-1(u)  */

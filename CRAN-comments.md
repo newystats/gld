@@ -1,7 +1,7 @@
 CRAN comments
 
 ## Test environment:
-* local windows install, R 4.1.3
+* local windows install, R 4.2.1
 * win-builder (release and devel)
 
 ## R CMD check results
@@ -13,8 +13,5 @@ Found the following (possibly) invalid URLs:
     From: man/fit.fkml.Rd
     Status: 504
     Message: Gateway Timeout
-  URL: https://www.jstor.org/stable/1267789
-    From: man/fit.fkml.Rd
-    Status: 403
-    Message: Forbidden
+
     
