@@ -41,7 +41,6 @@ central moment.
 \references{
 Au-Yeung, Susanna W. M. (2003) \emph{Finding Probability Distributions From 
 Moments}, Masters thesis, Imperial College of Science, Technology and Medicine (University of London), Department of Computing
-\url{https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.106.6130&rep=rep1&type=pdf}
 
 Freimer, M., Kollia, G., Mudholkar, G. S.,  & Lin, C. T. (1988), 
   \emph{A study of the generalized tukey lambda family}, Communications 
