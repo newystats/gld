@@ -10,11 +10,13 @@ values.}
 }
 \arguments{
   \item{pars}{A vector of length 4, giving the parameters of the 
-  GPD type generalised lambda distribution, consisting of; 
-    \item{\eqn{\alpha}{alpha}}{ location parameter}
-    \item{\eqn{\beta>0}{beta > 0}}{ scale parameter}
-    \item{\eqn{0 \leq \delta \leq 1}{0 <= delta <= 1}}{ skewness parameter}
-    \item{\eqn{\lambda}{lambda}}{ kurtosis parameter}
+  GPD type generalised lambda distribution, consisting of;
+  \itemize{
+    \item{\eqn{\alpha}{alpha}, location parameter}
+    \item{\eqn{\beta>0}{beta > 0}, scale parameter}
+    \item{\eqn{0 \leq \delta \leq 1}{0 <= delta <= 1}, skewness parameter}
+    \item{\eqn{\lambda}{lambda}, kurtosis parameter}
+      }
     }
   \item{order}{Integers to select the orders of L-moments to calculate.
     Currently this function only calculates for orders 1 to 4.}
