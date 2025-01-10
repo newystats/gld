@@ -4,7 +4,7 @@ Check if the sorting in pgl() is worth the computational cost
 
 ? support named elements of the vector for parameters ?
 
-Lmoments from parameters
+Lmoments from parameters for types other than GPD
 
 Should moment fitting return object of class starship? Copy class name 
 to FitFKML

@@ -4,6 +4,7 @@ export(dgl,dqgl,gl.check.lambda,pgl,plotglc,plotgld,
       gld.moments,gld.lmoments,fit.gpd,fit.gpd.lmom,
       BetaLambdaLambda,fit.gpd.lmom.given)
 S3method(plot,starship)
+export(plot.starship)
 S3method(print,starship)
 S3method(print,GldGPDFit)
 S3method(summary,starship)
