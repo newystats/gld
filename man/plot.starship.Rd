@@ -4,7 +4,7 @@
 \description{Plots to compare a fitted Generalised Lambda Distribution to data.  This works with fitted gld objects from \code{\link{starship}} or  \code{\link{fit.fkml}}.} 
 \usage{
 \method{plot}{starship}(x, data, ask = NULL, one.page = FALSE, 
-    breaks = "Sturges", plot.title = "default",...)
+    breaks = "Sturges", plot.title = "default",granularity=10000,...)
 }
 \arguments{
   \item{x}{An object of class \code{\link{starship}}.  These are produced by the fitting functions \code{\link{fit.fkml}} and \code{\link{starship}}.}
@@ -17,6 +17,8 @@
       If you set this to \code{"default"}, it will include the fitting
       method and gld type, for example 
       ``Starship fit of FMKL type GLD''.}
+  \item{granularity}{The number of points to calculate the quantile function for 
+  the QQ plot. Values less than 30 or more than 10000000 are changed to the default}
   \item{\dots}{arguments passed to \code{\link{plot}} AND \code{\link{hist}}}
 }
 \details{
@@ -47,7 +49,7 @@ Statistics \bold{41}, 353--374
 data <- rgl(100,0,1,.2,.2)
 starship.result <- starship(data,optim.method="Nelder-Mead",initgrid=list(lcvect=(0:4)/10,
 ldvect=(0:4)/10),return.data=TRUE)
-plot(starship.result)
+plot.starship(starship.result)
 }
 \keyword{distribution}
 

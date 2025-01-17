@@ -41,11 +41,12 @@ cat("Message: ")
 print(object$optim.results$message)
 }
 
-plot.starship <- function(x,data=NULL,ask=NULL,one.page=FALSE,breaks="Sturges",plot.title="default",...)
+plot.starship <- function(x,data=NULL,ask=NULL,one.page=FALSE,breaks="Sturges",plot.title="default",granularity=10000,...)
 {
 if (plot.title == "default") {
   plot.title <- paste(x$method.name,"fit of",x$param,"type GLD")
 }
+print("Using plot.starship from methods.R")
 allpar <- par()
 opar <- allpar[match(c("ask","mfrow"),names(allpar))]
 if (is.null(x$data)){
@@ -62,8 +63,28 @@ if (is.null(ask)) {if (one.page) {ask=FALSE} else {
 if (ask) {par(ask=TRUE)}
 if (one.page) {par(mfrow=c(2,1))}
 qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here
-hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
-plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
+# do hist 2nd to fix problem with cutting off the top of the density? - doesnt 
+# work - manually calculate max for density and adjust hist limits
+#print("Which has this thing to make granularity.  Why are you complaining?")
+default.granularity = 10000
+#if(exists(granularity)) {
+  if(is.integer(granularity)){
+    if(granularity < 30){
+      # too small
+      granularity = default.granularity
+    } else {
+      if (granularity > 10000000) {
+        # too big
+        granularity = default.granularity
+      }
+    }
+  } else {granularity = default.granularity}
+u <- seq(from = 0, to = 1, by = 1/granularity)
+# quantiles not neeeded quantiles <- qgl(u,lambda1=lambdas,param=param)
+density <- dqgl(u,lambda1=x$lambda,param=x$param)
+max.density = max(density)
+hist(data,prob=TRUE,xlab="Data",breaks=breaks,ylim=c(0,max.density),...)  
+plotgld(lambda1=x$lambda,param=x$param,main=plot.title,...)
 if (one.page) {par(opar)} # Return to previous par
 }
 
@@ -108,8 +129,9 @@ plot.GldGPDFit <- function(x,data=NULL,ask=NULL,breaks="Sturges",plot.title="def
     if (interactive()) {ask=TRUE} else {ask=FALSE}
   }
   if (ask) {par(ask=TRUE)}  ## up to here ## 
-  qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here
-  hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
-  plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
- # No one.page option - check this - but I think we don't need to save par further up this function  if (one.page) {par(opar)} # Return to previous par
+  qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here  
+  # re-ordered to avoid chopping the top off the density - check this works
+  hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,new=FALSE,...)
+  plotgld(lambda1=x$lambda,param=x$param,...)
+  # No one.page option - check this - but I think we don't need to save par further up this function  if (one.page) {par(opar)} # Return to previous par
 }
