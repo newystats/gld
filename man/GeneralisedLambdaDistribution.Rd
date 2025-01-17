@@ -57,7 +57,7 @@ rgl(n, lambda1=0, lambda2 = NULL, lambda3 = NULL, lambda4 = NULL,
   \item{param}{choose parameterisation (see below for details)
   \code{fmkl} uses \emph{Freimer, Mudholkar, Kollia and Lin (1988)} (default).
   \code{rs} uses \emph{Ramberg and Schmeiser (1974)}
-  \code{gpd} uses GPD parameterisation, see {van Staden and Loots (2009)}
+  \code{gpd} uses GPD parameterisation, see \emph{van Staden and Loots (2009)}
   \code{fm5} uses the 5 parameter version of the FMKL parameterisation 
   (paper to appear)}
   \item{inverse.eps}{Accuracy of calculation for the numerical determination of 

@@ -10,12 +10,13 @@ given parameter values.
 }
 \arguments{
   \item{par}{A vector of length 4, giving the parameters of the 
-  generalised lambda distribution, consisting of; 
-  {\eqn{\lambda_1}{lambda 1} location parameter}
-  {\eqn{\lambda_2}{lambda 2} - scale parameter}
-  {\eqn{\lambda_3}{lambda 3} - first shape parameter}
-  {\eqn{\lambda_4}{lambda 4} - second shape parameter}
-    }
+  generalised lambda distribution, consisting of;
+    \itemize{
+  \item{\eqn{\lambda_1}{lambda 1} location parameter}
+  \item{\eqn{\lambda_2}{lambda 2} - scale parameter}
+  \item{\eqn{\lambda_3}{lambda 3} - first shape parameter}
+  \item{\eqn{\lambda_4}{lambda 4} - second shape parameter}
+    } }
   \item{type}{choose the type of generalised lambda distribution.  Currently  \code{gld.moments} only supports
   \code{fkml} which uses \emph{Freimer, Kollia, Mudholkar, and Lin (1988)} (default).}
   \item{ratios}{Logical.  TRUE to give moment ratios for skewness and kurtosis, FALSE to give the third and fourth central moments instead.}
