@@ -84,7 +84,7 @@ u <- seq(from = 0, to = 1, by = 1/granularity)
 density <- dqgl(u,lambda1=x$lambda,param=x$param)
 max.density = max(density)
 hist(data,prob=TRUE,xlab="Data",breaks=breaks,ylim=c(0,max.density),...)  
-plotgld(lambda1=x$lambda,param=x$param,main=plot.title,...)
+plotgld(lambda1=x$lambda,param=x$param,main=plot.title,new.plot=FALSE,...)
 if (one.page) {par(opar)} # Return to previous par
 }
 
@@ -131,7 +131,7 @@ plot.GldGPDFit <- function(x,data=NULL,ask=NULL,breaks="Sturges",plot.title="def
   if (ask) {par(ask=TRUE)}  ## up to here ## 
   qqgl(y=data,lambda.pars1=x$lambda,param=x$param,xlab=paste(x$method.name," Fitted Theoretical Quantiles"),main=plot.title) # add which option here  
   # re-ordered to avoid chopping the top off the density - check this works
-  hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,new=FALSE,...)
-  plotgld(lambda1=x$lambda,param=x$param,...)
+  hist(data,prob=TRUE,xlab="Data",breaks=breaks,main=plot.title,...)
+  plotgld(lambda1=x$lambda,param=x$param,new.plot=FALSE,...)
   # No one.page option - check this - but I think we don't need to save par further up this function  if (one.page) {par(opar)} # Return to previous par
 }
