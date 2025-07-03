@@ -22,6 +22,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 
+      - name: Install fs package (workaround for install_deps bug)
+        run: |
+          R -e 'install.packages("fs", repos = "https://cloud.r-project.org")'
+          
       - name: Install dependencies
         run: |
           R -e 'install.packages(c("devtools", "roxygen2", "testthat", "covr", "e1701", "lmom"), repos = "https://cloud.r-project.org")'
