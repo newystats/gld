@@ -1,3 +1,7 @@
+Changes in version 2.6.8
+  - Documentation URL update
+  - plot.starship and plot.GldGPDFit now include pdf over histogram plot
+  
 Changes in version 2.6.7
   - Documentation bugfixes
 
