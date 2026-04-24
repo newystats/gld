@@ -11,4 +11,15 @@ $$Q(u)= \lambda_1 + { { \frac{u^{\lambda_3}-1}{\lambda_3} -
 \frac{(1-u)^{\lambda_4}-1}{\lambda_4} } \over \lambda_2 } 
 \qquad\text{ for } \quad\lambda_2 > 0$$
 
-[Freimer Mudholkar, Kollia and Lin (1988)](https://doi.org/10.1080/03610928808829820) 
+[Freimer Mudholkar, Kollia and Lin (1988) A study of the generalized tukey lambda family, Communications 
+	in Statistics - Theory and Methods *17* 3547--3567.](https://doi.org/10.1080/03610928808829820) 
+
+2. RS type -
+
+$$ Q(u)= \lambda_1 + \frac{u^{\lambda_3} - (1-u)^{\lambda_4}}{\lambda_2} $$
+
+[Ramberg, J. S. & Schmeiser, B. W. (1974) An approximate method for
+generating asymmetric random variables, Communications of the ACM _17_ 78--82](https://dl.acm.org/doi/10.1145/360827.360840)
+
+This type has a complex complex series of rules determining which values 
+of the parameters produce valid statistical distributions.  See the gl.check.lambda function in this package for details.
