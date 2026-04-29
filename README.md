@@ -34,3 +34,23 @@ $$ Q(u) = \alpha + \beta \left((1-\delta)\frac{(u^\lambda -1)}{\lambda} - \delta
 4. FM5 type -
 
 $$ Q(u) = \lambda_1 + \frac{ \frac{(1-\lambda_5)(u^{\lambda_3}-1)}{\lambda_3} - \frac{(1+\lambda_5)((1-u)^{\lambda_4}-1)}{\lambda_4} }{ \lambda_2 }$$
+
+The package provides the density, probability, quantile, and density quantile functions, Quantile-Quantile plots and random number generation for all 4 types.  
+
+Since four types of the distribution are defined by their quantile function and its distribution and density functions do not exist in closed form (except for some special cases). 
+Accordingly, the results from pgl and dgl are the result of numerical solutions to the quantile function, using the Newton-Raphson method. 
+Since the density quantile function, f(Q(u)), does exist, an additional function, dqgl, computes this.
+
+The package provides a variety of estimation methods for the distribution, with the table below showing which estimation methods are available for which type.
+
+| Estimation Method	| FMKL | RS	| GPD | FM5 |
+| ---   | --- |--- |---  | --- |
+| Starship | ✓  | ✓   | ✓   | ✓   |
+| L Moments | ✓  |    | ✓   |    |
+| Maximum likelihood | ✓  |    |   |    |
+| Maximum product of spacings | ✓  |    |   |    |
+| Titterington's | ✓  |    |   |    |
+| Moments | ✓  |    |   |    |
+| Trimmed L-Moments | ✓  |    |   |    |
+| Distributional Least Absolutes | ✓  |    |   |    |
+
