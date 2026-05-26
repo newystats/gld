@@ -5,18 +5,19 @@
 # This function is more than needed, really because the SE only exists
 # for lambda > -0.5
 BetaLambdaLambda <- function(lambda){
-  some.dodgy <- FALSE # identifies if there are problem lambda values
-  if (any(lambda[lambda<1]%%1==0)) { # If any of the lambdas are negative integers
+  some.dodgy <- FALSE # identifies if there are problematic lambda values
+  if (any(lambda[lambda<0]%%(0.5)==0)) { # If any of the lambdas are negative integers, or a half different to negative integers
     some.dodgy <- TRUE
   }
-  if (any(lambda == -0.5)) { some.dodgy <- TRUE} # Beta(-0.5,-0.5) = 0, but you can't get it directly from the version involving the Gamma Function
   if (some.dodgy){
-    dodgy.ones <- (((lambda <= 0) & (lambda%%1==0) ) | lambda== -0.5)
+    dodgy.ones <- ((lambda <= 0) & (lambda%%(0.5)==0 ))
+    dodge.integer <- ((lambda <= 0) & (lambda%%1==0 ))
+    dodge.halves <- ((lambda <= 0) & (lambda%%1==0.5 ))
     ok.ones <- lambda[!dodgy.ones] # Finds the values of lambda that work for this version
     ok.result <- (2 * (gamma(ok.ones+1))^2) / (ok.ones *gamma(2*ok.ones + 1))
     result <- c()
-    result[dodgy.ones] <- NaN # These could possibly be Inf, but the function loops round at negative integers so NaN seems a better option
-    result[lambda == -0.5] <- 0
+    result[dodge.integer] <- NaN # These could possibly be Inf, but the function loops round at negative integers so NaN seems a better option
+    result[dodge.halves] <- 0 # Beta(-k+0.5,-k+0.5) = 0, but you can't get it directly from the version involving the Gamma Function
     result[!dodgy.ones] <- ok.result
   } else {
     result <- (2 * (gamma(lambda+1))^2) / (lambda *gamma(2*lambda + 1))
